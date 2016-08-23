@@ -1,4 +1,4 @@
-package hu.schonherz.training.venue.entity;
+package hu.schonherz.training.venue.persistence.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,11 +19,11 @@ public class BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
-    public Long getId() {
+    public Long getOwnerId() {
         return Id;
     }
 
-    public void setId(Long id) {
-        Id = id;
+    public void setOwnerId(Long ownerId) {
+        Id = ownerId;
     }
 }

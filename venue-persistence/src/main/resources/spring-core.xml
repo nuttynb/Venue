@@ -15,13 +15,13 @@
     <context:component-scan base-package="hu.schonherz.training.venue" />
 
     <jpa:repositories base-package="hu.schonherz.training.venue.repository"
-                      repository-impl-postfix="impl" />
+                      repository-impl-postfix="Impl"  />
 
 
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" />
-        <property name="persistenceUnitName" value="hu.neuron.java.jpa" />
+        <property name="persistenceUnitName" value="hu.schonherz.training.venue" />
     </bean>
 
     <bean id="transactionManager"

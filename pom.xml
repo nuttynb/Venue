@@ -52,7 +52,7 @@
     </modules>
     <profiles>
         <profile>
-            <id>with-checkstyle</id>
+            <ownerId>with-checkstyle</ownerId>
             <build>
                 <plugins>
                     <plugin>
@@ -61,7 +61,7 @@
                         <version>${checkstyle.version}</version>
                         <executions>
                             <execution>
-                                <id>validate</id>
+                                <ownerId>validate</ownerId>
                                 <phase>validate</phase>
                                 <configuration>
                                     <configLocation>checkstyle.xml</configLocation>
