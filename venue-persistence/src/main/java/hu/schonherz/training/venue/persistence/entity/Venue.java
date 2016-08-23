@@ -27,9 +27,9 @@ public class Venue extends BaseEntity {
 
     @OneToOne
     @JoinColumn(name = "venueId")
-    private Adress adress;
+    private Address adress;
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "venueId", nullable = false)
     private Collection<Events> events;
 

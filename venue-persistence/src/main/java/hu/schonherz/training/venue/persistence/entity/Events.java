@@ -20,6 +20,10 @@ public class Events extends BaseEntity{
 
     @Basic
     @Column(nullable = false)
+    private Long bandId;
+
+    @Basic
+    @Column(nullable = false)
     private String name;
 
     @Basic
@@ -28,6 +32,14 @@ public class Events extends BaseEntity{
 
     @Basic
     private String description;
+
+    public Long getBandId() {
+        return bandId;
+    }
+
+    public void setBandId(Long bandId) {
+        this.bandId = bandId;
+    }
 
     public Long getVenueId() {
         return venueId;

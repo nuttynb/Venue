@@ -10,11 +10,15 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "Adress")
-public class Adress extends BaseEntity {
+@Table(name = "Address")
+public class Address extends BaseEntity {
 
     @Basic
     private Long venueId;
+
+    @Basic
+    @Column
+    private String country;
 
     @Basic
     @Column(nullable = false)
@@ -34,6 +38,14 @@ public class Adress extends BaseEntity {
 
     public Long getVenueId() {
         return venueId;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public void setVenueId(Long venueId) {
