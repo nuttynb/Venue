@@ -9,6 +9,9 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>java:jboss/datasources/Venue</jta-data-source>
         <class>hu.schonherz.training.venue.persistence.entity.BaseEntity</class>
+        <class>hu.schonherz.training.venue.persistence.entity.Venue</class>
+        <class>hu.schonherz.training.venue.persistence.entity.Adress</class>
+        <class>hu.schonherz.training.venue.persistence.entity.Events</class>
 
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>

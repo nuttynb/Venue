@@ -1,6 +1,7 @@
 package hu.schonherz.training.venue.persistence.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by Home on 2016. 08. 23..
@@ -11,32 +12,26 @@ import javax.persistence.*;
 public class Venue extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id" , nullable = false)
+    @JoinColumn(name = "userId" , nullable = false)
     private Long ownerId;
 
     @Column(nullable = false)
     private String name;
 
+    @Basic
     private String description;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    @Column(nullable = false)
-    private String country;
+    @OneToOne
+    @JoinColumn(name = "venueId")
+    private Adress adress;
 
-    @Column(nullable = false)
-    private String city;
-
-    @Column(nullable = false)
-    private String street;
-
-    @Column(nullable = false)
-    private String number;
-
-    @Column(nullable = false)
-    private int postcode;
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "venueId", nullable = false)
+    private Collection<Events> events;
 
     public Long getOwnerId() {
         return ownerId;
@@ -68,47 +63,6 @@ public class Venue extends BaseEntity {
 
     public void setType(Type type) {
         this.type = type;
-    }
-
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public int getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(int postcode) {
-        this.postcode = postcode;
     }
 
 }
