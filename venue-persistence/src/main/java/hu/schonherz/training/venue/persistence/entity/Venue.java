@@ -12,7 +12,7 @@ import java.util.Collection;
 public class Venue extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId" , nullable = false)
+    @JoinColumn(name = "userId", nullable = false)
     private Long ownerId;
 
     @Column(nullable = false)
@@ -27,9 +27,9 @@ public class Venue extends BaseEntity {
 
     @OneToOne
     @JoinColumn(name = "venueId")
-    private Address adress;
+    private Address address;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "venueId", nullable = false)
     private Collection<Events> events;
 

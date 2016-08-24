@@ -52,7 +52,6 @@ public class Address extends BaseEntity {
         this.venueId = venueId;
     }
 
-
     public String getCity() {
         return city;
     }

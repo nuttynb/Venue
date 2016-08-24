@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <url>https://github.com/schonherz-java-ee-2016-summer/Venue</url>
 
     <groupId>hu.schonherz.training.venue</groupId>
     <artifactId>venue</artifactId>
@@ -26,6 +27,8 @@
         <jsp.api.version>2.1</jsp.api.version>
         <el.ri.version>1.0</el.ri.version>
         <checkstyle.version>2.17</checkstyle.version>
+        <javadoc.version>2.10.3</javadoc.version>
+        <jxr.version>2.5</jxr.version>
     </properties>
     <dependencies>
         <dependency>
@@ -52,16 +55,21 @@
     </modules>
     <profiles>
         <profile>
-            <ownerId>with-checkstyle</ownerId>
+            <id>with-checkstyle</id>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-site-plugin</artifactId>
+                        <version>3.5</version>
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-checkstyle-plugin</artifactId>
                         <version>${checkstyle.version}</version>
                         <executions>
                             <execution>
-                                <ownerId>validate</ownerId>
+                                <id>validate</id>
                                 <phase>validate</phase>
                                 <configuration>
                                     <configLocation>checkstyle.xml</configLocation>
@@ -87,8 +95,27 @@
                             <configLocation>checkstyle.xml</configLocation>
                         </configuration>
                     </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${javadoc.version}</version>
+                        <configuration>
+                            <show>private</show>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jxr-plugin</artifactId>
+                        <version>${jxr.version}</version>
+                    </plugin>
                 </plugins>
             </reporting>
+            <distributionManagement>
+                <site>
+                    <id>website</id>
+                    <url>${project.baseUri}</url>
+                </site>
+            </distributionManagement>
         </profile>
     </profiles>
 </project>

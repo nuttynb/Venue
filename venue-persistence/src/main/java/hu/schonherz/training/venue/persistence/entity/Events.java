@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "Event")
-public class Events extends BaseEntity{
+public class Events extends BaseEntity {
 
     @Basic
     @Column(nullable = false)

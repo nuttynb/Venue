@@ -5,5 +5,5 @@ package hu.schonherz.training.venue.persistence.entity;
  */
 
 public enum Type {
-    Rock_kocsma,Rom_kocsma,Disco,Bar,Night_club;
+    Rock_kocsma, Rom_kocsma, Disco, Bar, Night_club;
 }
