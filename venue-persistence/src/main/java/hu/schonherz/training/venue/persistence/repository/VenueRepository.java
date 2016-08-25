@@ -17,17 +17,17 @@ import java.util.Collection;
 @Transactional(propagation = Propagation.REQUIRED)
 public interface VenueRepository extends JpaRepository<Venue , Long>{
 
-    Collection<Venue> getAllVenue();
+    Collection<Venue> findAllVenue();
 
-    Venue getVenueById(Long venueId);
+    Venue findVenueById(Long venueId);
 
-    Collection<Venue> getVenueByOwnerId(Long ownerId);
+    Collection<Venue> findVenueByOwnerId(Long ownerId);
 
-    Venue getVenueByName(String name);
+    Venue findVenueByName(String name);
 
-    Collection<Venue> getVenueByType(Type type);
+    Collection<Venue> findVenueByType(Type type);
 
-    Venue getVenuebyByEventId(Long eventId);
+    Venue findVenuebyByEventId(Long eventId);
 
-    Venue getVenueByAdressId(Long addressId);
+    Venue findVenueByAdressId(Long addressId);
 }
