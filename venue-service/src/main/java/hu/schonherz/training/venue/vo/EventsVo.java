@@ -10,6 +10,8 @@ public class EventsVo implements Serializable {
 
     private static final long serialVersionUID = 383913L;
 
+    private Long id;
+
     private Long venueId;
 
     private Long bandId;
@@ -19,6 +21,24 @@ public class EventsVo implements Serializable {
     private Date date;
 
     private String description;
+
+    /**
+     * Return the id of event.
+     *
+     * @return the id of event
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Set the id of event.
+     *
+     * @param id the id of event
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /**
      * Return the id of events place.

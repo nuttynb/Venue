@@ -9,6 +9,8 @@ public class AddressVo implements Serializable {
 
     private static final long serialVersionUID = 125312L;
 
+    private Long id;
+
     private Long venueId;
 
     private String country;
@@ -20,6 +22,24 @@ public class AddressVo implements Serializable {
     private String number;
 
     private int postcode;
+
+    /**
+     * Return the id of address.
+     *
+     * @return the id of address
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Set the id of address.
+     *
+     * @param id the id of address
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /**
      * Return the id of venue.
