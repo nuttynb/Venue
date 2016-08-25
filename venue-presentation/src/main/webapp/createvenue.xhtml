@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title></title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+
+            <p:growl id="growl" sticky="true" showDetail="true"/>
+
+            <p:wizard flowListener="#{venueWizard.onFlowProcess}">
+                <p:tab id="general" title="General">
+                    <p:panel header="General Informations">
+                        <p:messages/>
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Venue name: *"/>
+                            <p:inputText value="#{venueWizard.venue.name}" required="true" label="Venue name"/>
+
+                            <h:outputText value="Description: *"/>
+                            <p:inputTextarea value="#{venueWizard.venue.description}" required="true" rows="6" cols="33"
+                                             label="Short description"/>
+
+                            <h:outputText value="Venue type: "/>
+                            <p:inputText/>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="address" title="Address">
+                    <p:panel header="Address Details">
+                        <p:messages/>
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Country: "/>
+                            <p:inputText value="#{venueWizard.venue.address.country}"/>
+
+                            <h:outputText value="Postal Code: "/>
+                            <p:inputText value="#{venueWizard.venue.address.postcode}"/>
+
+                            <h:outputText value="City: "/>
+                            <p:inputText value="#{venueWizard.venue.address.city}"/>
+
+                            <h:outputText value="Street: "/>
+                            <p:inputText value="#{venueWizard.venue.address.street}"/>
+
+                            <h:outputText value="Number: "/>
+                            <p:inputText value="#{venueWizard.venue.address.number}"/>
+
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="confirm" title="Confirmation">
+                    <p:panel header="Confirmation">
+                        <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Venue name: "/>
+                                <h:outputText value="#{venueWizard.venue.name}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Description: "/>
+                                <h:outputText value="#{venueWizard.venue.description}" styleClass="outputLabel"/>
+
+
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Country: "/>
+                                <h:outputText value="#{venueWizard.venue.address.country}" styleClass="outputLabel"/>
+                                <h:outputText value="Postal: "/>
+                                <h:outputText value="#{venueWizard.venue.address.postcode}" styleClass="outputLabel"/>
+                                <h:outputText value="City: "/>
+                                <h:outputText value="#{venueWizard.venue.address.city}" styleClass="outputLabel"/>
+                                <h:outputText value="Street: "/>
+                                <h:outputText value="#{venueWizard.venue.address.street}" styleClass="outputLabel"/>
+                                <h:outputText value="Number: "/>
+                                <h:outputText value="#{venueWizard.venue.address.number}" styleClass="outputLabel"/>
+                            </h:panelGrid>
+                        </h:panelGrid>
+
+                        <p:commandButton value="Submit" actionListener="#{venueWizard.save}" update="growl"
+                                         process="@this"/>
+                    </p:panel>
+                </p:tab>
+            </p:wizard>
+        </h:form>
+    </h:body>
+</html>

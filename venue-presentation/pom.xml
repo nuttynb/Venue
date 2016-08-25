@@ -70,6 +70,7 @@
             <artifactId>el-ri</artifactId>
             <version>${el.ri.version}</version>
         </dependency>
+
     </dependencies>
     <build>
         <finalName>venue-presentation</finalName>
