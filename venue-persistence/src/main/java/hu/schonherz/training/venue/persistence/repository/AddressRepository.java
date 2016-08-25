@@ -14,6 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.REQUIRED)
 public interface AddressRepository extends JpaRepository<Address , Long>{
 
-    Address getAddressByPostId(Long postId);
+    Address getAddressByVenueId(Long venueId);
 
 }
