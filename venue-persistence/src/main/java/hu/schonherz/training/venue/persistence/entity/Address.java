@@ -14,10 +14,11 @@ import javax.persistence.Table;
 public class Address extends BaseEntity {
 
     @Basic
+    @Column(nullable = false)
     private Long venueId;
 
     @Basic
-    @Column
+    @Column(nullable = false)
     private String country;
 
     @Basic
