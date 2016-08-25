@@ -14,6 +14,8 @@ public class VenueVo implements Serializable {
 
     private static final long serialVersionUID = 568123L;
 
+    private Long id;
+
     private Long ownerId;
 
     private String name;
@@ -25,6 +27,24 @@ public class VenueVo implements Serializable {
     private Address address;
 
     private Collection<Events> events;
+
+    /**
+     * Return the id of venue.
+     *
+     * @return the id of venue
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Set the id of venue .
+     *
+     * @param id the id of venue
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /**
      * Return the id of venue owner.
