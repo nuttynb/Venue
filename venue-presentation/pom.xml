@@ -12,20 +12,21 @@
     <artifactId>venue-presentation</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+    <properties>
+        <pf.theme.version>1.0.8</pf.theme.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>${javaee.version}</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>com.sun.faces</groupId>
             <artifactId>jsf-api</artifactId>
@@ -42,18 +43,22 @@
             <version>${primefaces.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.primefaces.extensions</groupId>
+            <artifactId>all-themes</artifactId>
+            <version>${pf.theme.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>${jstl.version}</version>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>${servlet.api.version}</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
@@ -78,5 +83,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
