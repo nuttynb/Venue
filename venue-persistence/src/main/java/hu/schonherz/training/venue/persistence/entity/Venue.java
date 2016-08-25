@@ -11,7 +11,7 @@ import java.util.Collection;
 @Table(name = "Venue")
 public class Venue extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "userId", nullable = false)
     private Long ownerId;
 
