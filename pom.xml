@@ -29,6 +29,7 @@
         <checkstyle.version>2.17</checkstyle.version>
         <javadoc.version>2.10.3</javadoc.version>
         <jxr.version>2.5</jxr.version>
+        <dozer.version>5.5.1</dozer.version>
     </properties>
     <dependencies>
         <dependency>

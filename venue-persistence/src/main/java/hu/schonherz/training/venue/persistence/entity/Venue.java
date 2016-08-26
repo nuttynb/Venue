@@ -11,8 +11,8 @@ import java.util.Collection;
 @Table(name = "Venue")
 public class Venue extends BaseEntity {
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId", nullable = false)
+    /*@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId", nullable = false)*/
     private Long ownerId;
 
     @Column(nullable = false)
@@ -22,15 +22,15 @@ public class Venue extends BaseEntity {
     private String description;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
+    //@Enumerated(EnumType.STRING)
     private Type type;
 
     @OneToOne
-    @JoinColumn(name = "venueId")
+    /*@JoinColumn(name = "venueId")*/
     private Address address;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "venueId", nullable = false)
+    //@JoinColumn(name = "venueId", nullable = false)
     private Collection<Events> events;
 
     public Long getOwnerId() {

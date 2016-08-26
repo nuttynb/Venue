@@ -1,10 +1,7 @@
 package hu.schonherz.training.venue.vo;
 
-import hu.schonherz.training.venue.persistence.entity.Address;
-import hu.schonherz.training.venue.persistence.entity.Events;
-import hu.schonherz.training.venue.persistence.entity.Type;
-
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -22,11 +19,16 @@ public class VenueVo implements Serializable {
 
     private String description;
 
-    private Type type;
+    private TypeVo type;
 
-    private Address address;
+    private AddressVo address;
 
-    private Collection<Events> events;
+    private Collection<EventsVo> events;
+
+    public VenueVo() {
+        address = new AddressVo();
+        events = new ArrayList<>();
+    }
 
     /**
      * Return the id of venue.
@@ -105,7 +107,7 @@ public class VenueVo implements Serializable {
      *
      * @return the type of venue
      */
-    public Type getType() {
+    public TypeVo getType() {
         return type;
     }
 
@@ -114,7 +116,7 @@ public class VenueVo implements Serializable {
      *
      * @param type the type of venue
      */
-    public void setType(Type type) {
+    public void setType(TypeVo type) {
         this.type = type;
     }
 
@@ -123,7 +125,7 @@ public class VenueVo implements Serializable {
      *
      * @return the address of venue
      */
-    public Address getAddress() {
+    public AddressVo getAddress() {
         return address;
     }
 
@@ -132,7 +134,7 @@ public class VenueVo implements Serializable {
      *
      * @param address the address of venue
      */
-    public void setAddress(Address address) {
+    public void setAddress(AddressVo address) {
         this.address = address;
     }
 
@@ -141,7 +143,7 @@ public class VenueVo implements Serializable {
      *
      * @return the collection of events in venue
      */
-    public Collection<Events> getEvents() {
+    public Collection<EventsVo> getEvents() {
         return events;
     }
 
@@ -150,7 +152,7 @@ public class VenueVo implements Serializable {
      *
      * @param events the collection of events in venue.
      */
-    public void setEvents(Collection<Events> events) {
+    public void setEvents(Collection<EventsVo> events) {
         this.events = events;
     }
 }
