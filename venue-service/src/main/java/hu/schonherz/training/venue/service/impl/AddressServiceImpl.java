@@ -6,15 +6,23 @@ import hu.schonherz.training.venue.service.AddressService;
 import hu.schonherz.training.venue.vo.AddressVo;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
+
+import javax.ejb.Local;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.interceptor.Interceptors;
 
 /**
  * Created by Roli on 2016. 08. 26..
  */
 
-@Service
-@Transactional
+
+@Stateless(name = "AddressServiceImpl")
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@Local(AddressService.class)
+@Interceptors({ SpringBeanAutowiringInterceptor.class })
 public class AddressServiceImpl implements AddressService {
 
     @Autowired
