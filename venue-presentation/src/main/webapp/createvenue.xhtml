@@ -14,24 +14,25 @@
 
             <p:messages id="messages" showDetail="true" closable="true"/>
 
-            <p:wizard flowListener="#{createVenueBean.onFlowProcess}">
+            <p:wizard flowListener="#{createVenueBean.onFlowProcess}" style="width: 80%">
                 <p:tab id="general" title="General">
                     <p:panel header="General Informations">
                         <p:messages/>
                         <h:panelGrid columns="2" columnClasses="label, value" cellspacing="20">
                             <h:outputText value="Venue Name: *"/>
-                            <p:inputText value="#{venueBean.venue.name}" required="true" requiredMessage="Venue name must not be empty."/>
+                            <p:inputText value="#{venueBean.venue.name}" required="true"
+                                         requiredMessage="Venue name must not be empty."/>
 
                             <h:outputText value="Description: *"/>
                             <p:inputTextarea value="#{venueBean.venue.description}" required="true" rows="5" cols="50"
                                              requiredMessage="Description must not be empty."/>
 
-                            <p:outputLabel for="console" value="Venue Type:" />
-                            <p:selectOneMenu id="console" style="width:125px" required="true">
-                                <f:selectItem itemLabel="Select One" itemValue="" />
-                                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                                <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                            <p:outputLabel for="type" value="Venue Type:"/>
+                            <p:selectOneMenu id="type" style="width:125px" required="true"
+                                             value="#{venueBean.venue.type}" converter="#{typeConverterBean}">
+                                <f:selectItem itemLabel="Select One" itemValue=""/>
+                                <f:selectItems value="#{typeConverterBean.type.types}" var="type"
+                                               itemLabel="#{type.name}" itemValue="#{type}"/>
                             </p:selectOneMenu>
                         </h:panelGrid>
                     </p:panel>
@@ -42,19 +43,24 @@
                         <p:messages/>
                         <h:panelGrid columns="2" columnClasses="label, value" cellspacing="20">
                             <h:outputText value="Country: *"/>
-                            <p:inputText value="#{venueBean.venue.address.country}" required="true" requiredMessage="Country must not be empty."/>
+                            <p:inputText value="#{venueBean.venue.address.country}" required="true"
+                                         requiredMessage="Country must not be empty."/>
 
                             <h:outputText value="Postal Code: *"/>
-                            <p:inputText value="#{venueBean.venue.address.postcode}" required="true" label="Postal code" requiredMessage="Postal code must not be empty."/>
+                            <p:inputText value="#{venueBean.venue.address.postcode}" required="true" label="Postal code"
+                                         requiredMessage="Postal code must not be empty."/>
 
                             <h:outputText value="City: *"/>
-                            <p:inputText value="#{venueBean.venue.address.city}" required="true" requiredMessage="City must not be empty."/>
+                            <p:inputText value="#{venueBean.venue.address.city}" required="true"
+                                         requiredMessage="City must not be empty."/>
 
                             <h:outputText value="Street: *"/>
-                            <p:inputText value="#{venueBean.venue.address.street}" required="true" requiredMessage="Street must not be empty."/>
+                            <p:inputText value="#{venueBean.venue.address.street}" required="true"
+                                         requiredMessage="Street must not be empty."/>
 
                             <h:outputText value="Number: *"/>
-                            <p:inputText value="#{venueBean.venue.address.number}" required="true" requiredMessage="Number must not be empty."/>
+                            <p:inputText value="#{venueBean.venue.address.number}" required="true"
+                                         requiredMessage="Number must not be empty."/>
 
                         </h:panelGrid>
                     </p:panel>
@@ -68,8 +74,11 @@
                                 <h:outputText value="#{venueBean.venue.name}" styleClass="outputLabel"/>
 
                                 <h:outputText value="Description: "/>
-                                <h:outputText value="#{venueBean.venue.description}" styleClass="outputLabel" style="word-wrap:break-word;" />
+                                <h:outputText value="#{venueBean.venue.description}" styleClass="outputLabel"
+                                              style="word-wrap:break-word;"/>
 
+                                <h:outputText value="Venue type: "/>
+                                <h:outputText value="#{venueBean.venue.type.name}" styleClass="outputLabel"/>
 
                             </h:panelGrid>
 
@@ -87,7 +96,8 @@
                             </h:panelGrid>
                         </h:panelGrid>
 
-                        <p:commandButton value="Submit" action="#{createVenueBean.doCreate}" update="messages" process="@this"/>
+                        <p:commandButton value="Submit" action="#{createVenueBean.doCreate}" update="messages"
+                                         process="@this"/>
                     </p:panel>
                 </p:tab>
             </p:wizard>
