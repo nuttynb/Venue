@@ -21,7 +21,7 @@ public class AddressVo implements Serializable {
 
     private String number;
 
-    private int postcode;
+    private Integer postcode;
 
     /**
      * Return the id of address.
@@ -136,7 +136,7 @@ public class AddressVo implements Serializable {
      *
      * @return the postcode of venue
      */
-    public int getPostcode() {
+    public Integer getPostcode() {
         return postcode;
     }
 
@@ -145,7 +145,7 @@ public class AddressVo implements Serializable {
      *
      * @param postcode the postcode of venue
      */
-    public void setPostcode(int postcode) {
+    public void setPostcode(Integer postcode) {
         this.postcode = postcode;
     }
 }

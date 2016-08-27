@@ -35,10 +35,14 @@ public class Address extends BaseEntity {
 
     @Basic
     @Column(nullable = false)
-    private int postcode;
+    private Integer postcode;
 
     public Long getVenueId() {
         return venueId;
+    }
+
+    public void setVenueId(Long venueId) {
+        this.venueId = venueId;
     }
 
     public String getCountry() {
@@ -47,10 +51,6 @@ public class Address extends BaseEntity {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public void setVenueId(Long venueId) {
-        this.venueId = venueId;
     }
 
     public String getCity() {
@@ -77,11 +77,11 @@ public class Address extends BaseEntity {
         this.number = number;
     }
 
-    public int getPostcode() {
+    public Integer getPostcode() {
         return postcode;
     }
 
-    public void setPostcode(int postcode) {
+    public void setPostcode(Integer postcode) {
         this.postcode = postcode;
     }
 }
