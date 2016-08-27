@@ -19,7 +19,7 @@ import javax.interceptor.Interceptors;
  */
 
 
-@Stateless(name = "AddressServiceImpl")
+@Stateless(name = "AddressService", mappedName = "AddressService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @Local(AddressService.class)
 @Interceptors({ SpringBeanAutowiringInterceptor.class })

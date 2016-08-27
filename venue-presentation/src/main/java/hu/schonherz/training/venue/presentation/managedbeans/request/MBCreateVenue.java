@@ -21,7 +21,7 @@ public class MBCreateVenue {
     private MBVenue venue;
 
     @EJB
-    private VenueService venueService;
+    VenueService venueService;
 
     public String doCreate() {
         //venueService.createVenue(venue.getVenue());
@@ -48,4 +48,11 @@ public class MBCreateVenue {
         this.venue = venue;
     }
 
+    public VenueService getVenueService() {
+        return venueService;
+    }
+
+    public void setVenueService(VenueService venueService) {
+        this.venueService = venueService;
+    }
 }

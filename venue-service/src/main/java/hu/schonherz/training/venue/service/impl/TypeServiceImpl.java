@@ -2,7 +2,6 @@ package hu.schonherz.training.venue.service.impl;
 
 import hu.schonherz.training.venue.persistence.entity.Type;
 import hu.schonherz.training.venue.persistence.repository.TypeRepository;
-import hu.schonherz.training.venue.persistence.repository.VenueRepository;
 import hu.schonherz.training.venue.service.TypeService;
 import hu.schonherz.training.venue.vo.TypeVo;
 import org.dozer.DozerBeanMapper;
@@ -21,7 +20,7 @@ import java.util.List;
  * Created by Roli on 2016. 08. 27..
  */
 
-@Stateless(name = "TypeServiceImpl")
+@Stateless(name = "TypeService", mappedName = "TypeService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @Local(TypeService.class)
 @Interceptors({SpringBeanAutowiringInterceptor.class})

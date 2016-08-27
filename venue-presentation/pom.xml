@@ -80,6 +80,7 @@
             <groupId>hu.schonherz.training.venue</groupId>
             <artifactId>venue-ejb-client</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
     <build>

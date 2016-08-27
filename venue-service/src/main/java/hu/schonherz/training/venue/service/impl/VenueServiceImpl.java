@@ -20,7 +20,7 @@ import java.util.List;
  * Created by Roli on 2016. 08. 26..
  */
 
-@Stateless(name = "VenueServiceImpl")
+@Stateless(name = "VenueService",mappedName = "VenueService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @Local(VenueService.class)
 @Interceptors({ SpringBeanAutowiringInterceptor.class })

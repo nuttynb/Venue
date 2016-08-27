@@ -22,7 +22,7 @@ public class MBTypeConverter implements Converter {
     private MBType type;
 
     @EJB
-    private TypeService typeService;
+    TypeService typeService;
 
     @PostConstruct
     public void init() {
@@ -70,5 +70,13 @@ public class MBTypeConverter implements Converter {
 
     public void setType(MBType type) {
         this.type = type;
+    }
+
+    public TypeService getTypeService() {
+        return typeService;
+    }
+
+    public void setTypeService(TypeService typeService) {
+        this.typeService = typeService;
     }
 }

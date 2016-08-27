@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+	 	   http://www.springframework.org/schema/jee 
+	       http://www.springframework.org/schema/jee/spring-jee.xsd
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="hu.schonherz.training.venue.presentation"/>
+
+
+    <jee:local-slsb id="VenueService"
+                    jndi-name="java:global/Venue/venue-service/VenueService!hu.schonherz.training.venue.service.VenueService"
+                    business-interface="hu.schonherz.training.venue.service.VenueService"/>
+
+    <jee:local-slsb id="TypeService"
+                    jndi-name="java:global/Venue/venue-service/TypeService!hu.schonherz.training.venue.service.TypeService"
+                    business-interface="hu.schonherz.training.venue.service.TypeService"/>
+
+    <jee:local-slsb id="AddressService"
+                    jndi-name="java:global/Venue/venue-service/AddressService!hu.schonherz.training.venue.service.AddressService"
+                    business-interface="hu.schonherz.training.venue.service.AddressService"/>
+
+
+</beans>

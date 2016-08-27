@@ -50,7 +50,7 @@
     </dependencies>
     <modules>
         <module>venue-persistence</module>
-		<module>venue-ejb-client</module>
+        <module>venue-ejb-client</module>
         <module>venue-service</module>
         <module>venue-presentation</module>
         <module>ear</module>
