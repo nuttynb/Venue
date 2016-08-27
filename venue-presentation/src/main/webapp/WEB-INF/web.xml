@@ -24,17 +24,11 @@
         <param-value>bootstrap</param-value>
     </context-param>
 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/spring-context.xml</param-value>
-    </context-param>
+
     <!-- Welcome page -->
     <welcome-file-list>
         <welcome-file>profile.xhtml</welcome-file>
     </welcome-file-list>
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
 
     <listener>
         <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
