@@ -1,9 +1,9 @@
 package hu.schonherz.training.venue.service.impl;
 
-import hu.schonherz.training.venue.persistence.entity.Type;
 import hu.schonherz.training.venue.persistence.entity.Venue;
 import hu.schonherz.training.venue.persistence.repository.VenueRepository;
 import hu.schonherz.training.venue.service.VenueService;
+import hu.schonherz.training.venue.vo.TypeVo;
 import hu.schonherz.training.venue.vo.VenueVo;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +52,7 @@ public class VenueServiceImpl implements VenueService {
     }
 
     @Override
-    public List<VenueVo> getVenueByType(Type type) {
+    public List<VenueVo> getVenueByType(TypeVo type) {
         return null;
     }
 

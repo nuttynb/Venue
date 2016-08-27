@@ -1,6 +1,6 @@
 package hu.schonherz.training.venue.service;
 
-import hu.schonherz.training.venue.persistence.entity.Type;
+import hu.schonherz.training.venue.vo.TypeVo;
 import hu.schonherz.training.venue.vo.VenueVo;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public interface VenueService {
 
     List<VenueVo> getVenueByName(String name);
 
-    List<VenueVo> getVenueByType(Type type);
+    List<VenueVo> getVenueByType(TypeVo type);
 
     void createVenue(VenueVo venueVo);
 
