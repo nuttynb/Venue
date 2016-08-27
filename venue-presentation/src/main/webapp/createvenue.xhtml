@@ -12,22 +12,27 @@
     <h:body>
         <h:form id="form">
 
-            <p:growl id="growl" sticky="true" showDetail="true"/>
+            <p:messages id="messages" showDetail="true" closable="true"/>
 
-            <p:wizard flowListener="#{venueWizard.onFlowProcess}">
+            <p:wizard flowListener="#{createVenueBean.onFlowProcess}">
                 <p:tab id="general" title="General">
                     <p:panel header="General Informations">
                         <p:messages/>
-                        <h:panelGrid columns="2" columnClasses="label, value">
-                            <h:outputText value="Venue name: *"/>
-                            <p:inputText value="#{venueWizard.venue.name}" required="true" label="Venue name"/>
+                        <h:panelGrid columns="2" columnClasses="label, value" cellspacing="20">
+                            <h:outputText value="Venue Name: *"/>
+                            <p:inputText value="#{venueBean.venue.name}" required="true" requiredMessage="Venue name must not be empty."/>
 
                             <h:outputText value="Description: *"/>
-                            <p:inputTextarea value="#{venueWizard.venue.description}" required="true" rows="6" cols="33"
-                                             label="Short description"/>
+                            <p:inputTextarea value="#{venueBean.venue.description}" required="true" rows="5" cols="50"
+                                             requiredMessage="Description must not be empty."/>
 
-                            <h:outputText value="Venue type: "/>
-                            <p:inputText/>
+                            <p:outputLabel for="console" value="Venue Type:" />
+                            <p:selectOneMenu id="console" style="width:125px" required="true">
+                                <f:selectItem itemLabel="Select One" itemValue="" />
+                                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                                <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                            </p:selectOneMenu>
                         </h:panelGrid>
                     </p:panel>
                 </p:tab>
@@ -35,21 +40,21 @@
                 <p:tab id="address" title="Address">
                     <p:panel header="Address Details">
                         <p:messages/>
-                        <h:panelGrid columns="2" columnClasses="label, value">
-                            <h:outputText value="Country: "/>
-                            <p:inputText value="#{venueWizard.venue.address.country}"/>
+                        <h:panelGrid columns="2" columnClasses="label, value" cellspacing="20">
+                            <h:outputText value="Country: *"/>
+                            <p:inputText value="#{venueBean.venue.address.country}" required="true" requiredMessage="Country must not be empty."/>
 
-                            <h:outputText value="Postal Code: "/>
-                            <p:inputText value="#{venueWizard.venue.address.postcode}"/>
+                            <h:outputText value="Postal Code: *"/>
+                            <p:inputText value="#{venueBean.venue.address.postcode}" required="true" label="Postal code" requiredMessage="Postal code must not be empty."/>
 
-                            <h:outputText value="City: "/>
-                            <p:inputText value="#{venueWizard.venue.address.city}"/>
+                            <h:outputText value="City: *"/>
+                            <p:inputText value="#{venueBean.venue.address.city}" required="true" requiredMessage="City must not be empty."/>
 
-                            <h:outputText value="Street: "/>
-                            <p:inputText value="#{venueWizard.venue.address.street}"/>
+                            <h:outputText value="Street: *"/>
+                            <p:inputText value="#{venueBean.venue.address.street}" required="true" requiredMessage="Street must not be empty."/>
 
-                            <h:outputText value="Number: "/>
-                            <p:inputText value="#{venueWizard.venue.address.number}"/>
+                            <h:outputText value="Number: *"/>
+                            <p:inputText value="#{venueBean.venue.address.number}" required="true" requiredMessage="Number must not be empty."/>
 
                         </h:panelGrid>
                     </p:panel>
@@ -57,33 +62,32 @@
 
                 <p:tab id="confirm" title="Confirmation">
                     <p:panel header="Confirmation">
-                        <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                        <h:panelGrid id="confirmation" columns="2" columnClasses="grid,grid" cellspacing="40">
                             <h:panelGrid columns="2" columnClasses="label, value">
                                 <h:outputText value="Venue name: "/>
-                                <h:outputText value="#{venueWizard.venue.name}" styleClass="outputLabel"/>
+                                <h:outputText value="#{venueBean.venue.name}" styleClass="outputLabel"/>
 
                                 <h:outputText value="Description: "/>
-                                <h:outputText value="#{venueWizard.venue.description}" styleClass="outputLabel"/>
+                                <h:outputText value="#{venueBean.venue.description}" styleClass="outputLabel" style="word-wrap:break-word;" />
 
 
                             </h:panelGrid>
 
                             <h:panelGrid columns="2" columnClasses="label, value">
                                 <h:outputText value="Country: "/>
-                                <h:outputText value="#{venueWizard.venue.address.country}" styleClass="outputLabel"/>
+                                <h:outputText value="#{venueBean.venue.address.country}" styleClass="outputLabel"/>
                                 <h:outputText value="Postal: "/>
-                                <h:outputText value="#{venueWizard.venue.address.postcode}" styleClass="outputLabel"/>
+                                <h:outputText value="#{venueBean.venue.address.postcode}" styleClass="outputLabel"/>
                                 <h:outputText value="City: "/>
-                                <h:outputText value="#{venueWizard.venue.address.city}" styleClass="outputLabel"/>
+                                <h:outputText value="#{venueBean.venue.address.city}" styleClass="outputLabel"/>
                                 <h:outputText value="Street: "/>
-                                <h:outputText value="#{venueWizard.venue.address.street}" styleClass="outputLabel"/>
+                                <h:outputText value="#{venueBean.venue.address.street}" styleClass="outputLabel"/>
                                 <h:outputText value="Number: "/>
-                                <h:outputText value="#{venueWizard.venue.address.number}" styleClass="outputLabel"/>
+                                <h:outputText value="#{venueBean.venue.address.number}" styleClass="outputLabel"/>
                             </h:panelGrid>
                         </h:panelGrid>
 
-                        <p:commandButton value="Submit" actionListener="#{venueWizard.save}" update="growl"
-                                         process="@this"/>
+                        <p:commandButton value="Submit" action="#{createVenueBean.doCreate}" update="messages" process="@this"/>
                     </p:panel>
                 </p:tab>
             </p:wizard>

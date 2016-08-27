@@ -21,12 +21,12 @@
     <!-- To change PrimeFaces theme -->
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>casablanca</param-value>
+        <param-value>bootstrap</param-value>
     </context-param>
 
     <!-- Welcome page -->
     <welcome-file-list>
-        <welcome-file>welcome.xhtml</welcome-file>
+        <welcome-file>profile.xhtml</welcome-file>
     </welcome-file-list>
 
     <!-- JSF mapping -->

@@ -70,7 +70,11 @@
             <artifactId>el-ri</artifactId>
             <version>${el.ri.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>hu.schonherz.training.venue</groupId>
+            <artifactId>venue-service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>venue-presentation</finalName>
