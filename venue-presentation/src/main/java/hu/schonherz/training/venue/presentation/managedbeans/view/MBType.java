@@ -1,19 +1,18 @@
 package hu.schonherz.training.venue.presentation.managedbeans.view;
 
 import hu.schonherz.training.venue.vo.TypeVo;
-import hu.schonherz.training.venue.vo.VenueVo;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 
 @ManagedBean(name = "typeBean")
 @ViewScoped
-public class MBType {
+public class MBType implements Serializable {
+    private static final long serialVersionUID = 7869189274417139148L;
     private List<TypeVo> types = new ArrayList<>();
 
     public List<TypeVo> getTypes() {

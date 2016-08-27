@@ -4,11 +4,13 @@ import hu.schonherz.training.venue.vo.VenueVo;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.io.Serializable;
 
 
 @ManagedBean(name = "venueBean")
 @ViewScoped
-public class MBVenue {
+public class MBVenue implements Serializable {
+    private static final long serialVersionUID = 2555967875000668429L;
     private VenueVo venue = new VenueVo();
 
     public VenueVo getVenue() {
