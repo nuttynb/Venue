@@ -20,16 +20,15 @@ import java.util.List;
  * Created by Roli on 2016. 08. 26..
  */
 
-@Stateless(name = "VenueService",mappedName = "VenueService")
+@Stateless(name = "VenueService", mappedName = "VenueService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @Local(VenueService.class)
-@Interceptors({ SpringBeanAutowiringInterceptor.class })
-public class VenueServiceImpl implements VenueService {
+@Interceptors({SpringBeanAutowiringInterceptor.class})
+public class VenueServiceImpl extends AbstractMappingService implements VenueService {
 
     @Autowired
     private VenueRepository venueRepository;
 
-    private DozerBeanMapper mapper = new DozerBeanMapper();
 
     @Override
     public List<VenueVo> getAllVenue() {

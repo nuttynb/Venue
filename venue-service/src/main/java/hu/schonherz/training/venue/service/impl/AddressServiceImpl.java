@@ -8,10 +8,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
-import javax.ejb.Local;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
+import javax.ejb.*;
 import javax.interceptor.Interceptors;
 
 /**
@@ -22,13 +19,11 @@ import javax.interceptor.Interceptors;
 @Stateless(name = "AddressService", mappedName = "AddressService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @Local(AddressService.class)
-@Interceptors({ SpringBeanAutowiringInterceptor.class })
-public class AddressServiceImpl implements AddressService {
+@Interceptors({SpringBeanAutowiringInterceptor.class})
+public class AddressServiceImpl extends AbstractMappingService implements AddressService {
 
     @Autowired
     private AddressRepository addresRepository;
-
-    private DozerBeanMapper mapper = new DozerBeanMapper();
 
     @Override
     public AddressVo getAddressByVenueId(Long id) {

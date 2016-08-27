@@ -12,11 +12,11 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import javax.faces.convert.FacesConverter;
 import java.util.ArrayList;
 import java.util.List;
 
-@ManagedBean(name = "typeConverterBean")
-@RequestScoped
+@FacesConverter(forClass = TypeVo.class,value = "typeVOConverter")
 public class MBTypeConverter implements Converter {
     @ManagedProperty(value = "#{typeBean}")
     private MBType type;

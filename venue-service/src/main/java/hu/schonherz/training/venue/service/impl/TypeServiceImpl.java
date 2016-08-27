@@ -24,12 +24,10 @@ import java.util.List;
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @Local(TypeService.class)
 @Interceptors({SpringBeanAutowiringInterceptor.class})
-public class TypeServiceImpl implements TypeService {
+public class TypeServiceImpl extends AbstractMappingService implements TypeService {
 
     @Autowired
     private TypeRepository typeRepository;
-
-    private DozerBeanMapper mapper = new DozerBeanMapper();
 
     public List<TypeVo> toReporytory(List<Type> typeRepositorys) {
         List<TypeVo> typeVos = new ArrayList<>();
@@ -41,8 +39,7 @@ public class TypeServiceImpl implements TypeService {
 
     @Override
     public List<TypeVo> getAllType() {
-        List<TypeVo> types = new ArrayList<>();
-        types = toReporytory(typeRepository.findAll());
+        List<TypeVo> types = toReporytory(typeRepository.findAll());
         return types;
     }
 }
