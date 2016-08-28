@@ -57,7 +57,7 @@ public class VenueServiceImpl extends AbstractMappingService implements VenueSer
 
     @Override
     public void createVenue(VenueVo venueVo) {
-        venueRepository.save(mapper.map(venueVo, Venue.class));
+        venueRepository.save(map(venueVo, Venue.class));
     }
 
     @Override

@@ -32,7 +32,7 @@ public class TypeServiceImpl extends AbstractMappingService implements TypeServi
     public List<TypeVo> toReporytory(List<Type> typeRepositorys) {
         List<TypeVo> typeVos = new ArrayList<>();
         for (Type typeRepository : typeRepositorys) {
-            typeVos.add(mapper.map(typeRepository, TypeVo.class));
+            typeVos.add(map(typeRepository, TypeVo.class));
         }
         return typeVos;
     }
