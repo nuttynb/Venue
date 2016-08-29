@@ -29,9 +29,9 @@
 
                             <p:outputLabel for="type" value="Venue Type:"/>
                             <p:selectOneMenu id="type" style="width:125px" required="true"
-                                             value="#{venueBean.venue.type}" converter="#{typeConverterBean}">
+                                             value="#{venueBean.venue.type}" converter="typeVOConverter">
                                 <f:selectItem itemLabel="Select One" itemValue=""/>
-                                <f:selectItems value="#{typeConverterBean.type.types}" var="type"
+                                <f:selectItems value="#{typeBean.types}" var="type"
                                                itemLabel="#{type.name}" itemValue="#{type}"/>
                             </p:selectOneMenu>
                         </h:panelGrid>

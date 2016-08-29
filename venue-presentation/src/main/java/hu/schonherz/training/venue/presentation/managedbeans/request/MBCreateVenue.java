@@ -26,10 +26,9 @@ public class MBCreateVenue {
     public String doCreate() {
         //venueService.createVenue(venue.getVenue());
         //VenueVo possibleVenue = venueService.getVenueByName(venue.getVenue().getName());
-        if (false) {
+        if (true) {
             return "profile";
         } else {
-
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", venue.getVenue().getName() + " already exists.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return null;
