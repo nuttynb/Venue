@@ -33,9 +33,9 @@ public class Venue extends BaseEntity {
     //@JoinColumn(name = "venueId", nullable = false)
     private Collection<Events> events;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     //@JoinColumn(name = "venueId", nullable = false)
-    private Collection<VenueImage> images;
+    //private Collection<VenueImage> images;
 
 
     public Long getOwnerId() {

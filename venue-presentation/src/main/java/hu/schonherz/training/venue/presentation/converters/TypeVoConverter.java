@@ -8,8 +8,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@FacesConverter(forClass = TypeVo.class, value = "typeVOConverter")
-public class MBTypeConverter implements Converter {
+@FacesConverter(forClass = TypeVo.class, value = "typeVoConverter")
+public class TypeVoConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String submittedValue) {

@@ -29,7 +29,7 @@
 
                             <p:outputLabel for="type" value="Venue Type:"/>
                             <p:selectOneMenu id="type" style="width:125px" required="true"
-                                             value="#{venueBean.venue.type}" converter="typeVOConverter">
+                                             value="#{venueBean.venue.type}" converter="typeVoConverter">
                                 <f:selectItem itemLabel="Select One" itemValue=""/>
                                 <f:selectItems value="#{typeBean.types}" var="type"
                                                itemLabel="#{type.name}" itemValue="#{type}"/>
