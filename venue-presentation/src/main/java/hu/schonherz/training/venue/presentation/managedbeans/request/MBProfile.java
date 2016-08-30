@@ -4,6 +4,8 @@ import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenue;
 import hu.schonherz.training.venue.service.VenueService;
 import hu.schonherz.training.venue.vo.VenueVo;
 import org.primefaces.event.FlowEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -21,9 +23,11 @@ public class MBProfile {
 
     @EJB
     VenueService venueService;
+    private static Logger LOG = LoggerFactory.getLogger(MBProfile.class);
 
     public void onLoad() {
-        System.out.println("onLoad lefutott.");
+
+        LOG.info("onLoad lefutott.");
         VenueVo test = new VenueVo();
         test.setId(new Long(1));
         test.setName("Teszt eset");
