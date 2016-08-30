@@ -24,6 +24,12 @@
         <param-value>bootstrap</param-value>
     </context-param>
 
+    <!-- To file upload -->
+    <context-param>
+        <param-name>primefaces.UPLOADER</param-name>
+        <param-value>native</param-value>
+    </context-param>
+
     <!-- Welcome page -->
     <welcome-file-list>
         <welcome-file>profile.xhtml</welcome-file>
@@ -56,6 +62,24 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+        <!--<init-param>
+            <param-name>thresholdSize</param-name>
+            <param-value>51200</param-value>
+        </init-param>
+        <init-param>
+            <param-name>uploadDirectory</param-name>
+            <param-value>C:\temp\vkj</param-value>
+        </init-param> -->
+    </filter>
+    <filter-mapping>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+
 
     <ejb-local-ref>
         <ejb-ref-name>ejb.VenueService</ejb-ref-name>

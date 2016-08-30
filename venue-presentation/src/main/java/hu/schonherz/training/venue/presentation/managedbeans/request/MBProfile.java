@@ -5,6 +5,8 @@ import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenue;
 import hu.schonherz.training.venue.service.VenueService;
 import hu.schonherz.training.venue.vo.VenueVo;
 import org.primefaces.event.FlowEvent;
+import org.primefaces.event.FileUploadEvent;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,6 +41,11 @@ public class MBProfile {
             venue.setVenue(null);
         }
         LOG.info("onLoad lefutott.");
+    }
+
+    public void fileUpload(FileUploadEvent event) {
+        FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
     public MBVenue getVenue() {
