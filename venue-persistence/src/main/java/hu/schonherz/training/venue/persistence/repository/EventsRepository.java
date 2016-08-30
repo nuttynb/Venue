@@ -31,5 +31,4 @@ public interface EventsRepository extends JpaRepository<Events , Long>{
     Collection<Events> findEventByDate(Date date);
 
 
-
 }

@@ -1,9 +1,6 @@
 package hu.schonherz.training.venue.persistence.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Home on 2016. 08. 23..
@@ -13,9 +10,8 @@ import javax.persistence.Table;
 @Table(name = "Address")
 public class Address extends BaseEntity {
 
-    @Basic
-    @Column(nullable = false)
-    private Long venueId;
+    @OneToOne(mappedBy = "address")
+    private Venue venue;
 
     @Basic
     @Column(nullable = false)
@@ -36,14 +32,6 @@ public class Address extends BaseEntity {
     @Basic
     @Column(nullable = false)
     private Integer postcode;
-
-    public Long getVenueId() {
-        return venueId;
-    }
-
-    public void setVenueId(Long venueId) {
-        this.venueId = venueId;
-    }
 
     public String getCountry() {
         return country;
@@ -83,5 +71,13 @@ public class Address extends BaseEntity {
 
     public void setPostcode(Integer postcode) {
         this.postcode = postcode;
+    }
+
+    public Venue getVenue() {
+        return venue;
+    }
+
+    public void setVenue(Venue venue) {
+        this.venue = venue;
     }
 }

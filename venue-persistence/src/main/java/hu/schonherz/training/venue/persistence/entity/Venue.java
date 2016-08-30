@@ -21,21 +21,16 @@ public class Venue extends BaseEntity {
     @Basic
     private String description;
 
-    @Column(nullable = false)
-    //@Enumerated(EnumType.STRING)
+    @OneToOne
+    @JoinColumn(name = "typeId")
     private Type type;
 
     @OneToOne
-    /*@JoinColumn(name = "venueId")*/
+    @JoinColumn(name = "addressId")
     private Address address;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //@JoinColumn(name = "venueId", nullable = false)
+    @OneToMany(mappedBy = "veune",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<Events> events;
-
-    //@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //@JoinColumn(name = "venueId", nullable = false)
-    //private Collection<VenueImage> images;
 
 
     public Long getOwnerId() {

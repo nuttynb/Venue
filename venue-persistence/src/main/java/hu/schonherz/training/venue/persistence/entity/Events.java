@@ -1,9 +1,6 @@
 package hu.schonherz.training.venue.persistence.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -14,9 +11,9 @@ import java.util.Date;
 @Table(name = "Event")
 public class Events extends BaseEntity {
 
-    @Basic
-    @Column(nullable = false)
-    private Long venueId;
+    @ManyToOne
+    @JoinColumn(name ="venue_id")
+    private Venue venue;
 
     @Basic
     @Column(nullable = false)
@@ -41,14 +38,6 @@ public class Events extends BaseEntity {
         this.bandId = bandId;
     }
 
-    public Long getVenueId() {
-        return venueId;
-    }
-
-    public void setVenueId(Long venueId) {
-        this.venueId = venueId;
-    }
-
     public String getName() {
         return name;
     }
@@ -71,5 +60,13 @@ public class Events extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Venue getVenue() {
+        return venue;
+    }
+
+    public void setVenue(Venue venue) {
+        this.venue = venue;
     }
 }
