@@ -15,7 +15,7 @@
             <f:event type="preRenderView" listener="#{profileBean.onLoad}"/>
         </f:metadata>
         <div class="main">
-            <h:form styleClass="profile-details" rendered="#{venueBean.venue eq null}">
+            <h:form styleClass="profile-details" rendered="#{venueBean.venue ne null}">
                 <h1>#{userBean.name}'s venue:</h1>
                 <h:panelGrid columns="2" columnClasses="label, value">
                     <h:outputText value="Venue name: "/>
@@ -59,7 +59,7 @@
                 </h:panelGrid>
             </h:form>
 
-            <h:form rendered="#{venueBean.venue ne null}">
+            <h:form rendered="#{venueBean.venue eq null}">
                 <h1>Seems like you don't have any venue.</h1>
                 <p:button styleClass="create" outcome="createVenue" value="Create New Venue"
                           icon="ui-icon-plus"></p:button>
