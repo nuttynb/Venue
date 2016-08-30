@@ -9,39 +9,47 @@
         <ui:define name="title">Venue profile</ui:define>
         <ui:define name="body">
             <h:outputStylesheet name="css/venue.css"/>
+            <f:metadata>
+                <f:viewParam name="id" value="#{userBean.id}"/>
+                <f:viewParam name="name" value="#{userBean.name}"/>
+                <f:event type="preRenderView" listener="#{profileBean.onLoad}"/>
+            </f:metadata>
             <div class="main">
-                <div class="profile">
-                    <f:event type="preRenderView" listener="#{profileBean.onLoad}" />
-                        <h:panelGrid columns="2" columnClasses="label, value">
-                            <h:outputText value="Venue name: "/>
-                            <h:outputText value="#{venueBean.venue.name}" styleClass="outputLabel"/>
+                <h:form styleClass="profile-details" rendered="#{venueBean.venue ne null}">
+                    <h1>#{userBean.name}'s venue:</h1>
+                    <h:panelGrid columns="2" columnClasses="label, value">
+                        <h:outputText value="Venue name: "/>
+                        <h:outputText value="#{venueBean.venue.name}" styleClass="outputLabel"/>
 
-                            <h:outputText value="Description: "/>
-                            <h:outputText value="#{venueBean.venue.description}" styleClass="outputLabel"
-                                          style="word-wrap:break-word;"/>
-                            <h:outputText value="Venue type: "/>
-                            <h:outputText value="#{venueBean.venue.type.name}" styleClass="outputLabel"/>
-                        </h:panelGrid>
+                        <h:outputText value="Description: "/>
+                        <h:outputText value="#{venueBean.venue.description}" styleClass="outputLabel"
+                                      style="word-wrap:break-word;"/>
+                        <h:outputText value="Venue type: "/>
+                        <h:outputText value="#{venueBean.venue.type.name}" styleClass="outputLabel"/>
+                    </h:panelGrid>
 
-                        <h:panelGrid columns="2" columnClasses="label, value">
-                            <h:outputText value="Country: "/>
-                            <h:outputText value="#{venueBean.venue.address.country}"
-                                          styleClass="outputLabel"/>
-                            <h:outputText value="Postal: "/>
-                            <h:outputText value="#{venueBean.venue.address.postcode}"
-                                          styleClass="outputLabel"/>
-                            <h:outputText value="City: "/>
-                            <h:outputText value="#{venueBean.venue.address.city}" styleClass="outputLabel"/>
-                            <h:outputText value="Street: "/>
-                            <h:outputText value="#{venueBean.venue.address.street}"
-                                          styleClass="outputLabel"/>
-                            <h:outputText value="Number: "/>
-                            <h:outputText value="#{venueBean.venue.address.number}"
-                                          styleClass="outputLabel"/>
-                        </h:panelGrid>
-                </div>
-                <p:button styleClass="create" outcome="createVenue" value="Create New Venue"
-                          icon="ui-icon-plus"></p:button>
+                    <h:panelGrid columns="2" columnClasses="label, value">
+                        <h:outputText value="Country: "/>
+                        <h:outputText value="#{venueBean.venue.address.country}"
+                                      styleClass="outputLabel"/>
+                        <h:outputText value="Postal: "/>
+                        <h:outputText value="#{venueBean.venue.address.postcode}"
+                                      styleClass="outputLabel"/>
+                        <h:outputText value="City: "/>
+                        <h:outputText value="#{venueBean.venue.address.city}" styleClass="outputLabel"/>
+                        <h:outputText value="Street: "/>
+                        <h:outputText value="#{venueBean.venue.address.street}"
+                                      styleClass="outputLabel"/>
+                        <h:outputText value="Number: "/>
+                        <h:outputText value="#{venueBean.venue.address.number}"
+                                      styleClass="outputLabel"/>
+                    </h:panelGrid>
+                </h:form>
+                <h:form rendered="#{venueBean.venue eq null}">
+                    <h1>Seems like you don't have any venue.</h1>
+                    <p:button styleClass="create" outcome="createVenue" value="Create New Venue"
+                              icon="ui-icon-plus"></p:button>
+                </h:form>
             </div>
         </ui:define>
     </ui:composition>

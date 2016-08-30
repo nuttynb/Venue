@@ -1,5 +1,6 @@
 package hu.schonherz.training.venue.presentation.managedbeans.request;
 
+import hu.schonherz.training.venue.presentation.managedbeans.session.MBUser;
 import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenue;
 
 import hu.schonherz.training.venue.service.VenueService;
@@ -19,11 +20,13 @@ import javax.faces.context.FacesContext;
 public class MBCreateVenue {
     @ManagedProperty(value = "#{venueBean}")
     private MBVenue venue;
-
+    @ManagedProperty(value = "#{userBean}")
+    private MBUser user;
     @EJB
     VenueService venueService;
 
     public String doCreate() {
+        venue.getVenue().setOwnerId(user.getId());
         //venueService.createVenue(venue.getVenue());
         //VenueVo possibleVenue = venueService.getVenueByName(venue.getVenue().getName());
         if (true) {
@@ -53,5 +56,13 @@ public class MBCreateVenue {
 
     public void setVenueService(VenueService venueService) {
         this.venueService = venueService;
+    }
+
+    public MBUser getUser() {
+        return user;
+    }
+
+    public void setUser(MBUser user) {
+        this.user = user;
     }
 }
