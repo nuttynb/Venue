@@ -1,5 +1,10 @@
-.wizard {
+.main {
     width: 80%;
+    margin: 0 auto;
+}
+
+.create {
+    display: block;
     margin: 0 auto;
 }
 

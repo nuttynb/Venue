@@ -1,15 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Profile</title>
-    </h:head>
-    <h:body>
-        <p:button outcome="createVenue" value="Create New Venue" icon="ui-icon-star"></p:button>
-    </h:body>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/templates/pageTemplate.xhtml">
+        <ui:define name="title">Venue profile</ui:define>
+        <ui:define name="body">
+            <h:outputStylesheet name="css/venue.css"/>
+            <div class="main">
+                <div class="profile">
+                    <f:event type="preRenderView" listener="#{profileBean.onLoad}" />
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Venue name: "/>
+                            <h:outputText value="#{venueBean.venue.name}" styleClass="outputLabel"/>
+
+                            <h:outputText value="Description: "/>
+                            <h:outputText value="#{venueBean.venue.description}" styleClass="outputLabel"
+                                          style="word-wrap:break-word;"/>
+                            <h:outputText value="Venue type: "/>
+                            <h:outputText value="#{venueBean.venue.type.name}" styleClass="outputLabel"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Country: "/>
+                            <h:outputText value="#{venueBean.venue.address.country}"
+                                          styleClass="outputLabel"/>
+                            <h:outputText value="Postal: "/>
+                            <h:outputText value="#{venueBean.venue.address.postcode}"
+                                          styleClass="outputLabel"/>
+                            <h:outputText value="City: "/>
+                            <h:outputText value="#{venueBean.venue.address.city}" styleClass="outputLabel"/>
+                            <h:outputText value="Street: "/>
+                            <h:outputText value="#{venueBean.venue.address.street}"
+                                          styleClass="outputLabel"/>
+                            <h:outputText value="Number: "/>
+                            <h:outputText value="#{venueBean.venue.address.number}"
+                                          styleClass="outputLabel"/>
+                        </h:panelGrid>
+                </div>
+                <p:button styleClass="create" outcome="createVenue" value="Create New Venue"
+                          icon="ui-icon-plus"></p:button>
+            </div>
+        </ui:define>
+    </ui:composition>
 </html>

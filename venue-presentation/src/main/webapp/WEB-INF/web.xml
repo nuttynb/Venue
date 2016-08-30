@@ -24,7 +24,6 @@
         <param-value>bootstrap</param-value>
     </context-param>
 
-
     <!-- Welcome page -->
     <welcome-file-list>
         <welcome-file>profile.xhtml</welcome-file>
