@@ -8,7 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@FacesConverter(forClass = TypeVo.class, value = "typeVoConverter")
+@FacesConverter("typeVoConverter")
 public class TypeVoConverter implements Converter {
 
     @Override
