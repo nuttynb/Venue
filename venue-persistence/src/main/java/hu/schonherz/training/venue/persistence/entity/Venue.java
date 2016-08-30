@@ -29,7 +29,7 @@ public class Venue extends BaseEntity {
     @JoinColumn(name = "addressId")
     private Address address;
 
-    @OneToMany(mappedBy = "veune",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "venue",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<Events> events;
 
 
@@ -65,4 +65,19 @@ public class Venue extends BaseEntity {
         this.type = type;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Collection<Events> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Collection<Events> events) {
+        this.events = events;
+    }
 }
