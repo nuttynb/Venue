@@ -13,7 +13,7 @@
             <div class="main">
                 <h:form id="form">
                     <p:wizard styleClass="wizard" flowListener="#{createVenueBean.onFlowProcess}">
-                        <p:tab id="general" title="General">
+                        <p:tab id="general" title="#{msg['createvenue.wizard.label.general']}">
                             <p:panel header="General Informations">
                                 <p:messages/>
                                 <h:panelGrid columns="2" columnClasses="label, value" cellspacing="20">
@@ -35,7 +35,7 @@
                             </p:panel>
                         </p:tab>
 
-                        <p:tab id="address" title="Address">
+                        <p:tab id="address" title="#{msg['createvenue.wizard.label.address']}">
                             <p:panel header="Address Details">
                                 <p:messages/>
                                 <h:panelGrid columns="2" columnClasses="label, value" cellspacing="20">
@@ -59,7 +59,7 @@
                             </p:panel>
                         </p:tab>
 
-                        <p:tab id="confirm" title="Confirmation">
+                        <p:tab id="confirm" title="#{msg['createvenue.wizard.label.confirmation']}">
                             <p:panel header="Confirmation">
                                 <h:panelGrid id="confirmation" columns="2" columnClasses="grid,grid" cellspacing="40">
                                     <h:panelGrid columns="2" columnClasses="label, value">

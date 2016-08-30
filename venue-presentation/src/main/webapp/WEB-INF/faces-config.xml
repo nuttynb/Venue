@@ -5,6 +5,15 @@
         http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
               version="2.2">
 
+    <application>
+        <locale-config>
+            <default-locale>en</default-locale>
+        </locale-config>
+        <resource-bundle>
+            <base-name>resourcebundles.venue</base-name>
+            <var>msg</var>
+        </resource-bundle>
+    </application>
     <navigation-rule>
         <from-view-id>/profile.xhtml</from-view-id>
         <navigation-case>
