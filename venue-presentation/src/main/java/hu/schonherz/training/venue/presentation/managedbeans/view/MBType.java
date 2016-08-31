@@ -23,21 +23,7 @@ public class MBType implements Serializable {
 
     @PostConstruct
     public void init() {
-        //type.setTypes(typeService.getAllType());
-        List<TypeVo> tempListForTest = new ArrayList<>();
-        TypeVo tempType1 = new TypeVo();
-        TypeVo tempType2 = new TypeVo();
-        TypeVo tempType3 = new TypeVo();
-        tempType1.setId(new Long(1));
-        tempType1.setName("Test1");
-        tempListForTest.add(tempType1);
-        tempType2.setId(new Long(2));
-        tempType2.setName("Test2");
-        tempListForTest.add(tempType2);
-        tempType3.setId(new Long(3));
-        tempType3.setName("Test3");
-        tempListForTest.add(tempType3);
-        types = tempListForTest;
+        types = typeService.getAllType();
     }
 
 
