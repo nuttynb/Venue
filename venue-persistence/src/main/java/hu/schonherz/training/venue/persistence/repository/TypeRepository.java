@@ -15,6 +15,4 @@ import java.util.Collection;
 @Transactional(propagation = Propagation.REQUIRED)
 public interface TypeRepository extends JpaRepository<Type, Long>{
 
-    Collection<Type> findAllType();
-
 }

@@ -4,7 +4,6 @@ import hu.schonherz.training.venue.persistence.entity.Address;
 import hu.schonherz.training.venue.persistence.repository.AddressRepository;
 import hu.schonherz.training.venue.service.AddressService;
 import hu.schonherz.training.venue.vo.AddressVo;
-import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 

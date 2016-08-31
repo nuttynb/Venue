@@ -18,17 +18,7 @@ import java.util.Date;
 @Transactional(propagation = Propagation.REQUIRED)
 public interface EventsRepository extends JpaRepository<Events , Long>{
 
-    Collection<Events> findAllEvents();
 
-    Events findEventById(Long id);
-
-    Collection<Events> findEventByVenueId(Long venueid);
-
-    Collection<Events> findEventByBandId(Long bandId);
-
-    Event findEventByName(String name);
-
-    Collection<Events> findEventByDate(Date date);
 
 
 }

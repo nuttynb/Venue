@@ -19,26 +19,5 @@ import java.util.Collection;
 @Transactional(propagation = Propagation.REQUIRED)
 public interface VenueRepository extends JpaRepository<Venue , Long>{
 
-    Collection<Venue> findAllVenue();
-
-    Venue findVenueById(Long venueId);
-
-    Collection<Venue> findVenueByOwnerId(Long ownerId);
-
-    Venue findVenueByName(String name);
-
-    Collection<Venue> findVenueByType(Type type);
-
-    Venue findVenuebyByEventId(Long eventId);
-
-    Venue findVenueByAdressId(Long addressId);
-
-    @Modifying
-    @Query("update Venue v set v.name = ?1, v.description = ?2 ,v.type = ?3 where v.id = ?5")
-    void updateVenue(String name, String description, Type type,Long id);
-
-    void createVenue(Venue venue);
-
-    void deleteVenuebyVenueId(Venue venue);
 
 }

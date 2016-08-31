@@ -10,17 +10,6 @@ import java.util.List;
  */
 public interface VenueService {
 
-    List<VenueVo> getAllVenue();
-
-    VenueVo getVenueById(Long id);
-
-    List<VenueVo> getVenueByOwnerId(Long ownerId);
-
-    List<VenueVo> getVenueByName(String name);
-
-    List<VenueVo> getVenueByType(TypeVo type);
-
     void createVenue(VenueVo venueVo);
 
-    void deleteVenue(VenueVo venueVo);
 }

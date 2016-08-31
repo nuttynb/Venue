@@ -1,6 +1,6 @@
 package hu.schonherz.training.venue.service.impl;
 
-import org.dozer.DozerBeanMapperSingletonWrapper;
+import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.MappingException;
 
@@ -10,7 +10,7 @@ import org.dozer.MappingException;
 public abstract class AbstractMappingService implements Mapper {
 
     private Mapper getMapper() {
-        return DozerBeanMapperSingletonWrapper.getInstance();
+        return new DozerBeanMapper();
     }
 
     @Override

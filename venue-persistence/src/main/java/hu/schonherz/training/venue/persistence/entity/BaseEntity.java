@@ -19,11 +19,11 @@ public class BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
-    public Long getOwnerId() {
+    public Long getId() {
         return Id;
     }
 
-    public void setOwnerId(Long ownerId) {
-        Id = ownerId;
+    public void setId(Long id) {
+        Id = id;
     }
 }

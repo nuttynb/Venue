@@ -12,7 +12,7 @@ import java.util.Collection;
 public class Venue extends BaseEntity {
 
     @Basic
-    @Column(nullable = false)
+   // @Column(nullable = false)
     private Long ownerId;
 
     @Column(nullable = false)
@@ -21,16 +21,21 @@ public class Venue extends BaseEntity {
     @Basic
     private String description;
 
-    @OneToOne
-    @JoinColumn(name = "typeId")
+    @Column(nullable = false)
+    //@Enumerated(EnumType.STRING)
     private Type type;
 
     @OneToOne
-    @JoinColumn(name = "addressId")
+    /*@JoinColumn(name = "venueId")*/
     private Address address;
 
-    @OneToMany(mappedBy = "venue",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //@JoinColumn(name = "venueId", nullable = false)
     private Collection<Events> events;
+
+    //@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //@JoinColumn(name = "venueId", nullable = false)
+    //private Collection<VenueImage> images;
 
 
     public Long getOwnerId() {
@@ -65,19 +70,4 @@ public class Venue extends BaseEntity {
         this.type = type;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public Collection<Events> getEvents() {
-        return events;
-    }
-
-    public void setEvents(Collection<Events> events) {
-        this.events = events;
-    }
 }

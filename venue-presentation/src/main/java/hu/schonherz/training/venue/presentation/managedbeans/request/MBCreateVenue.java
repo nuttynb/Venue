@@ -26,9 +26,9 @@ public class MBCreateVenue {
     VenueService venueService;
 
     public String doCreate() {
-        venue.getVenue().setOwnerId(user.getId());
-        //venueService.createVenue(venue.getVenue());
-        //VenueVo possibleVenue = venueService.getVenueByName(venue.getVenue().getName());
+       // venue.getVenue().setOwnerId(user.getId());
+        venueService.createVenue(venue.getVenue());
+       /* VenueVo possibleVenue = venueService.getVenueByName(venue.getVenue().getName());*/
         if (true) {
             return "profile";
         } else {

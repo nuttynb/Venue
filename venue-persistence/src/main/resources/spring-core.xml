@@ -14,8 +14,8 @@
 
     <context:component-scan base-package="hu.schonherz.training.venue" />
 
-    <jpa:repositories base-package="hu.schonherz.training.venue.repository"
-                      repository-impl-postfix="Impl"  />
+    <jpa:repositories base-package="hu.schonherz.training.venue.persistence.repository"
+                      repository-impl-postfix="Impl" entity-manager-factory-ref="entityManagerFactory" />
 
 
     <bean id="entityManagerFactory"

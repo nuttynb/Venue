@@ -4,7 +4,6 @@ import hu.schonherz.training.venue.persistence.entity.Type;
 import hu.schonherz.training.venue.persistence.repository.TypeRepository;
 import hu.schonherz.training.venue.service.TypeService;
 import hu.schonherz.training.venue.vo.TypeVo;
-import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
