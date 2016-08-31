@@ -17,6 +17,7 @@ import javax.interceptor.Interceptors;
 
 @Stateless(name = "AddressService", mappedName = "AddressService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
+@TransactionManagement(TransactionManagementType.BEAN)
 @Local(AddressService.class)
 @Interceptors({SpringBeanAutowiringInterceptor.class})
 public class AddressServiceImpl extends AbstractMappingService implements AddressService {

@@ -16,6 +16,7 @@ import javax.interceptor.Interceptors;
 
 @Stateless(name = "VenueService", mappedName = "VenueService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
+@TransactionManagement(TransactionManagementType.BEAN)
 @Local(VenueService.class)
 @Interceptors({SpringBeanAutowiringInterceptor.class})
 public class VenueServiceImpl extends AbstractMappingService implements VenueService {

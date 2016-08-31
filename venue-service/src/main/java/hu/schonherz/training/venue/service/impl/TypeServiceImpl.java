@@ -7,10 +7,7 @@ import hu.schonherz.training.venue.vo.TypeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
-import javax.ejb.Local;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
+import javax.ejb.*;
 import javax.interceptor.Interceptors;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +18,7 @@ import java.util.List;
 
 @Stateless(name = "TypeService", mappedName = "TypeService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
+@TransactionManagement(TransactionManagementType.BEAN)
 @Local(TypeService.class)
 @Interceptors({SpringBeanAutowiringInterceptor.class})
 public class TypeServiceImpl extends AbstractMappingService implements TypeService {
