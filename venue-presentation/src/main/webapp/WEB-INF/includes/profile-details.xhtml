@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h1>#{userBean.name}'s venue:</h1>
+    <h:panelGrid columns="2" columnClasses="label, value">
+        <h:outputText value="Venue name: "/>
+        <h:outputText value="#{venueBean.venue.name}" styleClass="outputLabel"/>
+
+        <h:outputText value="Description: "/>
+        <h:outputText value="#{venueBean.venue.description}" styleClass="outputLabel"
+                      style="word-wrap:break-word;"/>
+        <h:outputText value="Venue type: "/>
+        <h:outputText value="#{venueBean.venue.type.name}" styleClass="outputLabel"/>
+    </h:panelGrid>
+
+    <h:panelGrid columns="2" columnClasses="label, value">
+        <h:outputText value="Country: "/>
+        <h:outputText value="#{venueBean.venue.address.country}"
+                      styleClass="outputLabel"/>
+        <h:outputText value="Postal: "/>
+        <h:outputText value="#{venueBean.venue.address.postcode}"
+                      styleClass="outputLabel"/>
+        <h:outputText value="City: "/>
+        <h:outputText value="#{venueBean.venue.address.city}" styleClass="outputLabel"/>
+        <h:outputText value="Street: "/>
+        <h:outputText value="#{venueBean.venue.address.street}"
+                      styleClass="outputLabel"/>
+        <h:outputText value="Number: "/>
+        <h:outputText value="#{venueBean.venue.address.number}"
+                      styleClass="outputLabel"/>
+    </h:panelGrid>
+    <h:panelGrid columns="2" columnClasses="label, value">
+        <!-- To show existing or a sample picture
+        <p:graphicImage value="#{bean.img}" />
+        -->
+        <h:form>
+            <p:fileUpload fileUploadListener="#{profileBean.fileUpload}" mode="advanced"
+                          dragDropSupport="false"
+                          update="messages" sizeLimit="100000" fileLimit="1"
+                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+
+            <p:growl id="messages" showDetail="true"/>
+        </h:form>
+    </h:panelGrid>
+</ui:composition>

@@ -31,6 +31,13 @@ public class MBProfile {
     private static Logger LOG = LoggerFactory.getLogger(MBProfile.class);
 
     public void onLoad() {
+        //if (user.getId() == null) {
+        //    FacesContext fc = FacesContext.getCurrentInstance();
+        //    fc.getApplication().getNavigationHandler().handleNavigation(fc, null, "error");
+        //}
+        //VenueVo possibleVenue = venueService.getVenueByOwnerId(user.getId());
+        //venue.setVenue(possibleVenue);
+
         if (new Long(1).equals(user.getId())) {
             VenueVo test = new VenueVo();
             test.setId(new Long(1));

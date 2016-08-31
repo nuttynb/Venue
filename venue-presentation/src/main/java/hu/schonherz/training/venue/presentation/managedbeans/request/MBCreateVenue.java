@@ -26,16 +26,9 @@ public class MBCreateVenue {
     VenueService venueService;
 
     public String doCreate() {
-       // venue.getVenue().setOwnerId(user.getId());
+        venue.getVenue().setOwnerId(user.getId());
         venueService.createVenue(venue.getVenue());
-       /* VenueVo possibleVenue = venueService.getVenueByName(venue.getVenue().getName());*/
-        if (true) {
-            return "profile";
-        } else {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", venue.getVenue().getName() + " already exists.");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-            return null;
-        }
+        return "profile";
     }
 
     public String onFlowProcess(FlowEvent event) {
