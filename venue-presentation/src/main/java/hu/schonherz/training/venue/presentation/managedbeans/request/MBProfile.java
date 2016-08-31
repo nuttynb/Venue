@@ -35,18 +35,9 @@ public class MBProfile {
         //    FacesContext fc = FacesContext.getCurrentInstance();
         //    fc.getApplication().getNavigationHandler().handleNavigation(fc, null, "error");
         //}
-        //VenueVo possibleVenue = venueService.getVenueByOwnerId(user.getId());
-        //venue.setVenue(possibleVenue);
+        VenueVo possibleVenue = venueService.getVenueByOwnerId(user.getId());
+        venue.setVenue(possibleVenue);
 
-        if (new Long(1).equals(user.getId())) {
-            VenueVo test = new VenueVo();
-            test.setId(new Long(1));
-            test.setName("myvenue");
-            test.setDescription("Teszt eset adatbázisból töltődik fel");
-            venue.setVenue(test);
-        } else {
-            venue.setVenue(null);
-        }
         LOG.info("onLoad lefutott.");
     }
 

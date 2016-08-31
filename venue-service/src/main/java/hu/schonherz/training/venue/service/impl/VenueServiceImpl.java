@@ -33,6 +33,9 @@ public class VenueServiceImpl extends AbstractMappingService implements VenueSer
     public VenueVo getVenueByOwnerId(Long ownerId) {
         Venue venue = null;
         venue = venueRepository.findVenueByOwnerId(ownerId);
-        return map(venue, VenueVo.class);
+        if (venue != null) {
+            return map(venue, VenueVo.class);
+        }
+        return null;
     }
 }
