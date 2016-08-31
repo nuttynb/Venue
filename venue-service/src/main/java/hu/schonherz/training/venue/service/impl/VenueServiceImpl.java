@@ -28,5 +28,10 @@ public class VenueServiceImpl extends AbstractMappingService implements VenueSer
         venueRepository.save(map(venueVo, Venue.class));
     }
 
-
+    @Override
+    public VenueVo getVenueByOwnerId(Long ownerId) {
+        Venue venue = null;
+        venue = venueRepository.findVenueByOwnerId(ownerId);
+        return map(venue, VenueVo.class);
+    }
 }

@@ -12,4 +12,6 @@ public interface VenueService {
 
     void createVenue(VenueVo venueVo);
 
+    VenueVo getVenueByOwnerId(Long ownerId);
+
 }
