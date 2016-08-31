@@ -25,13 +25,13 @@ public class Venue extends BaseEntity {
     //@Enumerated(EnumType.STRING)
     private Type type;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     //@JoinColumn(name = "venueId", nullable = false)
-    private Collection<Events> events;
+   // private Collection<Events> events;
 
 
     public Long getOwnerId() {
@@ -74,11 +74,11 @@ public class Venue extends BaseEntity {
         this.address = address;
     }
 
-    public Collection<Events> getEvents() {
+   /* public Collection<Events> getEvents() {
         return events;
     }
 
     public void setEvents(Collection<Events> events) {
         this.events = events;
-    }
+    }*/
 }
