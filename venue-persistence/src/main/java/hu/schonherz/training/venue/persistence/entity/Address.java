@@ -10,9 +10,8 @@ import javax.persistence.*;
 @Table(name = "Address")
 public class Address extends BaseEntity {
 
-    @Basic
-    @Column(nullable = false)
-    private Long venueId;
+    @OneToOne(mappedBy = "address")
+    private Venue venue;
 
     @Basic
     @Column(nullable = false)
@@ -74,11 +73,11 @@ public class Address extends BaseEntity {
         this.postcode = postcode;
     }
 
-    public Long getVenueId() {
-        return venueId;
+    public Venue getVenue() {
+        return venue;
     }
 
-    public void setVenueId(Long venueId) {
-        this.venueId = venueId;
+    public void setVenue(Venue venue) {
+        this.venue = venue;
     }
 }
