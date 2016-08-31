@@ -26,16 +26,12 @@ public class Venue extends BaseEntity {
     private Type type;
 
     @OneToOne
-    /*@JoinColumn(name = "venueId")*/
+    @JoinColumn(name = "venueId")
     private Address address;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     //@JoinColumn(name = "venueId", nullable = false)
     private Collection<Events> events;
-
-    //@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //@JoinColumn(name = "venueId", nullable = false)
-    //private Collection<VenueImage> images;
 
 
     public Long getOwnerId() {
@@ -70,4 +66,19 @@ public class Venue extends BaseEntity {
         this.type = type;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Collection<Events> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Collection<Events> events) {
+        this.events = events;
+    }
 }
