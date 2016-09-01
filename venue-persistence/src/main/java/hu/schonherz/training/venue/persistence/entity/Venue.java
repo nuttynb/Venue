@@ -1,7 +1,6 @@
 package hu.schonherz.training.venue.persistence.entity;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 /**
  * Created by Home on 2016. 08. 23..
@@ -21,8 +20,8 @@ public class Venue extends BaseEntity {
     @Basic
     private String description;
 
-    @Column(nullable = false)
-    //@Enumerated(EnumType.STRING)
+    @OneToOne
+    @JoinColumn(name = "type_id")
     private Type type;
 
     @OneToOne(cascade = CascadeType.ALL)
