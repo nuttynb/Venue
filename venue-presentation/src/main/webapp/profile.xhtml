@@ -15,9 +15,9 @@
                 <f:event type="preRenderView" listener="#{profileBean.onLoad}"/>
             </f:metadata>
             <div class="main">
-                <h:form styleClass="profile-details" rendered="#{venueBean.venue ne null}">
+                <ui:fragment styleClass="profile-details" rendered="#{venueBean.venue ne null}">
                     <ui:include src="WEB-INF/includes/profile-details.xhtml"/>
-                </h:form>
+                </ui:fragment>
                 <h:form rendered="#{venueBean.venue eq null}">
                     <h1>Seems like you don't have any venue.</h1>
                     <p:button styleClass="create" outcome="createVenue" value="Create New Venue"

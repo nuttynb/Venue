@@ -25,7 +25,7 @@
             <p:inputTextarea styleClass="centered-block" value="#{venueBean.venue.name}"/>
             <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}" type="button"
                              onclick="PF('nameDialog').hide();"
-                             icon="ui-icon-check"/>
+                             icon="ui-icon-check" update="messages"/>
         </p:dialog>
 
         <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('descriptionDialog').show();"

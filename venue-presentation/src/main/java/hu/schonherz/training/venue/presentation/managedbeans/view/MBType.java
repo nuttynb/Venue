@@ -26,7 +26,6 @@ public class MBType implements Serializable {
         types = typeService.getAllType();
     }
 
-
     public List<TypeVo> getTypes() {
         return types;
     }
