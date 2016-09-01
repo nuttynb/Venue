@@ -23,15 +23,15 @@ public interface VenueRepository extends JpaRepository<Venue , Long>{
 
     Venue findVenueById(Long Id);
 
-    Venue findVeuneByAddress(Long address_id);
+    Venue findVeuneByAddress_Id(Long address_id);
 
-    Collection<Venue> findVenueByType(Long type_id);
+    Collection<Venue> findVenueByType_Id(Long type_id);
 
     Venue findVenueByName(Long name);
 
     @Modifying
-    @Query("update venue v set v.name = ?1, v.description = ?2 ,v.type = ?3,v.address_id = ?4 where v.id = ?5")
-    void updateVenue(String name, String description, Type type, Long address_id, Long id);
+    @Query("update venue v set v.name = ?1, v.description = ?2 ,v.type_id = ?3 where v.id = ?4")
+    void updateVenue(String name, String description, Long type_id, Long id) throws Exception;
 
 
 }
