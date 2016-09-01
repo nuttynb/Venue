@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "Address")
+@Table(name = "address")
 public class Address extends BaseEntity {
 
     @OneToOne(mappedBy = "address")

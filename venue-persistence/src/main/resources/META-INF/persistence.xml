@@ -13,6 +13,8 @@
         <class>hu.schonherz.training.venue.persistence.entity.Address</class>
         <class>hu.schonherz.training.venue.persistence.entity.Events</class>
         <class>hu.schonherz.training.venue.persistence.entity.Type</class>
+        <class>hu.schonherz.training.venue.persistence.entity.VenueImage</class>
+
 
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>

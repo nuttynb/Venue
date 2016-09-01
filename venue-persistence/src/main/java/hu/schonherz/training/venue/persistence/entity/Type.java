@@ -8,7 +8,7 @@ import javax.persistence.Table;
  * Created by Home on 2016. 08. 23..
  */
 @Entity
-@Table(name = "Type")
+@Table(name = "type")
 public class Type extends BaseEntity {
 
     @Column(nullable = false)

@@ -1,13 +1,14 @@
 package hu.schonherz.training.venue.persistence.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by Home on 2016. 08. 23..
  */
 
 @Entity
-@Table(name = "Venue")
+@Table(name = "venue")
 public class Venue extends BaseEntity {
 
     @Basic
@@ -20,7 +21,7 @@ public class Venue extends BaseEntity {
     @Basic
     private String description;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "type_id")
     private Type type;
 
@@ -28,9 +29,11 @@ public class Venue extends BaseEntity {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    //@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //@JoinColumn(name = "venueId", nullable = false)
-   // private Collection<Events> events;
+    @OneToMany(mappedBy = "venue",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Collection<Events> events;
+
+    @OneToMany(mappedBy = "venue",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Collection<VenueImage> images;
 
 
     public Long getOwnerId() {
@@ -73,7 +76,23 @@ public class Venue extends BaseEntity {
         this.address = address;
     }
 
-   /* public Collection<Events> getEvents() {
+    public Collection<Events> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Collection<Events> events) {
+        this.events = events;
+    }
+
+    public Collection<VenueImage> getImages() {
+        return images;
+    }
+
+    public void setImages(Collection<VenueImage> images) {
+        this.images = images;
+    }
+
+    /* public Collection<Events> getEvents() {
         return events;
     }
 
