@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 public class VenueImageVo implements Serializable {
 
+    private static final long serialVersionUID = 892012L;
+
     private Long id;
 
     private String name;

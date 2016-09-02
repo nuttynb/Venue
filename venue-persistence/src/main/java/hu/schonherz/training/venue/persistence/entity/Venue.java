@@ -17,7 +17,7 @@ public class Venue extends BaseEntity {
     @Basic
     private String description;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "type_id")
     private Type type;
 
