@@ -53,3 +53,13 @@
     display: inline-block;
 }
 
+.box:hover{
+    background: #fff8fa;
+}
+
+.venue-name {
+    font-size: 50pt;
+    font-weight: bold;
+    text-align: center;
+}
+

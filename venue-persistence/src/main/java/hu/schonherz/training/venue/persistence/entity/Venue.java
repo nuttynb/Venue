@@ -3,10 +3,6 @@ package hu.schonherz.training.venue.persistence.entity;
 import javax.persistence.*;
 import java.util.Collection;
 
-/**
- * Created by Home on 2016. 08. 23..
- */
-
 @Entity
 @Table(name = "venue")
 public class Venue extends BaseEntity {
@@ -21,7 +17,7 @@ public class Venue extends BaseEntity {
     @Basic
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "type_id")
     private Type type;
 
@@ -32,8 +28,8 @@ public class Venue extends BaseEntity {
     @OneToMany(mappedBy = "venue",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<Events> events;
 
-    @OneToMany(mappedBy = "venue",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Collection<VenueImage> images;
+    //@OneToMany(mappedBy = "venue",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //private Collection<VenueImage> images;
 
 
     public Long getOwnerId() {
@@ -84,19 +80,12 @@ public class Venue extends BaseEntity {
         this.events = events;
     }
 
-    public Collection<VenueImage> getImages() {
+   /* public Collection<VenueImage> getImages() {
         return images;
     }
 
     public void setImages(Collection<VenueImage> images) {
         this.images = images;
-    }
-
-    /* public Collection<Events> getEvents() {
-        return events;
-    }
-
-    public void setEvents(Collection<Events> events) {
-        this.events = events;
     }*/
+
 }
