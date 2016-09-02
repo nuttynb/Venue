@@ -28,6 +28,9 @@
     margin: 0 auto;
     padding: 10px;
 }
+.centered-text {
+    text-align: center;
+}
 
 .open-dialog-link {
     text-decoration: none;
@@ -61,5 +64,6 @@
     font-size: 50pt;
     font-weight: bold;
     text-align: center;
+    display: block;
 }
 

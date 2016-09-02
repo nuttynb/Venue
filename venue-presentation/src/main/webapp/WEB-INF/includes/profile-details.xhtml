@@ -6,133 +6,136 @@
     <h1>#{userBean.name}'s venue:</h1>
     <h:form>
         <p:growl id="messages" showDetail="true"/>
-
-        <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('nameDialog').show();"
-                      style="text-decoration: none;">
-            <div class="box">
-                <div class="venue-name">
-                    <h:outputText value="#{venueBean.venue.name}"/>
+        <h:panelGrid id="main-content-grid" columns="2" columnClasses="grid,grid,grid" cellspacing="40">
+            <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('nameDialog').show();"
+                          style="text-decoration: none;">
+                <div class="box">
+                    <div class="venue-name">
+                        <h:outputText value="#{venueBean.venue.name}"/>
+                    </div>
                 </div>
-            </div>
-        </h:outputLink>
-        <p:dialog modal="true" closeOnEscape="true" header="#{msg['venue.name']}" widgetVar="nameDialog"
-                  showEffect="fade"
-                  hideEffect="fade" minHeight="100">
+            </h:outputLink>
+            <p:dialog modal="true" closeOnEscape="true" header="#{msg['venue.name']}" widgetVar="nameDialog"
+                      showEffect="fade"
+                      hideEffect="fade" minHeight="100">
 
-            <p:inputTextarea styleClass="centered-block" value="#{venueBean.venue.name}"/>
-            <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}" type="button"
-                             onclick="PF('nameDialog').hide();"
-                             icon="ui-icon-check" update="messages"/>
-        </p:dialog>
+                <p:inputTextarea styleClass="centered-block centered-text" value="#{venueBean.venue.name}"/>
+                <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}" type="button"
+                                 onclick="PF('nameDialog').hide();"
+                                 icon="ui-icon-check" update="messages"/>
+            </p:dialog>
 
-        <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('descriptionDialog').show();"
-                      style="text-decoration: none;">
-            <div class="box">
-                <div class="box-header">
-                    <h:outputText value="#{msg['venue.description']}"/>
+            <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)"
+                          onclick="PF('descriptionDialog').show();"
+                          style="text-decoration: none;">
+                <div class="box">
+                    <div class="box-header">
+                        <h:outputText value="#{msg['venue.description']}"/>
+                    </div>
+                    <div class="box-content">
+                        <h:outputText value="#{venueBean.venue.description}"/>
+                    </div>
                 </div>
-                <div class="box-content">
-                    <h:outputText value="#{venueBean.venue.description}"/>
-                </div>
-            </div>
-        </h:outputLink>
-        <p:dialog modal="true" closeOnEscape="true" header="#{msg['venue.description']}" widgetVar="descriptionDialog"
-                  showEffect="fade"
-                  hideEffect="fade" minHeight="100">
+            </h:outputLink>
+            <p:dialog modal="true" closeOnEscape="true" header="#{msg['venue.description']}"
+                      widgetVar="descriptionDialog"
+                      showEffect="fade"
+                      hideEffect="fade" minHeight="100">
 
-            <p:inputTextarea styleClass="centered-block" value="#{venueBean.venue.description}"/>
-            <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}" type="button"
-                             onclick="PF('descriptionDialog').hide();"
-                             icon="ui-icon-check"/>
-        </p:dialog>
-        <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('typeDialog').show();"
-                      style="text-decoration: none;">
-            <div class="box">
-                <div class="box-header">
-                    <h:outputText value="#{msg['venue.type']}"/>
+                <p:inputTextarea styleClass="centered-block" value="#{venueBean.venue.description}"/>
+                <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}" type="button"
+                                 onclick="PF('descriptionDialog').hide();"
+                                 icon="ui-icon-check"/>
+            </p:dialog>
+            <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('typeDialog').show();"
+                          style="text-decoration: none;">
+                <div class="box">
+                    <div class="box-header">
+                        <h:outputText value="#{msg['venue.type']}"/>
+                    </div>
+                    <div class="box-content">
+                        <h:outputText value="#{venueBean.venue.type.name}"/>
+                    </div>
                 </div>
-                <div class="box-content">
-                    <h:outputText value="#{venueBean.venue.type.name}"/>
-                </div>
-            </div>
-        </h:outputLink>
-        <p:dialog modal="true" closeOnEscape="true" header="#{msg['venue.type']}" widgetVar="typeDialog"
-                  showEffect="fade"
-                  hideEffect="fade" minHeight="100">
+            </h:outputLink>
+            <p:dialog modal="true" closeOnEscape="true" header="#{msg['venue.type']}" widgetVar="typeDialog"
+                      showEffect="fade"
+                      hideEffect="fade" minHeight="100">
 
-            <p:inputTextarea styleClass="centered-block" value="#{venueBean.venue.type.name}"/>
-            <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}" type="button"
-                             onclick="PF('typeDialog').hide();"
-                             icon="ui-icon-check"/>
-        </p:dialog>
+                <p:inputTextarea styleClass="centered-block" value="#{venueBean.venue.type.name}"/>
+                <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}" type="button"
+                                 onclick="PF('typeDialog').hide();"
+                                 icon="ui-icon-check"/>
+            </p:dialog>
 
-        <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('addressDialog').show();"
-                      style="text-decoration: none;">
-            <div class="box">
-                <div class="box-header">
-                    <h:outputText value="#{msg['createvenue.wizard.label.address']}"/>
-                </div>
-                <div class="box-content">
-                    <h:panelGrid id="address" columns="2" columnClasses="grid,grid" cellspacing="40">
-                        <h:panelGrid columns="2" columnClasses="label, value">
-                            <h:outputText styleClass="output-label"
-                                          value="#{msg['venue.address.country']}"/>
-                            <h:outputText value="#{venueBean.venue.address.country}"
-                                          styleClass="output-label"/>
-                            <h:outputText styleClass="output-label"
-                                          value="#{msg['venue.address.postalcode']}"/>
-                            <h:outputText value="#{venueBean.venue.address.postcode}"
-                                          styleClass="output-label"/>
-                            <h:outputText styleClass="output-label" value="#{msg['venue.address.city']}"/>
-                            <h:outputText value="#{venueBean.venue.address.city}"
-                                          styleClass="output-label"/>
-                            <h:outputText styleClass="output-label" value="#{msg['venue.address.street']}"/>
-                            <h:outputText value="#{venueBean.venue.address.street}"
-                                          styleClass="output-label"/>
-                            <h:outputText styleClass="output-label" value="#{msg['venue.address.number']}"/>
-                            <h:outputText value="#{venueBean.venue.address.number}"
-                                          styleClass="output-label"/>
+            <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('addressDialog').show();"
+                          style="text-decoration: none;">
+                <div class="box">
+                    <div class="box-header">
+                        <h:outputText value="#{msg['createvenue.wizard.label.address']}"/>
+                    </div>
+                    <div class="box-content">
+                        <h:panelGrid id="address" columns="2" columnClasses="grid,grid" cellspacing="40">
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText styleClass="output-label"
+                                              value="#{msg['venue.address.country']}"/>
+                                <h:outputText value="#{venueBean.venue.address.country}"
+                                              styleClass="output-label"/>
+                                <h:outputText styleClass="output-label"
+                                              value="#{msg['venue.address.postalcode']}"/>
+                                <h:outputText value="#{venueBean.venue.address.postcode}"
+                                              styleClass="output-label"/>
+                                <h:outputText styleClass="output-label" value="#{msg['venue.address.city']}"/>
+                                <h:outputText value="#{venueBean.venue.address.city}"
+                                              styleClass="output-label"/>
+                                <h:outputText styleClass="output-label" value="#{msg['venue.address.street']}"/>
+                                <h:outputText value="#{venueBean.venue.address.street}"
+                                              styleClass="output-label"/>
+                                <h:outputText styleClass="output-label" value="#{msg['venue.address.number']}"/>
+                                <h:outputText value="#{venueBean.venue.address.number}"
+                                              styleClass="output-label"/>
+                            </h:panelGrid>
                         </h:panelGrid>
-                    </h:panelGrid>
+                    </div>
                 </div>
-            </div>
-        </h:outputLink>
-        <p:dialog modal="true" closeOnEscape="true" header="#{msg['createvenue.wizard.label.address']}"
-                  widgetVar="addressDialog"
-                  showEffect="fade"
-                  hideEffect="fade" minHeight="100">
-            <h:panelGrid styleClass="centered-block" columns="2" columnClasses="label, value" cellspacing="20">
-                <h:outputText styleClass="input-label" value="#{msg['venue.address.country']} *"/>
-                <p:inputText value="#{venueBean.venue.address.country}" required="true"
-                             requiredMessage="#{msg['venue.address.country']} #{msg['createvenue.wizard.requiredmessage']}"/>
-                <h:outputText styleClass="input-label"
-                              value="#{msg['venue.address.postalcode']} *"/>
-                <p:inputText value="#{venueBean.venue.address.postcode}" required="true"
-                             label="#{msg['venue.address.postalcode']}"
-                             requiredMessage="#{msg['venue.address.postalcode']} #{msg['createvenue.wizard.requiredmessage']}"/>
-                <h:outputText styleClass="input-label" value="#{msg['venue.address.city']} *"/>
-                <p:inputText value="#{venueBean.venue.address.city}" required="true"
-                             requiredMessage="#{msg['venue.address.city']} #{msg['createvenue.wizard.requiredmessage']}"/>
-                <h:outputText styleClass="input-label" value="#{msg['venue.address.street']} *"/>
-                <p:inputText value="#{venueBean.venue.address.street}" required="true"
-                             requiredMessage="#{msg['venue.address.street']} #{msg['createvenue.wizard.requiredmessage']}"/>
-                <h:outputText styleClass="input-label" value="#{msg['venue.address.number']} *"/>
-                <p:inputText value="#{venueBean.venue.address.number}" required="true"
-                             requiredMessage="#{msg['venue.address.number']} #{msg['createvenue.wizard.requiredmessage']}"/>
-            </h:panelGrid>
+            </h:outputLink>
+            <p:dialog modal="true" closeOnEscape="true" header="#{msg['createvenue.wizard.label.address']}"
+                      widgetVar="addressDialog"
+                      showEffect="fade"
+                      hideEffect="fade" minHeight="100">
+                <h:panelGrid styleClass="centered-block" columns="2" columnClasses="label, value" cellspacing="20">
+                    <h:outputText styleClass="input-label" value="#{msg['venue.address.country']} *"/>
+                    <p:inputText value="#{venueBean.venue.address.country}" required="true"
+                                 requiredMessage="#{msg['venue.address.country']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                    <h:outputText styleClass="input-label"
+                                  value="#{msg['venue.address.postalcode']} *"/>
+                    <p:inputText value="#{venueBean.venue.address.postcode}" required="true"
+                                 label="#{msg['venue.address.postalcode']}"
+                                 requiredMessage="#{msg['venue.address.postalcode']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                    <h:outputText styleClass="input-label" value="#{msg['venue.address.city']} *"/>
+                    <p:inputText value="#{venueBean.venue.address.city}" required="true"
+                                 requiredMessage="#{msg['venue.address.city']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                    <h:outputText styleClass="input-label" value="#{msg['venue.address.street']} *"/>
+                    <p:inputText value="#{venueBean.venue.address.street}" required="true"
+                                 requiredMessage="#{msg['venue.address.street']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                    <h:outputText styleClass="input-label" value="#{msg['venue.address.number']} *"/>
+                    <p:inputText value="#{venueBean.venue.address.number}" required="true"
+                                 requiredMessage="#{msg['venue.address.number']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                </h:panelGrid>
 
-            <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}" type="button"
-                             onclick="PF('addressDialog').hide();"
-                             icon="ui-icon-check"/>
-        </p:dialog>
+                <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}" type="button"
+                                 onclick="PF('addressDialog').hide();"
+                                 icon="ui-icon-check"/>
+            </p:dialog>
 
-        
-        <!-- To show existing or a sample picture
-        <p:graphicImage value="#{bean.img}" />
-        -->
-        <p:fileUpload fileUploadListener="#{profileBean.fileUpload}" mode="advanced"
-                      dragDropSupport="false"
-                      update="messages" sizeLimit="100000" fileLimit="1"
-                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+
+            <!-- To show existing or a sample picture
+            <p:graphicImage value="#{bean.img}" />
+            -->
+            <p:fileUpload fileUploadListener="#{profileBean.fileUpload}" mode="advanced"
+                          dragDropSupport="false"
+                          update="messages" sizeLimit="100000" fileLimit="1"
+                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+        </h:panelGrid>
     </h:form>
 </ui:composition>
