@@ -9,8 +9,10 @@ import org.dozer.MappingException;
  */
 public abstract class AbstractMappingService implements Mapper {
 
+    private final Mapper mapper = new DozerBeanMapper();
+
     private Mapper getMapper() {
-        return new DozerBeanMapper();
+        return mapper;
     }
 
     @Override

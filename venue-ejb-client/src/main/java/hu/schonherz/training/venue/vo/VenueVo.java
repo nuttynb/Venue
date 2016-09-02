@@ -25,9 +25,14 @@ public class VenueVo implements Serializable {
 
     private Collection<EventsVo> events;
 
+    private Collection<VenueImageVo> images;
+
+
     public VenueVo() {
         address = new AddressVo();
         events = new ArrayList<>();
+        images = new ArrayList<>();
+
     }
 
     /**
@@ -154,5 +159,13 @@ public class VenueVo implements Serializable {
      */
     public void setEvents(Collection<EventsVo> events) {
         this.events = events;
+    }
+
+    public Collection<VenueImageVo> getImages() {
+        return images;
+    }
+
+    public void setImages(Collection<VenueImageVo> images) {
+        this.images = images;
     }
 }
