@@ -20,6 +20,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -64,13 +65,13 @@ public class MBProfile {
     }
 
     public void fileUpload(FileUploadEvent event) throws IOException {
-        FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+        FacesMessage message = new FacesMessage("Successful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, message);
         UploadedFile uploadedFile = event.getFile();
         Path folder = Paths.get("D:\\Project2\\uploads");
         VenueImageVo venueImageVo = new VenueImageVo();
         venueImageVo.setName(FilenameUtils.getBaseName(uploadedFile.getFileName()));
-        venueImageVo.setRoot("D:\\Project2\\uploads" + uploadedFile.getFileName());
+        venueImageVo.setRoot("D:\\Project2\\uploads" + File.separator + uploadedFile.getFileName());
         venueImageVo.setVenue(venue.getVenue());
         venueImageService.createVenueImage(venueImageVo);
         String extension = FilenameUtils.getExtension(uploadedFile.getFileName());
@@ -78,7 +79,6 @@ public class MBProfile {
         try (InputStream input = uploadedFile.getInputstream()){
             Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
         }
-        LOG.info("Picture upload success....");
     }
 
     public MBVenue getVenue() {

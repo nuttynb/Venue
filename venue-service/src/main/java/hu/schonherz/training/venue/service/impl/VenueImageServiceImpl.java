@@ -9,7 +9,6 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,18 +30,10 @@ public class VenueImageServiceImpl extends AbstractMappingService implements Ven
         venueImageRepository.save(map(venueImageVo, VenueImage.class));
     }
 
-    public List<VenueImageVo> toRepository(List<VenueImage> venueImages){
-        List<VenueImageVo> venueImageVos = new ArrayList<>();
-        for (VenueImage venueImage : venueImages) {
-            venueImageVos.add(map(venueImage, VenueImageVo.class));
-        }
-        return venueImageVos;
-    }
-
     @Override
     public List<VenueImageVo> getVenueImageByVenueId(Long venueId) {
-        List<VenueImageVo> venueImage = toRepository((List<VenueImage>)venueImageRepository.findVenueImageByVenueId(venueId));
-        return venueImage;
+        return null;
     }
+
 
 }
