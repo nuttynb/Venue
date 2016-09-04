@@ -10,4 +10,8 @@ public interface AddressService {
     AddressVo getAddressByVenueId(Long id);
 
     void createAddress(AddressVo addressVo);
+
+    void updateAddress(AddressVo addressVo) throws Exception;
+
+
 }

@@ -34,4 +34,10 @@ public class AddressServiceImpl extends AbstractMappingService implements Addres
     public void createAddress(AddressVo addressVo) {
         addresRepository.save(map(addressVo, Address.class));
     }
+
+    @Override
+    public void updateAddress(AddressVo addressVo) throws Exception {
+        addresRepository.save(map(addressVo, Address.class));
+    }
+
 }
