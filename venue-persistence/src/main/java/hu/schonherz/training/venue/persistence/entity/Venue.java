@@ -28,8 +28,8 @@ public class Venue extends BaseEntity {
     @OneToMany(mappedBy = "venue",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<Events> events;
 
-    //@OneToMany(mappedBy = "venue",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //private Collection<VenueImage> images;
+    @OneToMany(mappedBy = "venue",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Collection<VenueImage> images;
 
 
     public Long getOwnerId() {
