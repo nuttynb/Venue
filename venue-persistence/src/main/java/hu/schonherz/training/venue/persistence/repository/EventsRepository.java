@@ -6,14 +6,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.*;
-import java.util.Collection;
-import java.util.Date;
-
-/**
- * Created by Home on 2016. 08. 25..
- */
-
 @Repository
 @Transactional(propagation = Propagation.REQUIRED)
 public interface EventsRepository extends JpaRepository<Events , Long>{

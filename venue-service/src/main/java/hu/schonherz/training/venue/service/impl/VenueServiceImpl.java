@@ -1,6 +1,7 @@
 package hu.schonherz.training.venue.service.impl;
 
 import hu.schonherz.training.venue.persistence.entity.Venue;
+import hu.schonherz.training.venue.persistence.repository.TypeRepository;
 import hu.schonherz.training.venue.persistence.repository.VenueRepository;
 import hu.schonherz.training.venue.service.VenueService;
 import hu.schonherz.training.venue.vo.VenueVo;
@@ -38,4 +39,5 @@ public class VenueServiceImpl extends AbstractMappingService implements VenueSer
         }
         return null;
     }
+
 }

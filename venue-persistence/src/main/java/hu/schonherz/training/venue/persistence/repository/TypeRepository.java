@@ -6,13 +6,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
-
-/**
- * Created by Roli on 2016. 08. 27..
- */
 @Repository
 @Transactional(propagation = Propagation.REQUIRED)
-public interface TypeRepository extends JpaRepository<Type, Long>{
+public interface TypeRepository extends JpaRepository<Type, Long> {
 
 }

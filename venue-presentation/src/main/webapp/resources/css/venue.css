@@ -4,7 +4,9 @@
 }
 
 .profile-details {
-    display: table;
+
+    display: block;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -26,7 +28,8 @@
 .centered-block {
     display: block;
     margin: 0 auto;
-    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .centered-text {
     text-align: center;
@@ -41,7 +44,7 @@
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
-    width: 160px;
+    min-width: 160px;
     margin: 20px;
     padding: 20px;
     overflow: hidden;

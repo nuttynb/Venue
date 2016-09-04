@@ -28,7 +28,7 @@
                                     <p:selectOneMenu id="type" style="width:125px" required="true"
                                                      value="#{venueBean.venue.type}" converter="typeVoConverter"
                                                      requiredMessage="#{msg['venue.type']} #{msg['createvenue.wizard.requiredmessage']}">
-                                        <f:selectItem itemLabel="Select One" itemValue=""/>
+                                        <f:selectItem itemLabel="#{msg['selectonemenu.select']}" itemValue=""/>
                                         <f:selectItems value="#{typeBean.types}" var="type"
                                                        itemLabel="#{type.name}" itemValue="#{type}"/>
                                     </p:selectOneMenu>

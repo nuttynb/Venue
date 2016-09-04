@@ -23,7 +23,7 @@ import javax.interceptor.Interceptors;
 public class AddressServiceImpl extends AbstractMappingService implements AddressService {
 
     @Autowired
-    private AddressRepository addresRepository;
+    private AddressRepository addressRepository;
 
     @Override
     public AddressVo getAddressByVenueId(Long id) {
@@ -32,6 +32,7 @@ public class AddressServiceImpl extends AbstractMappingService implements Addres
 
     @Override
     public void createAddress(AddressVo addressVo) {
-        addresRepository.save(map(addressVo, Address.class));
+        addressRepository.save(map(addressVo, Address.class));
     }
+
 }

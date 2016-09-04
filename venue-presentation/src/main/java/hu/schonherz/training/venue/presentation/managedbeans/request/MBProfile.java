@@ -2,6 +2,7 @@ package hu.schonherz.training.venue.presentation.managedbeans.request;
 
 import hu.schonherz.training.venue.presentation.managedbeans.session.MBUser;
 import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenue;
+import hu.schonherz.training.venue.service.AddressService;
 import hu.schonherz.training.venue.service.VenueService;
 import hu.schonherz.training.venue.vo.VenueVo;
 import org.primefaces.event.FlowEvent;
@@ -28,6 +29,9 @@ public class MBProfile {
 
     @EJB
     VenueService venueService;
+    @EJB
+    AddressService addressService;
+
     private static Logger LOG = LoggerFactory.getLogger(MBProfile.class);
 
     public void onLoad() {
@@ -38,7 +42,12 @@ public class MBProfile {
         VenueVo possibleVenue = venueService.getVenueByOwnerId(user.getId());
         venue.setVenue(possibleVenue);
 
-        LOG.info("onLoad lefutott.");
+        LOG.info("onLoad completed.");
+    }
+
+    public void onModify() {
+        LOG.info("Modifying...");
+        venueService.createVenue(venue.getVenue());
     }
 
     public void fileUpload(FileUploadEvent event) {
