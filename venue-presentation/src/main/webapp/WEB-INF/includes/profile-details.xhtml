@@ -14,7 +14,7 @@
                             <p:column>
                                 <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)"
                                               onclick="PF('imageDialog').show();">
-                                    <p:graphicImage styleClass="profile-image centered-block" name="images/no_image.jpg"
+                                    <p:graphicImage styleClass="profile-image centered-block" name="images/no_image.PNG"
                                                     width="200" rendered="#{venueBean.venue.profileImage eq null}"/>
                                     <p:graphicImage styleClass="profile-image centered-block"
                                                     value="#{venueImages.image}"
@@ -230,7 +230,8 @@
             </p:ring>
             <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
                              oncomplete="PF('imageDialog').hide();"
-                             icon="ui-icon-check" update=":form"/>
+                             icon="ui-icon-check"
+                             update=":form"/>
         </p:dialog>
     </h:form>
 </ui:composition>
