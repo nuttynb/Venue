@@ -20,9 +20,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import javax.faces.event.SystemEvent;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -54,9 +53,6 @@ public class MBProfile {
         //    fc.getApplication().getNavigationHandler().handleNavigation(fc, null, "error");
         //}
         VenueVo possibleVenue = venueService.getVenueByOwnerId(user.getId());
-        if (possibleVenue != null) {
-            possibleVenue.setImages(venueImageService.getVenueImageByVenueId(possibleVenue.getId()));
-        }
         venue.setVenue(possibleVenue);
 
         LOG.info("onLoad completed.");
@@ -70,18 +66,39 @@ public class MBProfile {
     public void fileUpload(FileUploadEvent event) throws IOException {
         FacesMessage message = new FacesMessage("Successful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, message);
-        UploadedFile uploadedFile = event.getFile();
-        Path folder = Paths.get("D:\\Project2\\uploads");
+        try {
+            createFile(event.getFile().getFileName(), event.getFile().getInputstream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createFile(String fileName, InputStream input) throws IOException {
+        File destination = new File(System.getProperty("user.dir") + File.separator +
+                "venue" + File.separator + venue.getVenue().getId().toString());
+        destination.mkdirs();
+        File file = new File(destination + File.separator + fileName);
+        String absPath = file.getAbsolutePath().toString();
+        OutputStream out = new FileOutputStream(file);
+
+        int read = 0;
+        byte[] bytes = new byte[1024];
+
+        while ((read = input.read(bytes)) != -1) {
+            out.write(bytes, 0, read);
+        }
+        input.close();
+        out.flush();
+        out.close();
+        setImageInDb(absPath, fileName);
+    }
+
+    public void setImageInDb(String path, String fileName) {
         VenueImageVo venueImageVo = new VenueImageVo();
-        venueImageVo.setName(FilenameUtils.getBaseName(uploadedFile.getFileName()));
-        venueImageVo.setRoot("D:\\Project2\\uploads" + File.separator + uploadedFile.getFileName());
+        venueImageVo.setName(fileName);
+        venueImageVo.setRoot(path);
         venueImageVo.setVenue(venue.getVenue());
         venueImageService.createVenueImage(venueImageVo);
-        String extension = FilenameUtils.getExtension(uploadedFile.getFileName());
-        Path file = Files.createTempFile(folder, venueImageVo.getName() + "-", "." + extension);
-        try (InputStream input = uploadedFile.getInputstream()) {
-            Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
-        }
     }
 
     public MBVenue getVenue() {
