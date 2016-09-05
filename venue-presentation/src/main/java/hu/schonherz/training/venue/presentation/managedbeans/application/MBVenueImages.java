@@ -29,9 +29,7 @@ public class MBVenueImages {
             return new DefaultStreamedContent();
         } else {
             String imageId = context.getExternalContext().getRequestParameterMap().get("imageId");
-            LOG.info(imageId);
             VenueImageVo image = venueImageService.getVenueImageById(Long.valueOf(imageId));
-            LOG.info(image.getRoot());
             return new DefaultStreamedContent(new FileInputStream(Paths.get(image.getRoot()).toFile()), "image/png", image.getName());
         }
     }

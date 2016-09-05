@@ -20,6 +20,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.SystemEvent;
 import java.io.*;
 import java.nio.file.Files;
@@ -37,6 +38,8 @@ public class MBProfile {
     private MBUser user;
     @ManagedProperty(value = "#{venueImageBean}")
     private MBVenueImage venueImage;
+    @ManagedProperty(value="#{param.profileImageId}")
+    private Long profileImageId;
 
     @EJB
     VenueService venueService;
@@ -63,6 +66,12 @@ public class MBProfile {
     public void onModify() {
         LOG.info("Modifying...");
         venueService.createVenue(venue.getVenue());
+    }
+
+    public void onClickedProfileImage() {
+        venue.getVenue().setProfileImage(venueImageService.getVenueImageById(profileImageId));
+        venueService.createVenue(venue.getVenue());
+        LOG.info("onClicked - " + profileImageId);
     }
 
     public void fileUpload(FileUploadEvent event) throws IOException {
@@ -133,5 +142,13 @@ public class MBProfile {
 
     public void setVenueImage(MBVenueImage venueImage) {
         this.venueImage = venueImage;
+    }
+
+    public Long getProfileImageId() {
+        return profileImageId;
+    }
+
+    public void setProfileImageId(Long profileImageId) {
+        this.profileImageId = profileImageId;
     }
 }

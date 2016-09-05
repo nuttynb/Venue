@@ -4,7 +4,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <div class="box venue-name">#{userBean.name}#{msg['user.venue']}</div>
-    <h:form>
+    <h:form id="form">
         <p:growl id="messages" showDetail="true" autoUpdate="true"/>
         <p:panelGrid id="main-content-grid" styleClass="ui-panelgrid-blank" cellspacing="20">
             <p:row>
@@ -15,7 +15,13 @@
                                 <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)"
                                               onclick="PF('imageDialog').show();">
                                     <p:graphicImage styleClass="profile-image centered-block" name="images/no_image.jpg"
-                                                    width="200"/>
+                                                    width="200" rendered="#{venueBean.venue.profileImage eq null}"/>
+                                    <p:graphicImage styleClass="profile-image centered-block"
+                                                    value="#{venueImages.image}"
+                                                    alt="#{venueBean.venue.profileImage.name}"
+                                                    title="#{venueBean.venue.profileImage.name}" width="200" rendered="#{venueBean.venue.profileImage ne null}">
+                                        <f:param name="imageId" value="#{venueBean.venue.profileImage.id}"/>
+                                    </p:graphicImage>
                                 </h:outputLink>
                             </p:column>
                         </p:row>
@@ -79,9 +85,9 @@
                                     <div class="box-header">#{msg['venue.image.upload']}</div>
                                     <div class="box-content">
                                         <p:fileUpload fileUploadListener="#{profileBean.fileUpload}" mode="advanced"
-                                                      dragDropSupport="false"
-                                                      update="messages main-content-grid" sizeLimit="200000"
-                                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                                                      dragDropSupport="true"
+                                                      update="messages :form" sizeLimit="200000"
+                                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" multiple="true"/>
                                     </div>
                                 </div>
                             </p:column>
@@ -122,21 +128,18 @@
                             <p:column>
                                 <p:accordionPanel styleClass="ui-accordion-content" multiple="true">
                                     <p:tab title="#{msg['venue.images']}">
-                                        <h:panelGrid columns="2" cellpadding="10">
-                                            <p:galleria value="#{venueBean.venue.images}" var="image" panelWidth="500"
-                                                        panelHeight="313" showCaption="true">
-                                                <p:graphicImage value="#{venueImages.image}" alt="#{image.name}" title="#{image.name}">
-                                                    <f:param name="imageId" value="#{image.id}"/>
-                                                </p:graphicImage>
-                                            </p:galleria>
-                                        </h:panelGrid>
+                                        <p:galleria value="#{venueBean.venue.images}" var="image" panelWidth="500"
+                                                    style="margin: 0 auto;"
+                                                    panelHeight="313" showCaption="true"
+                                                    rendered="#{!venueBean.venue.images.isEmpty()}" effect="puff">
+                                            <p:graphicImage value="#{venueImages.image}" alt="#{image.name}"
+                                                            title="#{image.name}">
+                                                <f:param name="imageId" value="#{image.id}"/>
+                                            </p:graphicImage>
+                                        </p:galleria>
                                     </p:tab>
                                     <p:tab title="#{msg['venue.events']}">
-
-                                        <h:panelGrid columns="2" cellpadding="10">
-                                            <h:outputText value="Francis Ford Coppola's legendary..."/>
-                                        </h:panelGrid>
-
+                                        <h1>Events schedule.......</h1>
                                     </p:tab>
                                 </p:accordionPanel>
                             </p:column>
@@ -213,11 +216,21 @@
         <p:dialog modal="true" closeOnEscape="true" header="#{msg['venue.profile.image']}"
                   widgetVar="imageDialog"
                   showEffect="fade"
-                  hideEffect="fade" minHeight="100">
-            <p:fileUpload fileUploadListener="#{profileBean.fileUpload}" mode="advanced"
-                          dragDropSupport="false"
-                          update="messages" sizeLimit="200000" fileLimit="1"
-                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/" oncomplete="PF('imageDialog').hide();"/>
+                  hideEffect="fade" style="min-height:600px;height:auto;min-width: 800px;width: auto;" closable="false">
+
+            <p:ring id="custom" value="#{venueBean.venue.images}" var="image">
+                <h:commandLink>
+                    <f:param name="profileImageId" value="#{image.id}" />
+                    <p:graphicImage value="#{venueImages.image}" alt="#{image.name}"
+                                    title="#{image.name}" width="100">
+                        <f:param name="imageId" value="#{image.id}"/>
+                    </p:graphicImage>
+                    <p:ajax event="click" listener="#{profileBean.onClickedProfileImage}"/>
+                </h:commandLink>
+            </p:ring>
+            <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
+                             oncomplete="PF('imageDialog').hide();"
+                             icon="ui-icon-check" update=":form"/>
         </p:dialog>
     </h:form>
 </ui:composition>

@@ -14,4 +14,6 @@ public interface VenueImageRepository extends JpaRepository<VenueImage, Long> {
 
     Collection<VenueImage> findVenueImageByVenueId(Long venueId);
 
+    VenueImage findById(Long id);
+
 }

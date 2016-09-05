@@ -27,6 +27,8 @@ public class VenueVo implements Serializable {
 
     private Collection<VenueImageVo> images;
 
+    private VenueImageVo profileImage;
+
 
     public VenueVo() {
         address = new AddressVo();
@@ -167,5 +169,13 @@ public class VenueVo implements Serializable {
 
     public void setImages(Collection<VenueImageVo> images) {
         this.images = images;
+    }
+
+    public VenueImageVo getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(VenueImageVo profileImage) {
+        this.profileImage = profileImage;
     }
 }

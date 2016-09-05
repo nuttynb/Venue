@@ -31,6 +31,10 @@ public class Venue extends BaseEntity {
     @OneToMany(mappedBy = "venue",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<VenueImage> images;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "profile_image_id")
+    private VenueImage profileImage;
+
 
     public Long getOwnerId() {
         return ownerId;
@@ -88,4 +92,11 @@ public class Venue extends BaseEntity {
         this.images = images;
     }*/
 
+    public VenueImage getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(VenueImage profileImage) {
+        this.profileImage = profileImage;
+    }
 }
