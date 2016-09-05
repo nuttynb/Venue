@@ -53,8 +53,10 @@ public class MBProfile {
         //    fc.getApplication().getNavigationHandler().handleNavigation(fc, null, "error");
         //}
         VenueVo possibleVenue = venueService.getVenueByOwnerId(user.getId());
+        if (possibleVenue != null) {
+            possibleVenue.setImages(venueImageService.getVenueImageByVenueId(possibleVenue.getId()));
+        }
         venue.setVenue(possibleVenue);
-
         LOG.info("onLoad completed.");
     }
 

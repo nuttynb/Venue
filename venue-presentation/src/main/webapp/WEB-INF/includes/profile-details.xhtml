@@ -125,7 +125,7 @@
                                         <h:panelGrid columns="2" cellpadding="10">
                                             <p:galleria value="#{venueBean.venue.images}" var="image" panelWidth="500"
                                                         panelHeight="313" showCaption="true">
-                                                <p:graphicImage value="#{venueImages.image}">
+                                                <p:graphicImage value="#{venueImages.image}" alt="#{image.name}" title="#{image.name}">
                                                     <f:param name="imageId" value="#{image.id}"/>
                                                 </p:graphicImage>
                                             </p:galleria>
