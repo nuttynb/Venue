@@ -3,142 +3,215 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h1>#{userBean.name}'s venue:</h1>
+    <div class="box venue-name">#{userBean.name}#{msg['user.venue']}</div>
     <h:form>
-        <p:growl id="messages" showDetail="true"/>
-        <h:panelGrid id="main-content-grid" columns="3" cellspacing="40">
-            <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('nameDialog').show();"
-                          style="text-decoration: none;">
-                <div class="box">
-                    <div class="venue-name">
-                        <h:outputText id="name" value="#{venueBean.venue.name}"/>
-                    </div>
-                </div>
-            </h:outputLink>
-            <p:dialog modal="true" closeOnEscape="true" header="#{msg['venue.name']}" widgetVar="nameDialog"
-                      showEffect="fade"
-                      hideEffect="fade" minHeight="100">
+        <p:growl id="messages" showDetail="true" autoUpdate="true"/>
+        <p:panelGrid id="main-content-grid" styleClass="ui-panelgrid-blank" cellspacing="20">
+            <p:row>
+                <p:column>
+                    <p:panelGrid id="left-side-bar">
+                        <p:row>
+                            <p:column>
+                                <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)"
+                                              onclick="PF('imageDialog').show();">
+                                    <p:graphicImage styleClass="profile-image centered-block" name="images/no_image.jpg"
+                                                    width="200"/>
+                                </h:outputLink>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)"
+                                              onclick="PF('typeDialog').show();"
+                                              style="text-decoration: none;">
+                                    <div class="box">
+                                        <div class="box-header">
+                                            <h:outputText value="#{msg['venue.type']}"/>
+                                        </div>
+                                        <div class="box-content">
+                                            <h:outputText id="type" value="#{venueBean.venue.type.name}"/>
+                                        </div>
+                                    </div>
+                                </h:outputLink>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)"
+                                              onclick="PF('addressDialog').show();"
+                                              style="text-decoration: none;">
+                                    <div class="box">
+                                        <div class="box-header">
+                                            <h:outputText value="#{msg['createvenue.wizard.label.address']}"/>
+                                        </div>
+                                        <div class="box-content">
+                                            <h:panelGrid id="address" columns="2" columnClasses="label, value"
+                                                         cellspacing="100">
+                                                <h:outputText styleClass="output-label"
+                                                              value="#{msg['venue.address.country']}"/>
+                                                <h:outputText id="country" value="#{venueBean.venue.address.country}"
+                                                              styleClass="output-label"/>
+                                                <h:outputText styleClass="output-label"
+                                                              value="#{msg['venue.address.postalcode']}"/>
+                                                <h:outputText id="postcode" value="#{venueBean.venue.address.postcode}"
+                                                              styleClass="output-label"/>
+                                                <h:outputText styleClass="output-label"
+                                                              value="#{msg['venue.address.city']}"/>
+                                                <h:outputText id="city" value="#{venueBean.venue.address.city}"
+                                                              styleClass="output-label"/>
+                                                <h:outputText styleClass="output-label"
+                                                              value="#{msg['venue.address.street']}"/>
+                                                <h:outputText id="street" value="#{venueBean.venue.address.street}"
+                                                              styleClass="output-label"/>
+                                                <h:outputText styleClass="output-label"
+                                                              value="#{msg['venue.address.number']}"/>
+                                                <h:outputText id="number" value="#{venueBean.venue.address.number}"
+                                                              styleClass="output-label"/>
+                                            </h:panelGrid>
+                                        </div>
+                                    </div>
+                                </h:outputLink>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <div class="box">
+                                    <div class="box-header">#{msg['venue.image.upload']}</div>
+                                    <div class="box-content">
+                                        <p:fileUpload fileUploadListener="#{profileBean.fileUpload}" mode="advanced"
+                                                      dragDropSupport="false"
+                                                      update="messages" sizeLimit="200000"
+                                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                                    </div>
+                                </div>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </p:column>
+                <p:column>
+                    <p:panelGrid id="right-side-bar">
+                        <p:row>
+                            <p:column>
+                                <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)"
+                                              onclick="PF('nameDialog').show();" style="text-decoration: none;">
+                                    <div class="box">
+                                        <div class="venue-name">
+                                            <h:outputText id="name" value="#{venueBean.venue.name}"/>
+                                        </div>
+                                    </div>
+                                </h:outputLink>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)"
+                                              onclick="PF('descriptionDialog').show();"
+                                              style="text-decoration: none;">
+                                    <div class="box">
+                                        <div class="box-header">
+                                            <h:outputText value="#{msg['venue.description']}"/>
+                                        </div>
+                                        <div class="box-content">
+                                            <h:outputText id="description" value="#{venueBean.venue.description}"/>
+                                        </div>
+                                    </div>
+                                </h:outputLink>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:accordionPanel styleClass="ui-accordion-content" multiple="true">
+                                    <p:tab title="#{msg['venue.images']}">
+                                        <h:panelGrid columns="2" cellpadding="10">
+                                            <h:outputText
+                                                    value="The story begins as Don Vito Corleone..."/>
+                                        </h:panelGrid>
+                                    </p:tab>
+                                    <p:tab title="#{msg['venue.events']}">
+                                        <h:panelGrid columns="2" cellpadding="10">
+                                            <h:outputText value="Francis Ford Coppola's legendary..."/>
+                                        </h:panelGrid>
+                                    </p:tab>
+                                </p:accordionPanel>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+        <p:dialog modal="true" closeOnEscape="true" header="#{msg['venue.name']}" widgetVar="nameDialog"
+                  showEffect="fade"
+                  hideEffect="fade" minHeight="100" minWidth="100">
 
-                <p:inputTextarea styleClass="centered-block centered-text" value="#{venueBean.venue.name}"/>
-                <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
-                                 oncomplete="PF('nameDialog').hide();"
-                                 icon="ui-icon-check" actionListener="#{profileBean.onModify}" update="name"/>
-            </p:dialog>
+            <p:inputTextarea styleClass="centered-block centered-text" value="#{venueBean.venue.name}"
+                             required="true"/>
+            <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
+                             oncomplete="PF('nameDialog').hide();"
+                             icon="ui-icon-check" actionListener="#{profileBean.onModify}"
+                             update="main-content-grid"/>
+        </p:dialog>
+        <p:dialog modal="true" closeOnEscape="true" header="#{msg['venue.description']}"
+                  widgetVar="descriptionDialog"
+                  showEffect="fade"
+                  hideEffect="fade" minHeight="100">
+            <p:inputTextarea styleClass="centered-block centered-text" value="#{venueBean.venue.description}"/>
+            <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
+                             oncomplete="PF('descriptionDialog').hide();"
+                             icon="ui-icon-check" actionListener="#{profileBean.onModify}"
+                             update="main-content-grid"/>
+        </p:dialog>
+        <p:dialog modal="true" closeOnEscape="true" header="#{msg['venue.type']}" widgetVar="typeDialog"
+                  showEffect="fade"
+                  hideEffect="fade" minHeight="100">
+            <p:selectOneMenu styleClass="centered-block centered-text" style="width:125px" required="true"
+                             value="#{venueBean.venue.type}" converter="typeVoConverter"
+                             requiredMessage="#{msg['venue.type']} #{msg['createvenue.wizard.requiredmessage']}">
+                <f:selectItem itemLabel="#{msg['selectonemenu.select']}" itemValue=""/>
+                <f:selectItems value="#{typeBean.types}" var="type"
+                               itemLabel="#{type.name}" itemValue="#{type}"/>
+            </p:selectOneMenu>
+            <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
+                             oncomplete="PF('typeDialog').hide();"
+                             icon="ui-icon-check" actionListener="#{profileBean.onModify}"
+                             update="main-content-grid"/>
+        </p:dialog>
+        <p:dialog modal="true" closeOnEscape="true" header="#{msg['createvenue.wizard.label.address']}"
+                  widgetVar="addressDialog"
+                  showEffect="fade"
+                  hideEffect="fade" minHeight="100">
+            <h:panelGrid styleClass="centered-block" columns="2" columnClasses="label, value" cellspacing="20">
+                <h:outputText styleClass="input-label" value="#{msg['venue.address.country']} *"/>
+                <p:inputText value="#{venueBean.venue.address.country}" required="true"
+                             requiredMessage="#{msg['venue.address.country']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                <h:outputText styleClass="input-label"
+                              value="#{msg['venue.address.postalcode']} *"/>
+                <p:inputText value="#{venueBean.venue.address.postcode}" required="true"
+                             label="#{msg['venue.address.postalcode']}"
+                             requiredMessage="#{msg['venue.address.postalcode']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                <h:outputText styleClass="input-label" value="#{msg['venue.address.city']} *"/>
+                <p:inputText value="#{venueBean.venue.address.city}" required="true"
+                             requiredMessage="#{msg['venue.address.city']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                <h:outputText styleClass="input-label" value="#{msg['venue.address.street']} *"/>
+                <p:inputText value="#{venueBean.venue.address.street}" required="true"
+                             requiredMessage="#{msg['venue.address.street']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                <h:outputText styleClass="input-label" value="#{msg['venue.address.number']} *"/>
+                <p:inputText value="#{venueBean.venue.address.number}" required="true"
+                             requiredMessage="#{msg['venue.address.number']} #{msg['createvenue.wizard.requiredmessage']}"/>
+            </h:panelGrid>
 
-            <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)"
-                          onclick="PF('descriptionDialog').show();"
-                          style="text-decoration: none;">
-                <div class="box">
-                    <div class="box-header">
-                        <h:outputText value="#{msg['venue.description']}"/>
-                    </div>
-                    <div class="box-content">
-                        <h:outputText id="description" value="#{venueBean.venue.description}"/>
-                    </div>
-                </div>
-            </h:outputLink>
-            <p:dialog modal="true" closeOnEscape="true" header="#{msg['venue.description']}"
-                      widgetVar="descriptionDialog"
-                      showEffect="fade"
-                      hideEffect="fade" minHeight="100">
-
-                <p:inputTextarea styleClass="centered-block centered-text" value="#{venueBean.venue.description}"/>
-                <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
-                                 oncomplete="PF('descriptionDialog').hide();"
-                                 icon="ui-icon-check" actionListener="#{profileBean.onModify}" update="description"/>
-            </p:dialog>
-            <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('typeDialog').show();"
-                          style="text-decoration: none;">
-                <div class="box">
-                    <div class="box-header">
-                        <h:outputText value="#{msg['venue.type']}"/>
-                    </div>
-                    <div class="box-content">
-                        <h:outputText id="type" value="#{venueBean.venue.type.name}"/>
-                    </div>
-                </div>
-            </h:outputLink>
-            <p:dialog modal="true" closeOnEscape="true" header="#{msg['venue.type']}" widgetVar="typeDialog"
-                      showEffect="fade"
-                      hideEffect="fade" minHeight="100">
-                <p:selectOneMenu styleClass="centered-block centered-text" style="width:125px" required="true"
-                                 value="#{venueBean.venue.type}" converter="typeVoConverter"
-                                 requiredMessage="#{msg['venue.type']} #{msg['createvenue.wizard.requiredmessage']}">
-                    <f:selectItem itemLabel="#{msg['selectonemenu.select']}" itemValue=""/>
-                    <f:selectItems value="#{typeBean.types}" var="type"
-                                   itemLabel="#{type.name}" itemValue="#{type}"/>
-                </p:selectOneMenu>
-                <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
-                                 oncomplete="PF('typeDialog').hide();"
-                                 icon="ui-icon-check" actionListener="#{profileBean.onModify}" update="type"/>
-            </p:dialog>
-
-            <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('addressDialog').show();"
-                          style="text-decoration: none;">
-                <div class="box">
-                    <div class="box-header">
-                        <h:outputText value="#{msg['createvenue.wizard.label.address']}"/>
-                    </div>
-                    <div class="box-content">
-                        <h:panelGrid id="address" columns="2" columnClasses="label, value" cellspacing="100">
-                            <h:outputText styleClass="output-label"
-                                          value="#{msg['venue.address.country']}"/>
-                            <h:outputText id="country" value="#{venueBean.venue.address.country}"
-                                          styleClass="output-label"/>
-                            <h:outputText styleClass="output-label"
-                                          value="#{msg['venue.address.postalcode']}"/>
-                            <h:outputText id="postcode" value="#{venueBean.venue.address.postcode}"
-                                          styleClass="output-label"/>
-                            <h:outputText styleClass="output-label" value="#{msg['venue.address.city']}"/>
-                            <h:outputText id="city" value="#{venueBean.venue.address.city}"
-                                          styleClass="output-label"/>
-                            <h:outputText styleClass="output-label" value="#{msg['venue.address.street']}"/>
-                            <h:outputText id="street" value="#{venueBean.venue.address.street}"
-                                          styleClass="output-label"/>
-                            <h:outputText styleClass="output-label" value="#{msg['venue.address.number']}"/>
-                            <h:outputText id="number" value="#{venueBean.venue.address.number}"
-                                          styleClass="output-label"/>
-                        </h:panelGrid>
-                    </div>
-                </div>
-            </h:outputLink>
-            <p:dialog modal="true" closeOnEscape="true" header="#{msg['createvenue.wizard.label.address']}"
-                      widgetVar="addressDialog"
-                      showEffect="fade"
-                      hideEffect="fade" minHeight="100">
-                <h:panelGrid styleClass="centered-block" columns="2" columnClasses="label, value" cellspacing="20">
-                    <h:outputText styleClass="input-label" value="#{msg['venue.address.country']} *"/>
-                    <p:inputText value="#{venueBean.venue.address.country}" required="true"
-                                 requiredMessage="#{msg['venue.address.country']} #{msg['createvenue.wizard.requiredmessage']}"/>
-                    <h:outputText styleClass="input-label"
-                                  value="#{msg['venue.address.postalcode']} *"/>
-                    <p:inputText value="#{venueBean.venue.address.postcode}" required="true"
-                                 label="#{msg['venue.address.postalcode']}"
-                                 requiredMessage="#{msg['venue.address.postalcode']} #{msg['createvenue.wizard.requiredmessage']}"/>
-                    <h:outputText styleClass="input-label" value="#{msg['venue.address.city']} *"/>
-                    <p:inputText value="#{venueBean.venue.address.city}" required="true"
-                                 requiredMessage="#{msg['venue.address.city']} #{msg['createvenue.wizard.requiredmessage']}"/>
-                    <h:outputText styleClass="input-label" value="#{msg['venue.address.street']} *"/>
-                    <p:inputText value="#{venueBean.venue.address.street}" required="true"
-                                 requiredMessage="#{msg['venue.address.street']} #{msg['createvenue.wizard.requiredmessage']}"/>
-                    <h:outputText styleClass="input-label" value="#{msg['venue.address.number']} *"/>
-                    <p:inputText value="#{venueBean.venue.address.number}" required="true"
-                                 requiredMessage="#{msg['venue.address.number']} #{msg['createvenue.wizard.requiredmessage']}"/>
-                </h:panelGrid>
-
-                <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
-                                 oncomplete="PF('addressDialog').hide();"
-                                 icon="ui-icon-check" actionListener="#{profileBean.onModify}" update="address"/>
-            </p:dialog>
-
-
-            <!-- To show existing or a sample picture
-            <p:graphicImage value="#{bean.img}" />
-            -->
+            <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
+                             oncomplete="PF('addressDialog').hide();"
+                             icon="ui-icon-check" actionListener="#{profileBean.onModify}"
+                             update="main-content-grid"/>
+        </p:dialog>
+        <p:dialog modal="true" closeOnEscape="true" header="#{msg['venue.profile.image']}"
+                  widgetVar="imageDialog"
+                  showEffect="fade"
+                  hideEffect="fade" minHeight="100">
             <p:fileUpload fileUploadListener="#{profileBean.fileUpload}" mode="advanced"
                           dragDropSupport="false"
-                          update="messages" sizeLimit="100000" fileLimit="1"
-                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
-        </h:panelGrid>
+                          update="messages" sizeLimit="200000" fileLimit="1"
+                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/" oncomplete="PF('imageDialog').hide();"/>
+        </p:dialog>
     </h:form>
 </ui:composition>
