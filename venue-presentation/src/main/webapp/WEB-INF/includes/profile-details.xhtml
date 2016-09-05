@@ -6,10 +6,10 @@
     <div class="box venue-name">#{userBean.name}#{msg['user.venue']}</div>
     <h:form id="form">
         <p:growl id="messages" showDetail="true" autoUpdate="true"/>
-        <p:panelGrid id="main-content-grid" styleClass="ui-panelgrid-blank" cellspacing="20">
-            <p:row>
+        <p:panelGrid id="main-content-grid" styleClass="ui-panelgrid-blank" cellspacing="20" style="width: 100%" >
+            <p:row >
                 <p:column>
-                    <p:panelGrid id="left-side-bar">
+                    <p:panelGrid id="left-side-bar" styleClass="left">
                         <p:row>
                             <p:column>
                                 <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)"

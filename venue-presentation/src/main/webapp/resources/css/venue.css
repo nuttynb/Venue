@@ -3,8 +3,9 @@
     margin: 0 auto;
 }
 
-.profile-details {
-
+.left {
+    width: 300px;
+    table-layout:fixed;
 }
 
 .profile-image {
