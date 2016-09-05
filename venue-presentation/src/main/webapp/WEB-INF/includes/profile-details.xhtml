@@ -80,7 +80,7 @@
                                     <div class="box-content">
                                         <p:fileUpload fileUploadListener="#{profileBean.fileUpload}" mode="advanced"
                                                       dragDropSupport="false"
-                                                      update="messages" sizeLimit="200000"
+                                                      update="messages main-content-grid" sizeLimit="200000"
                                                       allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
                                     </div>
                                 </div>
@@ -123,14 +123,20 @@
                                 <p:accordionPanel styleClass="ui-accordion-content" multiple="true">
                                     <p:tab title="#{msg['venue.images']}">
                                         <h:panelGrid columns="2" cellpadding="10">
-                                            <h:outputText
-                                                    value="The story begins as Don Vito Corleone..."/>
+                                            <p:galleria value="#{venueBean.venue.images}" var="image" panelWidth="500"
+                                                        panelHeight="313" showCaption="true">
+                                                <p:graphicImage value="#{venueImages.image}">
+                                                    <f:param name="imageId" value="#{image.id}"/>
+                                                </p:graphicImage>
+                                            </p:galleria>
                                         </h:panelGrid>
                                     </p:tab>
                                     <p:tab title="#{msg['venue.events']}">
+
                                         <h:panelGrid columns="2" cellpadding="10">
                                             <h:outputText value="Francis Ford Coppola's legendary..."/>
                                         </h:panelGrid>
+
                                     </p:tab>
                                 </p:accordionPanel>
                             </p:column>

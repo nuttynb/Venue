@@ -40,4 +40,14 @@ public class VenueServiceImpl extends AbstractMappingService implements VenueSer
         return null;
     }
 
+    @Override
+    public VenueVo getVenueById(Long venueId) {
+        Venue venue = null;
+        venue = venueRepository.findById(venueId);
+        if (venue != null) {
+            return map(venue, VenueVo.class);
+        }
+        return null;
+    }
+
 }

@@ -13,4 +13,6 @@ public interface VenueImageService {
     void createVenueImage(VenueImageVo venueImageVo);
 
     List<VenueImageVo> getVenueImageByVenueId(Long venueId);
+
+    VenueImageVo getVenueImageById(Long id);
 }

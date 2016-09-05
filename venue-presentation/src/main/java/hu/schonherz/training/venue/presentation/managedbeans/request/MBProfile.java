@@ -54,6 +54,9 @@ public class MBProfile {
         //    fc.getApplication().getNavigationHandler().handleNavigation(fc, null, "error");
         //}
         VenueVo possibleVenue = venueService.getVenueByOwnerId(user.getId());
+        if (possibleVenue != null) {
+            possibleVenue.setImages(venueImageService.getVenueImageByVenueId(possibleVenue.getId()));
+        }
         venue.setVenue(possibleVenue);
 
         LOG.info("onLoad completed.");
@@ -75,8 +78,8 @@ public class MBProfile {
         venueImageVo.setVenue(venue.getVenue());
         venueImageService.createVenueImage(venueImageVo);
         String extension = FilenameUtils.getExtension(uploadedFile.getFileName());
-        Path file = Files.createTempFile(folder, venueImageVo.getName() +  "-", "." + extension);
-        try (InputStream input = uploadedFile.getInputstream()){
+        Path file = Files.createTempFile(folder, venueImageVo.getName() + "-", "." + extension);
+        try (InputStream input = uploadedFile.getInputstream()) {
             Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
         }
     }

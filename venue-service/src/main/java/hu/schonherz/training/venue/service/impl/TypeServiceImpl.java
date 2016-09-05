@@ -26,7 +26,7 @@ public class TypeServiceImpl extends AbstractMappingService implements TypeServi
     @Autowired
     private TypeRepository typeRepository;
 
-    public List<TypeVo> toReporytory(List<Type> typeRepositorys) {
+    public List<TypeVo> toRepository(List<Type> typeRepositorys) {
         List<TypeVo> typeVos = new ArrayList<>();
         for (Type typeRepository : typeRepositorys) {
             typeVos.add(map(typeRepository, TypeVo.class));
@@ -36,7 +36,7 @@ public class TypeServiceImpl extends AbstractMappingService implements TypeServi
 
     @Override
     public List<TypeVo> getAllType() {
-        List<TypeVo> types = toReporytory(typeRepository.findAll());
+        List<TypeVo> types = toRepository(typeRepository.findAll());
         return types;
     }
 }

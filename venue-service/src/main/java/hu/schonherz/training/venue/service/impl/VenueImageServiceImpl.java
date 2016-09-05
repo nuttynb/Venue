@@ -9,6 +9,8 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -20,10 +22,18 @@ import java.util.List;
 @TransactionManagement(TransactionManagementType.BEAN)
 @Local(VenueImageService.class)
 @Interceptors({SpringBeanAutowiringInterceptor.class})
-public class VenueImageServiceImpl extends AbstractMappingService implements VenueImageService{
+public class VenueImageServiceImpl extends AbstractMappingService implements VenueImageService {
 
     @Autowired
     private VenueImageRepository venueImageRepository;
+
+    public List<VenueImageVo> toRepository(Collection<VenueImage> imageRepositorys) {
+        List<VenueImageVo> venueImageVos = new ArrayList<>();
+        for (VenueImage typeRepository : imageRepositorys) {
+            venueImageVos.add(map(typeRepository, VenueImageVo.class));
+        }
+        return venueImageVos;
+    }
 
     @Override
     public void createVenueImage(VenueImageVo venueImageVo) {
@@ -32,8 +42,12 @@ public class VenueImageServiceImpl extends AbstractMappingService implements Ven
 
     @Override
     public List<VenueImageVo> getVenueImageByVenueId(Long venueId) {
-        return null;
+
+        return toRepository(venueImageRepository.findVenueImageByVenueId(venueId));
     }
 
-
+    @Override
+    public VenueImageVo getVenueImageById(Long id) {
+        return map(venueImageRepository.findOne(id), VenueImageVo.class);
+    }
 }
