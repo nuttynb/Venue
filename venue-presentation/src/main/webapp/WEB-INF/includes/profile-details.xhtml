@@ -120,11 +120,17 @@
                         </p:row>
                         <p:row>
                             <p:column>
-                                <p:accordionPanel styleClass="ui-accordion-content" multiple="true">
+                                <p:accordionPanel styleClass="ui-accordion-content" multiple="true" activeIndex="-1">
                                     <p:tab title="#{msg['venue.images']}">
                                         <h:panelGrid columns="2" cellpadding="10">
-                                            <h:outputText
-                                                    value="The story begins as Don Vito Corleone..."/>
+                                            <div>
+                                                <p:galleria value="#{venueBean.venue.images}" var="image"
+                                                            panelWidth="500" panelHeight="313" showCaption="true">
+                                                    <p:graphicImage value="images/no_image.jpg"
+                                                                    alt="Image Description for #{image}"
+                                                                    title="#{image}"/>
+                                                </p:galleria>
+                                            </div>
                                         </h:panelGrid>
                                     </p:tab>
                                     <p:tab title="#{msg['venue.events']}">
