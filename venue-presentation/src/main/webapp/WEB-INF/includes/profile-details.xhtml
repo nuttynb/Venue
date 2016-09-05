@@ -14,8 +14,10 @@
                             <p:column>
                                 <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)"
                                               onclick="PF('imageDialog').show();">
-                                    <p:graphicImage styleClass="profile-image centered-block" name="images/no_image.jpg"
-                                                    width="200"/>
+                                    <p:graphicImage styleClass="profile-image centered-block" width="200"
+                                                    value="#{venueImages.image}" var="profil">
+                                        <f:param name="profilImgId" value="#{profil.id}"/>
+                                    </p:graphicImage>
                                 </h:outputLink>
                             </p:column>
                         </p:row>
@@ -125,7 +127,8 @@
                                         <h:panelGrid columns="2" cellpadding="10">
                                             <p:galleria value="#{venueBean.venue.images}" var="image" panelWidth="500"
                                                         panelHeight="313" showCaption="true">
-                                                <p:graphicImage value="#{venueImages.image}" alt="#{image.name}" title="#{image.name}">
+                                                <p:graphicImage value="#{venueImages.image}" alt="#{image.name}"
+                                                                title="#{image.name}">
                                                     <f:param name="imageId" value="#{image.id}"/>
                                                 </p:graphicImage>
                                             </p:galleria>
@@ -214,9 +217,13 @@
                   widgetVar="imageDialog"
                   showEffect="fade"
                   hideEffect="fade" minHeight="100">
+            <p:graphicImage styleClass="profile-image centered-block" width="200"
+                            value="#{venueImages.image}" var="profil">
+                <f:param name="profilImgId" value="#{profil.id}"/>
+            </p:graphicImage>
             <p:fileUpload fileUploadListener="#{profileBean.fileUpload}" mode="advanced"
                           dragDropSupport="false"
-                          update="messages" sizeLimit="200000" fileLimit="1"
+                          update="messages main-content-grid" sizeLimit="200000" fileLimit="1"
                           allowTypes="/(\.|\/)(gif|jpe?g|png)$/" oncomplete="PF('imageDialog').hide();"/>
         </p:dialog>
     </h:form>

@@ -27,12 +27,18 @@ public class MBVenueImages {
         FacesContext context = FacesContext.getCurrentInstance();
         if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
             return new DefaultStreamedContent();
+
         } else {
             String imageId = context.getExternalContext().getRequestParameterMap().get("imageId");
+            if (imageId == null) {
+                return new DefaultStreamedContent(this.getClass().getResourceAsStream("/images/no_image.PNG"), "image/png", "no_image.PNG");
+            }
+
             LOG.info(imageId);
             VenueImageVo image = venueImageService.getVenueImageById(Long.valueOf(imageId));
             LOG.info(image.getRoot());
             return new DefaultStreamedContent(new FileInputStream(Paths.get(image.getRoot()).toFile()), "image/png", image.getName());
         }
     }
+
 }
