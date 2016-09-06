@@ -142,11 +142,15 @@
                                     </p:tab>
                                     <p:tab title="#{msg['venue.events']}">
                                         <h1>Events schedule.......</h1>
-                                        <p:schedule id="schedule" value="#{scheduleBean.eventModel}" widgetVar="schedule" timeZone="UTC+01:00">
-
+                                        <p:schedule value="#{scheduleBean.eventModel}"
+                                                    editable="true"
+                                                    widgetVar="myschedule" >
+                                            <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="form" oncomplete="PF('eventDialog').show();" />
+                                            <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="form" oncomplete="PF('eventDialog').show();" />
+                                            <p:ajax event="eventMove" listener="#{scheduleView.onEventMove}" update="form" />
+                                            <p:ajax event="eventResize" listener="#{scheduleView.onEventResize}" update="form" />
                                         </p:schedule>
                                     </p:tab>
-
                                 </p:accordionPanel>
                             </p:column>
                         </p:row>
@@ -240,6 +244,25 @@
                              oncomplete="PF('imageDialog').hide();"
                              icon="ui-icon-check"
                              update=":form"/>
+        </p:dialog>
+        <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
+            <h:panelGrid id="eventDetails" columns="2">
+                <h:outputLabel for="title" value="Title:" />
+                <p:inputText id="title" value="#{scheduleBean.event.title}" />
+
+                <h:outputLabel for="from" value="From:" />
+                <p:calendar id="from" value="#{scheduleBean.event.startDate}"  pattern="dd/MM/yyyy HH:mm"/>
+
+                <h:outputLabel for="to" value="To:" />
+                <p:calendar id="to"  value="#{scheduleBean.event.endDate}"  pattern="dd/MM/yyyy HH:mm"/>
+
+                <h:outputLabel for="allDay" value="All Day:" />
+                <h:selectBooleanCheckbox id="allDay" value="#{scheduleBean.event.allDay}" />
+
+                <p:commandButton type="reset" value="Reset" />
+                <p:commandButton value="Save" oncomplete="myschedule.update();eventDialog.hide();" actionListener="#{scheduleBean.addEvent}" />
+            </h:panelGrid>
+            <p:messages />
         </p:dialog>
     </h:form>
 </ui:composition>
