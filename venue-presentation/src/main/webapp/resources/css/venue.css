@@ -5,7 +5,12 @@
 
 .left {
     width: 300px;
-    table-layout:fixed;
+    table-layout: fixed;
+}
+
+.right {
+    height: 100%;
+    vertical-align: top;
 }
 
 .profile-image {

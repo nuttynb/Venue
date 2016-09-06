@@ -6,9 +6,9 @@
     <div class="box venue-name">#{userBean.name}#{msg['user.venue']}</div>
     <h:form id="form">
         <p:growl id="messages" showDetail="true" autoUpdate="true"/>
-        <p:panelGrid id="main-content-grid" styleClass="ui-panelgrid-blank" cellspacing="20" style="width: 100%" >
-            <p:row >
-                <p:column>
+        <p:panelGrid id="main-content-grid" styleClass="ui-panelgrid-blank" cellspacing="20" style="width: 100%;">
+            <p:row>
+                <p:column style="padding: 0;">
                     <p:panelGrid id="left-side-bar" styleClass="left">
                         <p:row>
                             <p:column>
@@ -19,7 +19,8 @@
                                     <p:graphicImage styleClass="profile-image centered-block"
                                                     value="#{venueImages.image}"
                                                     alt="#{venueBean.venue.profileImage.name}"
-                                                    title="#{venueBean.venue.profileImage.name}" width="200" rendered="#{venueBean.venue.profileImage ne null}">
+                                                    title="#{venueBean.venue.profileImage.name}" width="200"
+                                                    rendered="#{venueBean.venue.profileImage ne null}">
                                         <f:param name="imageId" value="#{venueBean.venue.profileImage.id}"/>
                                     </p:graphicImage>
                                 </h:outputLink>
@@ -94,8 +95,8 @@
                         </p:row>
                     </p:panelGrid>
                 </p:column>
-                <p:column>
-                    <p:panelGrid id="right-side-bar">
+                <p:column styleClass="right" style="padding:0;">
+                    <p:panelGrid id="right-side-bar" styleClass="no-padding">
                         <p:row>
                             <p:column>
                                 <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)"
@@ -126,12 +127,13 @@
                         </p:row>
                         <p:row>
                             <p:column>
-                                <p:accordionPanel styleClass="ui-accordion-content" multiple="true">
+                                <p:accordionPanel multiple="true">
                                     <p:tab title="#{msg['venue.images']}">
                                         <p:galleria value="#{venueBean.venue.images}" var="image" panelWidth="500"
                                                     style="margin: 0 auto;"
                                                     panelHeight="313" showCaption="true"
-                                                    rendered="#{!venueBean.venue.images.isEmpty()}" effect="puff">
+                                                    rendered="#{!venueBean.venue.images.isEmpty()}" effect="puff"
+                                                    effectSpeed="3000" autoPlay="false" transitionInterval="500">
                                             <p:graphicImage value="#{venueImages.image}" alt="#{image.name}"
                                                             title="#{image.name}">
                                                 <f:param name="imageId" value="#{image.id}"/>
@@ -217,10 +219,12 @@
                   widgetVar="imageDialog"
                   showEffect="fade"
                   hideEffect="fade" style="min-height:600px;height:auto;min-width: 800px;width: auto;" closable="false">
-
-            <p:ring id="custom" value="#{venueBean.venue.images}" var="image">
+            <h:outputText value="#{msg['no.images']}" rendered="#{venueBean.venue.images.isEmpty()}"/>
+            <p:ring id="custom" value="#{venueBean.venue.images}" var="image" autoplay="true" easing="easeInOutBack"
+                    autoplayPauseOnHover="true" autoplayDuration="2000"
+                    styleClass="centered-block">
                 <h:commandLink>
-                    <f:param name="profileImageId" value="#{image.id}" />
+                    <f:param name="profileImageId" value="#{image.id}"/>
                     <p:graphicImage value="#{venueImages.image}" alt="#{image.name}"
                                     title="#{image.name}" width="100">
                         <f:param name="imageId" value="#{image.id}"/>

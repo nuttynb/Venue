@@ -19,7 +19,7 @@
                     <ui:include src="WEB-INF/includes/profile-details.xhtml"/>
                 </ui:fragment>
                 <h:form rendered="#{venueBean.venue eq null}">
-                    <h1>Seems like you don't have any venue.</h1>
+                    <h:outputText value="#{msg['no.images']}"/>
                     <p:button styleClass="create" outcome="createVenue" value="Create New Venue"
                               icon="ui-icon-plus"></p:button>
                 </h:form>
