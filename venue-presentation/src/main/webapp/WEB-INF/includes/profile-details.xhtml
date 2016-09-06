@@ -142,7 +142,11 @@
                                     </p:tab>
                                     <p:tab title="#{msg['venue.events']}">
                                         <h1>Events schedule.......</h1>
+                                        <p:schedule id="schedule" value="#{scheduleBean.eventModel}" widgetVar="schedule" timeZone="UTC+01:00">
+
+                                        </p:schedule>
                                     </p:tab>
+
                                 </p:accordionPanel>
                             </p:column>
                         </p:row>
