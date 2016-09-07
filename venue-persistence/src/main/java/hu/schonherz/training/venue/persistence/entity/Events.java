@@ -24,7 +24,8 @@ public class Events extends BaseEntity {
     private String name;
 
     @Basic
-    @Column(nullable = false)
+    @Column(nullable = false, name = "date", columnDefinition = "TIMESTAMP(0)")
+    @Temporal(TemporalType.TIMESTAMP)
     public Date date;
 
     @Basic

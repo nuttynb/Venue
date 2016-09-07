@@ -5,9 +5,7 @@ import hu.schonherz.training.venue.vo.EventsVo;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Roli on 2016. 08. 25..
- */
+
 public interface EventsService {
 
     List<EventsVo> getAllEvents();
@@ -15,6 +13,8 @@ public interface EventsService {
     EventsVo getEventById(Long id);
 
     List<EventsVo> getEventByVenueId(Long venueid);
+
+    EventsVo getEventByVenueIdAndDate(Long venueid, Date date);
 
     List<EventsVo> getEventByBandId(Long bandId);
 
