@@ -76,7 +76,7 @@ public class Venue extends BaseEntity {
         this.address = address;
     }
 
-   /* public Collection<Events> getEvents() {
+    public Collection<Events> getEvents() {
         return events;
     }
 
@@ -90,7 +90,7 @@ public class Venue extends BaseEntity {
 
     public void setImages(Collection<VenueImage> images) {
         this.images = images;
-    }*/
+    }
 
     public VenueImage getProfileImage() {
         return profileImage;

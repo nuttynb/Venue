@@ -15,5 +15,5 @@ import java.util.Date;
 @Transactional(propagation = Propagation.REQUIRED)
 public interface EventsRepository extends JpaRepository<Events , Long>{
 
-    Events findByVenue_IdAndBeginAndEnd(Long id, Date begin, Date end);
+    Events findByVenueIdAndBeginAndEnd(Long id, Date begin, Date end);
 }

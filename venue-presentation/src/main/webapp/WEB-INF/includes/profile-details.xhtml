@@ -4,6 +4,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <div class="box venue-name">#{userBean.name}#{msg['user.venue']}</div>
+
     <h:form id="form">
         <p:growl id="messages" showDetail="true" autoUpdate="true"/>
         <p:panelGrid id="main-content-grid" styleClass="ui-panelgrid-blank" cellspacing="20" style="width: 100%;">
@@ -147,14 +148,16 @@
                                         <p:schedule value="#{scheduleBean.eventModel}"
                                                     editable="true"
                                                     widgetVar="myschedule">
-                                            <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}"
-                                                    update="form:eventDetails" oncomplete="PF('eventDialog').show();"/>
-                                            <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}"
-                                                    update="form:eventDetails" oncomplete="PF('eventDialog').show();"/>
-                                            <p:ajax event="eventMove" listener="#{scheduleView.onEventMove}"
-                                                    update="form:eventDetails"/>
-                                            <p:ajax event="eventResize" listener="#{scheduleView.onEventResize}"
-                                                    update="form:eventDetails"/>
+                                            <p:ajax event="dateSelect" listener="#{scheduleBean.onDateSelect}"
+                                                    update="@widgetVar(eventDialog)"
+                                                    oncomplete="PF('eventDialog').show();"/>
+                                            <p:ajax event="eventSelect" listener="#{scheduleBean.onEventSelect}"
+                                                    update="@widgetVar(eventDialog)"
+                                                    oncomplete="PF('eventDialog').show();"/>
+                                            <p:ajax event="eventMove" listener="#{scheduleBean.onEventMove}"
+                                                    update="@widgetVar(eventDialog)"/>
+                                            <p:ajax event="eventResize" listener="#{scheduleBean.onEventResize}"
+                                                    update="@widgetVar(eventDialog)"/>
                                         </p:schedule>
                                     </p:tab>
                                 </p:accordionPanel>
@@ -196,9 +199,9 @@
                                itemLabel="#{type.name}" itemValue="#{type}"/>
             </p:selectOneMenu>
             <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
-                             oncomplete="PF('typeDialog').hide();"
+                             oncomplete="if(!args.validationFailed){PF('typeDialog').hide();}"
                              icon="ui-icon-check" actionListener="#{profileBean.onModify}"
-                             update="main-content-grid"/>
+            />
         </p:dialog>
         <p:dialog modal="true" closeOnEscape="true" header="#{msg['createvenue.wizard.label.address']}"
                   widgetVar="addressDialog"
@@ -239,7 +242,7 @@
             </div>
             <p:ring id="custom" value="#{venueBean.venue.images}" var="image" autoplay="true"
                     easing="easeInOutBack"
-                    autoplayPauseOnHover="true" autoplayDuration="2000" style="height: 280px;">
+                    autoplayPauseOnHover="true" autoplayDuration="5000" style="height: 280px;">
                 <h:commandLink>
                     <f:param name="profileImageId" value="#{image.id}"/>
                     <p:graphicImage value="#{venueImages.image}" alt="#{image.name}"
@@ -260,7 +263,9 @@
                                  update=":form" styleClass="centered-block"/>
             </div>
         </p:dialog>
-        <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
+    </h:form>
+    <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
+        <h:form>
             <h:panelGrid id="eventDetails" columns="2">
                 <h:outputLabel for="title" value="Title:"/>
                 <p:inputText id="title" value="#{scheduleBean.event.title}"/>
@@ -275,10 +280,11 @@
                 <h:selectBooleanCheckbox id="allDay" value="#{scheduleBean.event.allDay}"/>
 
                 <p:commandButton type="reset" value="Reset"/>
-                <p:commandButton value="Save" oncomplete="myschedule.update();eventDialog.hide();"
-                                 actionListener="#{scheduleBean.addEvent}"/>
+                <p:commandButton value="Save" oncomplete="PF('eventDialog').hide(); PF('myschedule').update();"
+                                 actionListener="#{scheduleBean.addEvent}" process="@this, @form"/>
             </h:panelGrid>
             <p:messages/>
-        </p:dialog>
-    </h:form>
+        </h:form>
+    </p:dialog>
+
 </ui:composition>

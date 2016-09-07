@@ -18,7 +18,7 @@ import java.util.List;
 
 @Stateless(name = "TypeService", mappedName = "TypeService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionManagement(TransactionManagementType.CONTAINER)
 @Local(TypeService.class)
 @Interceptors({SpringBeanAutowiringInterceptor.class})
 public class TypeServiceImpl extends AbstractMappingService implements TypeService {

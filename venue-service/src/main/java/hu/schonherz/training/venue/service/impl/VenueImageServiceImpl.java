@@ -19,7 +19,7 @@ import java.util.List;
 
 @Stateless(name = "VenueImageService", mappedName = "VenueImageService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionManagement(TransactionManagementType.CONTAINER)
 @Local(VenueImageService.class)
 @Interceptors({SpringBeanAutowiringInterceptor.class})
 public class VenueImageServiceImpl extends AbstractMappingService implements VenueImageService {
@@ -27,10 +27,10 @@ public class VenueImageServiceImpl extends AbstractMappingService implements Ven
     @Autowired
     private VenueImageRepository venueImageRepository;
 
-    public List<VenueImageVo> toRepository(Collection<VenueImage> imageRepositorys) {
+    public List<VenueImageVo> toVenueImageVo(Collection<VenueImage> imageRepositorys) {
         List<VenueImageVo> venueImageVos = new ArrayList<>();
-        for (VenueImage typeRepository : imageRepositorys) {
-            venueImageVos.add(map(typeRepository, VenueImageVo.class));
+        for (VenueImage venueImage : imageRepositorys) {
+            venueImageVos.add(map(venueImage, VenueImageVo.class));
         }
         return venueImageVos;
     }
@@ -43,7 +43,7 @@ public class VenueImageServiceImpl extends AbstractMappingService implements Ven
     @Override
     public List<VenueImageVo> getVenueImageByVenueId(Long venueId) {
 
-        return toRepository(venueImageRepository.findVenueImageByVenueId(venueId));
+        return toVenueImageVo(venueImageRepository.findVenueImageByVenueId(venueId));
     }
 
     @Override

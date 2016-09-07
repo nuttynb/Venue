@@ -75,14 +75,16 @@ public class MBProfile {
         LOG.info("onClicked - " + profileImageId);
     }
 
-    public void fileUpload(FileUploadEvent event) throws IOException {
-        FacesMessage message = new FacesMessage("Successful", event.getFile().getFileName() + " is uploaded.");
-        FacesContext.getCurrentInstance().addMessage(null, message);
+    public void fileUpload(FileUploadEvent event) {
+        FacesMessage message;
         try {
             createFile(event.getFile().getFileName(), event.getFile().getInputstream());
+            message = new FacesMessage("Successful", event.getFile().getFileName() + " is uploaded.");
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("Upload failed on creating files.",e);
+            message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error", "Failed uploading.");
         }
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
     public void createFile(String fileName, InputStream input) throws IOException {
