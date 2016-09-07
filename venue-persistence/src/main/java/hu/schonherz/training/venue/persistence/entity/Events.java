@@ -24,9 +24,14 @@ public class Events extends BaseEntity {
     private String name;
 
     @Basic
-    @Column(nullable = false, name = "date", columnDefinition = "TIMESTAMP(0)")
+    @Column(nullable = false, name = "begin_date", columnDefinition = "TIMESTAMP(0)")
     @Temporal(TemporalType.TIMESTAMP)
-    public Date date;
+    private Date begin;
+
+    @Basic
+    @Column(nullable = false, name = "end_date", columnDefinition = "TIMESTAMP(0)")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date end;
 
     @Basic
     private String description;
@@ -47,12 +52,20 @@ public class Events extends BaseEntity {
         this.name = name;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getBegin() {
+        return begin;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setBegin(Date begin) {
+        this.begin = begin;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
     }
 
     public String getDescription() {

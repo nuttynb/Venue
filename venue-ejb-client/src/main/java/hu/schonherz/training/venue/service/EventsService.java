@@ -14,7 +14,7 @@ public interface EventsService {
 
     List<EventsVo> getEventByVenueId(Long venueid);
 
-    EventsVo getEventByVenueIdAndDate(Long venueid, Date date);
+    EventsVo getEventByVenueIdAndDate(Long venueid, Date begin, Date end);
 
     List<EventsVo> getEventByBandId(Long bandId);
 

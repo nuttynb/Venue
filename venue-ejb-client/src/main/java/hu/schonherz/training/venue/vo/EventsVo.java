@@ -18,7 +18,9 @@ public class EventsVo implements Serializable {
 
     private String name;
 
-    private Date date;
+    private Date begin;
+
+    private Date end;
 
     private String description;
 
@@ -99,17 +101,25 @@ public class EventsVo implements Serializable {
      *
      * @return the date of event
      */
-    public Date getDate() {
-        return date;
+    public Date getBegin() {
+        return begin;
+    }
+
+    public Date getEnd() {
+        return end;
     }
 
     /**
      * Set the date of event.
      *
-     * @param date the date of event
+     * @param begin the date of event
      */
-    public void setDate(Date date) {
-        this.date = date;
+    public void setBegin(Date begin) {
+        this.begin = begin;
+    }
+
+    public void setEndDate(Date end) {
+        this.end = end;
     }
 
     /**

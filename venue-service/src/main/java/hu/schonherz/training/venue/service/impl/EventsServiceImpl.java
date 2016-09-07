@@ -39,9 +39,9 @@ public class EventsServiceImpl extends AbstractMappingService implements EventsS
     }
 
     @Override
-    public EventsVo getEventByVenueIdAndDate(Long venueid, Date date) {
+    public EventsVo getEventByVenueIdAndDate(Long venueid, Date begin, Date end) {
         Events event = null;
-        event = eventsRepository.findByVenue_IdAndDate(venueid, date);
+        event = eventsRepository.findByVenue_IdAndBeginAndEnd(venueid, begin, end);
         if (event != null) {
             return map(event, EventsVo.class);
         }

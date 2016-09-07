@@ -1,6 +1,7 @@
 package hu.schonherz.training.venue.persistence.repository;
 
 import hu.schonherz.training.venue.persistence.entity.Events;
+import org.springframework.data.auditing.DateTimeProvider;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.stereotype.Repository;
@@ -14,5 +15,5 @@ import java.util.Date;
 @Transactional(propagation = Propagation.REQUIRED)
 public interface EventsRepository extends JpaRepository<Events , Long>{
 
-    Events findByVenue_IdAndDate(Long id, Date date);
+    Events findByVenue_IdAndBeginAndEnd(Long id, Date begin, Date end);
 }
