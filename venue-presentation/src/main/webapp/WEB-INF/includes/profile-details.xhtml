@@ -148,13 +148,13 @@
                                                     editable="true"
                                                     widgetVar="myschedule">
                                             <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}"
-                                                    update="form" oncomplete="PF('eventDialog').show();"/>
+                                                    update="form:eventDetails" oncomplete="PF('eventDialog').show();"/>
                                             <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}"
-                                                    update="form" oncomplete="PF('eventDialog').show();"/>
+                                                    update="form:eventDetails" oncomplete="PF('eventDialog').show();"/>
                                             <p:ajax event="eventMove" listener="#{scheduleView.onEventMove}"
-                                                    update="form"/>
+                                                    update="form:eventDetails"/>
                                             <p:ajax event="eventResize" listener="#{scheduleView.onEventResize}"
-                                                    update="form"/>
+                                                    update="form:eventDetails"/>
                                         </p:schedule>
                                     </p:tab>
                                 </p:accordionPanel>
