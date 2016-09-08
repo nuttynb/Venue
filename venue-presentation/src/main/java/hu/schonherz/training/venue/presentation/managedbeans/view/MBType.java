@@ -23,7 +23,7 @@ public class MBType implements Serializable {
 
     @PostConstruct
     public void init() {
-        types = typeService.getAllType();
+        types = typeService.getAllTypes();
     }
 
     public List<TypeVo> getTypes() {

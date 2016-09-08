@@ -20,6 +20,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import java.io.*;
+import java.nio.file.*;
 
 
 @ManagedBean(name = "profileBean")
@@ -52,7 +53,7 @@ public class MBProfile {
         //}
         VenueVo possibleVenue = venueService.getVenueByOwnerId(user.getId());
         if (possibleVenue != null) {
-            venueImages.setImages(venueImageService.getVenueImageByVenueId(possibleVenue.getId()));
+            venueImages.setImages(venueImageService.getVenueImagesByVenueId(possibleVenue.getId()));
         }
         venue.setVenue(possibleVenue);
         LOG.info("onLoad completed.");
@@ -67,46 +68,6 @@ public class MBProfile {
         venue.getVenue().setProfileImage(venueImageService.getVenueImageById(profileImageId));
         venueService.saveVenue(venue.getVenue());
         LOG.info("onClicked - " + profileImageId);
-    }
-
-    public void fileUpload(FileUploadEvent event) {
-        FacesMessage message;
-        try {
-            createFile(event.getFile().getFileName(), event.getFile().getInputstream());
-            message = new FacesMessage("Successful", event.getFile().getFileName() + " is uploaded.");
-        } catch (IOException e) {
-            LOG.error("Upload failed on creating files.", e);
-            message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Failed uploading.");
-        }
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
-
-    public void createFile(String fileName, InputStream input) throws IOException {
-        File destination = new File(System.getProperty("user.dir") + File.separator +
-                "venue" + File.separator + venue.getVenue().getId().toString());
-        destination.mkdirs();
-        File file = new File(destination + File.separator + fileName);
-        String absPath = file.getAbsolutePath().toString();
-        OutputStream out = new FileOutputStream(file);
-
-        int read = 0;
-        byte[] bytes = new byte[1024];
-
-        while ((read = input.read(bytes)) != -1) {
-            out.write(bytes, 0, read);
-        }
-        input.close();
-        out.flush();
-        out.close();
-        setImageInDb(absPath, fileName);
-    }
-
-    public void setImageInDb(String path, String fileName) {
-        VenueImageVo venueImageVo = new VenueImageVo();
-        venueImageVo.setName(fileName);
-        venueImageVo.setRoot(path);
-        venueImageVo.setVenue(venue.getVenue());
-        venueImageService.saveVenueImage(venueImageVo);
     }
 
     public MBVenue getVenue() {

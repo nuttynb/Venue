@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "event")
-public class Events extends BaseEntity {
+public class Event extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "venue_id")
@@ -20,14 +20,12 @@ public class Events extends BaseEntity {
     private String name;
 
     @Basic
-    @Column(nullable = false, name = "begin_date", columnDefinition = "TIMESTAMP(0)")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date begin;
+    @Column(nullable = false, name = "begin_date")
+    private Date beginDate;
 
     @Basic
-    @Column(nullable = false, name = "end_date", columnDefinition = "TIMESTAMP(0)")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date end;
+    @Column(nullable = false, name = "end_date")
+    private Date endDate;
 
     @Basic
     private String description;
@@ -48,20 +46,20 @@ public class Events extends BaseEntity {
         this.name = name;
     }
 
-    public Date getBegin() {
-        return begin;
+    public Date getBeginDate() {
+        return beginDate;
     }
 
-    public void setBegin(Date begin) {
-        this.begin = begin;
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
     }
 
-    public Date getEnd() {
-        return end;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEnd(Date end) {
-        this.end = end;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public String getDescription() {

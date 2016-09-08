@@ -26,7 +26,7 @@ public class Venue extends BaseEntity {
     private Address address;
 
     @OneToMany(mappedBy = "venue", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Collection<Events> events;
+    private Collection<Event> events;
 
     @OneToMany(mappedBy = "venue", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<VenueImage> images;
@@ -76,11 +76,11 @@ public class Venue extends BaseEntity {
         this.address = address;
     }
 
-    public Collection<Events> getEvents() {
+    public Collection<Event> getEvents() {
         return events;
     }
 
-    public void setEvents(Collection<Events> events) {
+    public void setEvents(Collection<Event> events) {
         this.events = events;
     }
 
