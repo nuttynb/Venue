@@ -12,7 +12,7 @@ public class EventVo implements Serializable {
 
     private Long id;
 
-    private Long venueId;
+    private VenueVo venue;
 
     private Long bandId;
 
@@ -45,19 +45,19 @@ public class EventVo implements Serializable {
     /**
      * Return the id of events place.
      *
-     * @return the id of venue
+     * @return the event's venue
      */
-    public Long getVenueId() {
-        return venueId;
+    public VenueVo getVenue() {
+        return venue;
     }
 
     /**
      * Set the id of events place.
      *
-     * @param venueId the id of venue
+     * @param venue the venue of the event
      */
-    public void setVenueId(Long venueId) {
-        this.venueId = venueId;
+    public void setVenue(VenueVo venue) {
+        this.venue = venue;
     }
 
     /**
