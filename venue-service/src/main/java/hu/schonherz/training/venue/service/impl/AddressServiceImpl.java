@@ -10,14 +10,9 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
 
-/**
- * Created by Roli on 2016. 08. 26..
- */
-
-
 @Stateless(name = "AddressService", mappedName = "AddressService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionManagement(TransactionManagementType.CONTAINER)
 @Local(AddressService.class)
 @Interceptors({SpringBeanAutowiringInterceptor.class})
 public class AddressServiceImpl extends AbstractMappingService implements AddressService {
@@ -26,12 +21,7 @@ public class AddressServiceImpl extends AbstractMappingService implements Addres
     private AddressRepository addressRepository;
 
     @Override
-    public AddressVo getAddressByVenueId(Long id) {
-        return null;
-    }
-
-    @Override
-    public void createAddress(AddressVo addressVo) {
+    public void saveAddress(AddressVo addressVo) {
         addressRepository.save(map(addressVo, Address.class));
     }
 

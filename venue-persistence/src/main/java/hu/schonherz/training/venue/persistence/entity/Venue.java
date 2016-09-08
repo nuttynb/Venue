@@ -8,7 +8,7 @@ import java.util.Collection;
 public class Venue extends BaseEntity {
 
     @Basic
-   // @Column(nullable = false)
+    // @Column(nullable = false)
     private Long ownerId;
 
     @Column(nullable = false)
@@ -25,13 +25,13 @@ public class Venue extends BaseEntity {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @OneToMany(mappedBy = "venue",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "venue", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<Events> events;
 
-    @OneToMany(mappedBy = "venue",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "venue", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<VenueImage> images;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @OneToOne
     @JoinColumn(name = "profile_image_id")
     private VenueImage profileImage;
 

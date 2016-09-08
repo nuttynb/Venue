@@ -16,8 +16,8 @@ public class TypeVoConverter implements Converter {
         if (submittedValue == null || submittedValue.isEmpty()) {
             return null;
         }
-        MBType type = (MBType) facesContext.getViewRoot().getViewMap().get("typeBean");
-        return type.findTypeByName(submittedValue);
+        MBType type = facesContext.getApplication().evaluateExpressionGet(facesContext, "#{typeBean}", MBType.class);
+        return type.findTypeById(Long.valueOf(submittedValue));
     }
 
     @Override
@@ -26,7 +26,7 @@ public class TypeVoConverter implements Converter {
             return "";
         }
         if (modelValue instanceof TypeVo) {
-            return ((TypeVo) modelValue).getName();
+            return ((TypeVo) modelValue).getId().toString();
         } else {
             return "";
         }

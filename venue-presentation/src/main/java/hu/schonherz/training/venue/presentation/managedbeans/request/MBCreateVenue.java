@@ -8,12 +8,9 @@ import hu.schonherz.training.venue.service.VenueService;
 import org.primefaces.event.FlowEvent;
 
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-
 
 @ManagedBean(name = "createVenueBean")
 @RequestScoped
@@ -27,7 +24,7 @@ public class MBCreateVenue {
 
     public String doCreate() {
         venue.getVenue().setOwnerId(user.getId());
-        venueService.createVenue(venue.getVenue());
+        venueService.saveVenue(venue.getVenue());
         return "profile";
     }
 

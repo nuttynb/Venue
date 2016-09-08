@@ -15,7 +15,7 @@ import java.util.List;
 
 @Stateless(name = "EventsService", mappedName = "EventsService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionManagement(TransactionManagementType.CONTAINER)
 @Local(EventsService.class)
 @Interceptors({SpringBeanAutowiringInterceptor.class})
 public class EventsServiceImpl extends AbstractMappingService implements EventsService {

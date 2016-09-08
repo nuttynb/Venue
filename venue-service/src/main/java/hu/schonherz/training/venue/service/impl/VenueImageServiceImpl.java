@@ -13,10 +13,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by Home on 2016. 09. 03..
- */
-
 @Stateless(name = "VenueImageService", mappedName = "VenueImageService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -27,16 +23,16 @@ public class VenueImageServiceImpl extends AbstractMappingService implements Ven
     @Autowired
     private VenueImageRepository venueImageRepository;
 
-    public List<VenueImageVo> toVenueImageVo(Collection<VenueImage> imageRepositorys) {
+    public List<VenueImageVo> toVenueImageVo(Collection<VenueImage> images) {
         List<VenueImageVo> venueImageVos = new ArrayList<>();
-        for (VenueImage venueImage : imageRepositorys) {
+        for (VenueImage venueImage : images) {
             venueImageVos.add(map(venueImage, VenueImageVo.class));
         }
         return venueImageVos;
     }
 
     @Override
-    public void createVenueImage(VenueImageVo venueImageVo) {
+    public void saveVenueImage(VenueImageVo venueImageVo) {
         venueImageRepository.save(map(venueImageVo, VenueImage.class));
     }
 

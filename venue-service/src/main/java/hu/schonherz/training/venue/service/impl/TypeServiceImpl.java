@@ -12,10 +12,6 @@ import javax.interceptor.Interceptors;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Roli on 2016. 08. 27..
- */
-
 @Stateless(name = "TypeService", mappedName = "TypeService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -26,17 +22,22 @@ public class TypeServiceImpl extends AbstractMappingService implements TypeServi
     @Autowired
     private TypeRepository typeRepository;
 
-    public List<TypeVo> toRepository(List<Type> typeRepositorys) {
+    public List<TypeVo> toTypeVo(List<Type> types) {
         List<TypeVo> typeVos = new ArrayList<>();
-        for (Type typeRepository : typeRepositorys) {
-            typeVos.add(map(typeRepository, TypeVo.class));
+        for (Type type : types) {
+            typeVos.add(map(type, TypeVo.class));
         }
         return typeVos;
     }
 
     @Override
     public List<TypeVo> getAllType() {
-        List<TypeVo> types = toRepository(typeRepository.findAll());
+        List<TypeVo> types = toTypeVo(typeRepository.findAll());
         return types;
+    }
+
+    @Override
+    public TypeVo getTypeById(Long id) {
+        return map(typeRepository.findById(id), TypeVo.class);
     }
 }

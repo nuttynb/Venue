@@ -1,7 +1,6 @@
 package hu.schonherz.training.venue.service.impl;
 
 import hu.schonherz.training.venue.persistence.entity.Venue;
-import hu.schonherz.training.venue.persistence.repository.TypeRepository;
 import hu.schonherz.training.venue.persistence.repository.VenueRepository;
 import hu.schonherz.training.venue.service.VenueService;
 import hu.schonherz.training.venue.vo.VenueVo;
@@ -10,10 +9,6 @@ import org.springframework.ejb.interceptor.SpringBeanAutowiringInterceptor;
 
 import javax.ejb.*;
 import javax.interceptor.Interceptors;
-
-/**
- * Created by Roli on 2016. 08. 26..
- */
 
 @Stateless(name = "VenueService", mappedName = "VenueService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -26,7 +21,7 @@ public class VenueServiceImpl extends AbstractMappingService implements VenueSer
     private VenueRepository venueRepository;
 
     @Override
-    public void createVenue(VenueVo venueVo) {
+    public void saveVenue(VenueVo venueVo) {
         venueRepository.save(map(venueVo, Venue.class));
     }
 

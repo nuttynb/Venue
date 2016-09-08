@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <div>
+        <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('descriptionDialog').show();"
+                      style="text-decoration: none;">
+            <div class="box">
+                <div class="box-header">
+                    <h:outputText value="#{msg['venue.description']}"/>
+                </div>
+                <div class="box-content">
+                    <h:outputText id="description" value="#{venueBean.venue.description}"/>
+                </div>
+            </div>
+        </h:outputLink>
+        <p:dialog modal="true" closeOnEscape="true" header="#{msg['venue.description']}" widgetVar="descriptionDialog"
+                  showEffect="fade" hideEffect="fade" minHeight="100">
+            <p:inputTextarea styleClass="centered-block centered-text" value="#{venueBean.venue.description}"/>
+            <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
+                             oncomplete="PF('descriptionDialog').hide();" icon="ui-icon-check"
+                             actionListener="#{profileBean.onModify}" update="main-content-grid"/>
+        </p:dialog>
+    </div>
+</ui:composition>

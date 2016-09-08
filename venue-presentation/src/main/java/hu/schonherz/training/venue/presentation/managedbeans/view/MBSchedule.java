@@ -17,13 +17,9 @@ import javax.faces.event.ActionEvent;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by Home on 2016. 09. 06..
- */
-
 @ManagedBean(name = "scheduleBean")
 @ViewScoped
-public class MBSchedule implements Serializable{
+public class MBSchedule implements Serializable {
 
     private static final long serialVersionUID = 1237458387432819321L;
 
@@ -35,14 +31,15 @@ public class MBSchedule implements Serializable{
     public void init() {
         eventModel = new DefaultScheduleModel();
     }
-/*
-    public Date getInitialDate() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR), Calendar.FEBRUARY, calendar.get(Calendar.DATE), 0, 0, 0);
 
-        return calendar.getTime();
-    }
-*/
+    /*
+        public Date getInitialDate() {
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(calendar.get(Calendar.YEAR), Calendar.FEBRUARY, calendar.get(Calendar.DATE), 0, 0, 0);
+
+            return calendar.getTime();
+        }
+    */
     public ScheduleModel getEventModel() {
         return eventModel;
     }
@@ -65,10 +62,11 @@ public class MBSchedule implements Serializable{
     }
 
     public void addEvent(ActionEvent actionEvent) {
-        if(event.getId() == null)
+        if (event.getId() == null) {
             eventModel.addEvent(event);
-        else
+        } else {
             eventModel.updateEvent(event);
+        }
 
         event = new DefaultScheduleEvent();
     }

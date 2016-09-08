@@ -3,14 +3,13 @@ package hu.schonherz.training.venue.presentation.managedbeans.request;
 import hu.schonherz.training.venue.presentation.managedbeans.session.MBUser;
 import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenue;
 import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenueImage;
+import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenueImages;
 import hu.schonherz.training.venue.service.AddressService;
 import hu.schonherz.training.venue.service.VenueImageService;
 import hu.schonherz.training.venue.service.VenueService;
 import hu.schonherz.training.venue.vo.VenueImageVo;
 import hu.schonherz.training.venue.vo.VenueVo;
-import org.apache.commons.io.FilenameUtils;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,13 +19,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.AjaxBehaviorEvent;
-import javax.faces.event.SystemEvent;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 
 @ManagedBean(name = "profileBean")
@@ -38,7 +31,9 @@ public class MBProfile {
     private MBUser user;
     @ManagedProperty(value = "#{venueImageBean}")
     private MBVenueImage venueImage;
-    @ManagedProperty(value="#{param.profileImageId}")
+    @ManagedProperty(value = "#{venueImagesBean}")
+    private MBVenueImages venueImages;
+    @ManagedProperty(value = "#{param.profileImageId}")
     private Long profileImageId;
 
     @EJB
@@ -57,8 +52,7 @@ public class MBProfile {
         //}
         VenueVo possibleVenue = venueService.getVenueByOwnerId(user.getId());
         if (possibleVenue != null) {
-            possibleVenue.setImages(venueImageService.getVenueImageByVenueId(possibleVenue.getId()));
-
+            venueImages.setImages(venueImageService.getVenueImageByVenueId(possibleVenue.getId()));
         }
         venue.setVenue(possibleVenue);
         LOG.info("onLoad completed.");
@@ -66,12 +60,12 @@ public class MBProfile {
 
     public void onModify() {
         LOG.info("Modifying...");
-        venueService.createVenue(venue.getVenue());
+        venueService.saveVenue(venue.getVenue());
     }
 
     public void onClickedProfileImage() {
         venue.getVenue().setProfileImage(venueImageService.getVenueImageById(profileImageId));
-        venueService.createVenue(venue.getVenue());
+        venueService.saveVenue(venue.getVenue());
         LOG.info("onClicked - " + profileImageId);
     }
 
@@ -81,8 +75,8 @@ public class MBProfile {
             createFile(event.getFile().getFileName(), event.getFile().getInputstream());
             message = new FacesMessage("Successful", event.getFile().getFileName() + " is uploaded.");
         } catch (IOException e) {
-            LOG.error("Upload failed on creating files.",e);
-            message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error", "Failed uploading.");
+            LOG.error("Upload failed on creating files.", e);
+            message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Failed uploading.");
         }
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
@@ -112,7 +106,7 @@ public class MBProfile {
         venueImageVo.setName(fileName);
         venueImageVo.setRoot(path);
         venueImageVo.setVenue(venue.getVenue());
-        venueImageService.createVenueImage(venueImageVo);
+        venueImageService.saveVenueImage(venueImageVo);
     }
 
     public MBVenue getVenue() {
@@ -153,5 +147,13 @@ public class MBProfile {
 
     public void setProfileImageId(Long profileImageId) {
         this.profileImageId = profileImageId;
+    }
+
+    public MBVenueImages getVenueImages() {
+        return venueImages;
+    }
+
+    public void setVenueImages(MBVenueImages venueImages) {
+        this.venueImages = venueImages;
     }
 }

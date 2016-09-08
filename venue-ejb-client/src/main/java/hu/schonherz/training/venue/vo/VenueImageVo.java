@@ -2,9 +2,6 @@ package hu.schonherz.training.venue.vo;
 
 import java.io.Serializable;
 
-/**
- * Created by Roli on 2016. 09. 02..
- */
 public class VenueImageVo implements Serializable {
 
     private static final long serialVersionUID = 892012L;

@@ -2,10 +2,6 @@ package hu.schonherz.training.venue.persistence.entity;
 
 import javax.persistence.*;
 
-/**
- * Created by Home on 2016. 09. 01..
- */
-
 @Entity
 @Table(name = "venueImage")
 public class VenueImage extends BaseEntity {

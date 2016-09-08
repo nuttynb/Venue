@@ -9,5 +9,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional(propagation = Propagation.REQUIRED)
 public interface TypeRepository extends JpaRepository<Type, Long> {
-
+    Type findById(Long id);
 }

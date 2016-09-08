@@ -3,16 +3,12 @@ package hu.schonherz.training.venue.persistence.entity;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by Home on 2016. 08. 23..
- */
-
 @Entity
 @Table(name = "event")
 public class Events extends BaseEntity {
 
     @ManyToOne
-    @JoinColumn(name ="venue_id")
+    @JoinColumn(name = "venue_id")
     private Venue venue;
 
     @Basic

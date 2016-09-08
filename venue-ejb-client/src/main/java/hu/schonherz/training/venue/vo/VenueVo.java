@@ -23,18 +23,11 @@ public class VenueVo implements Serializable {
 
     private AddressVo address;
 
-    private Collection<EventsVo> events;
-
-    private Collection<VenueImageVo> images;
-
     private VenueImageVo profileImage;
 
 
     public VenueVo() {
         address = new AddressVo();
-        events = new ArrayList<>();
-        images = new ArrayList<>();
-
     }
 
     /**
@@ -143,32 +136,6 @@ public class VenueVo implements Serializable {
      */
     public void setAddress(AddressVo address) {
         this.address = address;
-    }
-
-    /**
-     * Return the collection of events in venue.
-     *
-     * @return the collection of events in venue
-     */
-    public Collection<EventsVo> getEvents() {
-        return events;
-    }
-
-    /**
-     * Set the collection of events in venue.
-     *
-     * @param events the collection of events in venue.
-     */
-    public void setEvents(Collection<EventsVo> events) {
-        this.events = events;
-    }
-
-    public Collection<VenueImageVo> getImages() {
-        return images;
-    }
-
-    public void setImages(Collection<VenueImageVo> images) {
-        this.images = images;
     }
 
     public VenueImageVo getProfileImage() {

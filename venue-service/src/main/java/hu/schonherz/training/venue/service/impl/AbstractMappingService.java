@@ -4,9 +4,6 @@ import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.MappingException;
 
-/**
- * Created by ikant on 2016. 08. 27..
- */
 public abstract class AbstractMappingService implements Mapper {
 
     private final Mapper mapper = new DozerBeanMapper();

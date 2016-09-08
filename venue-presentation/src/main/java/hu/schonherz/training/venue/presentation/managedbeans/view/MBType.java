@@ -34,12 +34,8 @@ public class MBType implements Serializable {
         this.types = types;
     }
 
-    public TypeVo findTypeByName(String typeName) {
-        types = typeService.getAllType();
-        return types.stream()
-                .filter(type -> type.getName().equals(typeName))
-                .findFirst()
-                .get();
+    public TypeVo findTypeById(Long id) {
+        return typeService.getTypeById(id);
     }
 
     public TypeService getTypeService() {

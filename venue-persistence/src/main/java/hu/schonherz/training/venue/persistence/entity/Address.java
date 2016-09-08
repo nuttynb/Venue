@@ -2,10 +2,6 @@ package hu.schonherz.training.venue.persistence.entity;
 
 import javax.persistence.*;
 
-/**
- * Created by Home on 2016. 08. 23..
- */
-
 @Entity
 @Table(name = "address")
 public class Address extends BaseEntity {

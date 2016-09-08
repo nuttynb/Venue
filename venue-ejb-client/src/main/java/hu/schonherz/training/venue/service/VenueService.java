@@ -5,7 +5,7 @@ import hu.schonherz.training.venue.vo.VenueVo;
 
 public interface VenueService {
 
-    void createVenue(VenueVo venueVo);
+    void saveVenue(VenueVo venueVo);
 
     VenueVo getVenueByOwnerId(Long ownerId);
 

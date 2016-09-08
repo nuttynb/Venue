@@ -2,9 +2,6 @@ package hu.schonherz.training.venue.vo;
 
 import java.io.Serializable;
 
-/**
- * Created by Roli on 2016. 08. 26..
- */
 public class TypeVo implements Serializable {
 
     private static final long serialVersionUID = 729312L;

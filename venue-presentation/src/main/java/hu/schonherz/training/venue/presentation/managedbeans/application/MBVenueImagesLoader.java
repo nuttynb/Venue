@@ -4,8 +4,6 @@ import hu.schonherz.training.venue.service.VenueImageService;
 import hu.schonherz.training.venue.vo.VenueImageVo;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ApplicationScoped;
@@ -16,12 +14,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-@ManagedBean(name = "venueImages")
+@ManagedBean(name = "venueImagesLoader")
 @ApplicationScoped
-public class MBVenueImages {
+public class MBVenueImagesLoader {
     @EJB
     VenueImageService venueImageService;
-    private static Logger LOG = LoggerFactory.getLogger(MBVenueImages.class);
 
     public StreamedContent getImage() throws IOException {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -31,10 +28,8 @@ public class MBVenueImages {
         } else {
             String imageId = context.getExternalContext().getRequestParameterMap().get("imageId");
 
-            //LOG.info(imageId);
             VenueImageVo image = venueImageService.getVenueImageById(Long.valueOf(imageId));
             return new DefaultStreamedContent(new FileInputStream(Paths.get(image.getRoot()).toFile()), "image/png", image.getName());
         }
     }
-
 }
