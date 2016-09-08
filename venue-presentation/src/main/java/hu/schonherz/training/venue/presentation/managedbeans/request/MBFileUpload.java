@@ -1,6 +1,7 @@
-package hu.schonherz.training.venue.presentation.managedbeans.view;
+package hu.schonherz.training.venue.presentation.managedbeans.request;
 
 
+import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenue;
 import hu.schonherz.training.venue.service.VenueImageService;
 import hu.schonherz.training.venue.vo.VenueImageVo;
 import org.primefaces.event.FileUploadEvent;
@@ -11,7 +12,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +23,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 @ManagedBean(name = "fileUploadBean")
-@ViewScoped
+@RequestScoped
 public class MBFileUpload {
 
     @ManagedProperty(value = "#{venueBean}")
