@@ -77,12 +77,12 @@ public class MBSchedule implements Serializable {
         } else {
             eventModel.updateEvent(event);
         }
-
+/*
         LOG.info(event.toString());
         LOG.info(event.getTitle());
         LOG.info("Start" + event.getStartDate());
         LOG.info("End" + event.getEndDate());
-
+*/
         eventsService.createEvent(EventVoWrapper.toEventVo(event));
 
         event = new DefaultScheduleEvent();
