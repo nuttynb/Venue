@@ -1,5 +1,6 @@
-package hu.schonherz.training.venue.presentation.managedbeans.view;
+package hu.schonherz.training.venue.presentation.managedbeans.request;
 
+import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenue;
 import hu.schonherz.training.venue.presentation.wrappers.EventVoWrapper;
 import hu.schonherz.training.venue.service.EventService;
 import org.primefaces.event.ScheduleEntryMoveEvent;
@@ -16,15 +17,19 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import java.io.Serializable;
 import java.util.Date;
 
 @ManagedBean(name = "scheduleBean")
-@ViewScoped
+@RequestScoped
 public class MBSchedule implements Serializable {
+
+    @ManagedProperty(value = "#{venueBean}")
+    private MBVenue venue;
 
     private static final long serialVersionUID = 1237458387432819321L;
 
@@ -77,13 +82,8 @@ public class MBSchedule implements Serializable {
         } else {
             eventModel.updateEvent(event);
         }
-/*
-        LOG.info(event.toString());
-        LOG.info(event.getTitle());
-        LOG.info("Start" + event.getStartDate());
-        LOG.info("End" + event.getEndDate());
-*/
-        eventService.createEvent(EventVoWrapper.toEventVo(event));
+
+        eventService.createEvent(EventVoWrapper.toEventVo(event,venue.getVenue()));
 
         event = new DefaultScheduleEvent();
 
@@ -112,5 +112,13 @@ public class MBSchedule implements Serializable {
 
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    public MBVenue getVenue() {
+        return venue;
+    }
+
+    public void setVenue(MBVenue venue) {
+        this.venue = venue;
     }
 }
