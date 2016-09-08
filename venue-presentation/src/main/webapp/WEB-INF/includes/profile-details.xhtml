@@ -33,7 +33,12 @@
                                 <div class="box-header">#{msg['venue.image.upload']}</div>
                                 <div class="box-content">
                                     <h:form>
-                                        <p:fileUpload disabled="#{profileBean.disabled}" fileUploadListener="#{fileUploadBean.fileUpload}" mode="advanced"
+                                        <p:fileUpload disabled="#{profileBean.disabled}" fileUploadListener="#{fileUploadBean.fileUpload}"
+                                                      uploadLabel="#{msg['fileupload.wizard.label.upload']}"
+                                                      label="#{msg['fileupload.wizard.label.choose']}"
+                                                      cancelLabel="#{msg['fileupload.wizard.label.cancel']}"
+                                                      invalidSizeMessage="#{msg['fileupload.wizard.label.size']}"
+                                                      mode="advanced"
                                                       dragDropSupport="true"
                                                       update="@widgetVar(imageDialog) :right-side-bar"
                                                       sizeLimit="200000"
