@@ -31,7 +31,7 @@ public class TypeServiceImpl extends AbstractMappingService implements TypeServi
     }
 
     @Override
-    public List<TypeVo> getAllType() {
+    public List<TypeVo> getAllTypes() {
         List<TypeVo> types = toTypeVo(typeRepository.findAll());
         return types;
     }

@@ -9,7 +9,7 @@ public interface VenueImageService {
 
     void saveVenueImage(VenueImageVo venueImageVo);
 
-    List<VenueImageVo> getVenueImageByVenueId(Long venueId);
+    List<VenueImageVo> getVenueImagesByVenueId(Long venueId);
 
     VenueImageVo getVenueImageById(Long id);
 }

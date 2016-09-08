@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * The Vo of Events.
  */
-public class EventsVo implements Serializable {
+public class EventVo implements Serializable {
 
     private static final long serialVersionUID = 383913L;
 
@@ -18,9 +18,9 @@ public class EventsVo implements Serializable {
 
     private String name;
 
-    private Date begin;
+    private Date beginDate;
 
-    private Date end;
+    private Date endDate;
 
     private String description;
 
@@ -102,11 +102,11 @@ public class EventsVo implements Serializable {
      * @return the date of event
      */
     public Date getBegin() {
-        return begin;
+        return beginDate;
     }
 
-    public Date getEnd() {
-        return end;
+    public Date getEndDate() {
+        return endDate;
     }
 
     /**
@@ -115,11 +115,11 @@ public class EventsVo implements Serializable {
      * @param begin the date of event
      */
     public void setBegin(Date begin) {
-        this.begin = begin;
+        this.beginDate = begin;
     }
 
     public void setEndDate(Date end) {
-        this.end = end;
+        this.endDate = end;
     }
 
     /**

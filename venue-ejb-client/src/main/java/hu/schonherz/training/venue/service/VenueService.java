@@ -9,5 +9,5 @@ public interface VenueService {
 
     VenueVo getVenueByOwnerId(Long ownerId);
 
-    public VenueVo getVenueById(Long venueId);
+    VenueVo getVenueById(Long venueId);
 }

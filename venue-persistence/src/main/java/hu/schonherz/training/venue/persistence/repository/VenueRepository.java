@@ -16,9 +16,9 @@ public interface VenueRepository extends JpaRepository<Venue , Long>{
 
     Venue findById(Long id);
 
-    Venue findByAddress_Id(Long address_id);
+    Venue findByAddressId(Long address_id);
 
-    Collection<Venue> findByType_Id(Long type_id);
+    Collection<Venue> findByTypeId(Long type_id);
 
     Venue findByName(Long name);
 }

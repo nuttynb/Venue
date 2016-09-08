@@ -5,6 +5,8 @@ import hu.schonherz.training.venue.vo.TypeVo;
 import java.util.List;
 
 public interface TypeService {
-    List<TypeVo> getAllType();
+
+    List<TypeVo> getAllTypes();
+
     TypeVo getTypeById(Long id);
 }
