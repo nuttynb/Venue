@@ -1,6 +1,6 @@
 package hu.schonherz.training.venue.presentation.wrappers;
 
-import hu.schonherz.training.venue.vo.EventsVo;
+import hu.schonherz.training.venue.vo.EventVo;
 import org.primefaces.model.ScheduleEvent;
 
 /**
@@ -10,14 +10,14 @@ import org.primefaces.model.ScheduleEvent;
 
 public class EventVoWrapper {
 
-    public static EventsVo toEventVo(ScheduleEvent scheduleEvent){
-        EventsVo eventsVo = new EventsVo();
+    public static EventVo toEventVo(ScheduleEvent scheduleEvent){
+        EventVo eventVo = new EventVo();
         //eventsVo.setId(Long.parseLong(scheduleEvent.getId()));
-        eventsVo.setBegin(scheduleEvent.getStartDate());
-        eventsVo.setEndDate(scheduleEvent.getEndDate());
-        eventsVo.setName(scheduleEvent.getTitle());
+        eventVo.setBegin(scheduleEvent.getStartDate());
+        eventVo.setEndDate(scheduleEvent.getEndDate());
+        eventVo.setName(scheduleEvent.getTitle());
 
-        return eventsVo;
+        return eventVo;
     }
 
 }

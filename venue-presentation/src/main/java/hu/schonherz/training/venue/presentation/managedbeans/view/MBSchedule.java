@@ -1,7 +1,7 @@
 package hu.schonherz.training.venue.presentation.managedbeans.view;
 
 import hu.schonherz.training.venue.presentation.wrappers.EventVoWrapper;
-import hu.schonherz.training.venue.service.EventsService;
+import hu.schonherz.training.venue.service.EventService;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -35,7 +35,7 @@ public class MBSchedule implements Serializable {
     private static Logger LOG = LoggerFactory.getLogger(MBSchedule.class);
 
     @EJB
-    private EventsService eventsService;
+    private EventService eventService;
 
     @PostConstruct
     public void init() {
@@ -83,7 +83,7 @@ public class MBSchedule implements Serializable {
         LOG.info("Start" + event.getStartDate());
         LOG.info("End" + event.getEndDate());
 */
-        eventsService.createEvent(EventVoWrapper.toEventVo(event));
+        eventService.createEvent(EventVoWrapper.toEventVo(event));
 
         event = new DefaultScheduleEvent();
 
