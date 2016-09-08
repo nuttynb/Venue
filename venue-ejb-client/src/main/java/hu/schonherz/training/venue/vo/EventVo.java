@@ -101,7 +101,7 @@ public class EventVo implements Serializable {
      *
      * @return the date of event
      */
-    public Date getBegin() {
+    public Date getBeginDate() {
         return beginDate;
     }
 
@@ -114,7 +114,7 @@ public class EventVo implements Serializable {
      *
      * @param begin the date of event
      */
-    public void setBegin(Date begin) {
+    public void setBeginDate(Date begin) {
         this.beginDate = begin;
     }
 
