@@ -106,6 +106,10 @@
                 <h:outputLabel for="to" value="To:"/>
                 <p:calendar id="to" value="#{scheduleBean.event.endDate}" pattern="dd/MM/yyyy HH:mm"/>
 
+                <h:outputLabel for="description" value="Description:"/>
+                <p:inputText id="description" value="#{scheduleBean.event.description}"/>
+
+
                 <h:outputLabel for="allDay" value="All Day:"/>
                 <h:selectBooleanCheckbox id="allDay" value="#{scheduleBean.event.allDay}"/>
 
