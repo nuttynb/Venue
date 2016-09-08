@@ -7,21 +7,15 @@ import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenueImages;
 import hu.schonherz.training.venue.service.AddressService;
 import hu.schonherz.training.venue.service.VenueImageService;
 import hu.schonherz.training.venue.service.VenueService;
-import hu.schonherz.training.venue.vo.VenueImageVo;
 import hu.schonherz.training.venue.vo.VenueVo;
-import org.primefaces.event.FileUploadEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-import java.io.*;
-import java.nio.file.*;
-
 
 @ManagedBean(name = "profileBean")
 @RequestScoped
@@ -36,6 +30,7 @@ public class MBProfile {
     private MBVenueImages venueImages;
     @ManagedProperty(value = "#{param.profileImageId}")
     private Long profileImageId;
+    private boolean disabled = false;
 
     @EJB
     VenueService venueService;
@@ -116,5 +111,13 @@ public class MBProfile {
 
     public void setVenueImages(MBVenueImages venueImages) {
         this.venueImages = venueImages;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 }

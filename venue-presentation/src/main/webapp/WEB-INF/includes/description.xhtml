@@ -4,7 +4,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <div>
-        <h:outputLink styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('descriptionDialog').show();"
+        <h:outputLink disabled="#{profileBean.disabled}" styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('descriptionDialog').show();"
                       style="text-decoration: none;">
             <div class="box">
                 <div class="box-header">
@@ -17,10 +17,15 @@
         </h:outputLink>
         <p:dialog modal="true" closeOnEscape="true" header="#{msg['venue.description']}" widgetVar="descriptionDialog"
                   showEffect="fade" hideEffect="fade" minHeight="100">
-            <p:inputTextarea styleClass="centered-block centered-text" value="#{venueBean.venue.description}"/>
-            <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
-                             oncomplete="PF('descriptionDialog').hide();" icon="ui-icon-check"
-                             actionListener="#{profileBean.onModify}" update="main-content-grid"/>
+            <h:form>
+                <p:inputTextarea styleClass="centered-block centered-text" value="#{venueBean.venue.description}"
+                                 required="true"
+                                 requiredMessage="#{msg['venue.description']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
+                                 oncomplete="if(!args.validationFailed){PF('descriptionDialog').hide();}"
+                                 icon="ui-icon-check"
+                                 actionListener="#{profileBean.onModify}" update=":description"/>
+            </h:form>
         </p:dialog>
     </div>
 </ui:composition>

@@ -7,93 +7,100 @@
 
     <h:form id="form">
         <p:growl id="messages" showDetail="true" autoUpdate="true"/>
-        <p:panelGrid id="main-content-grid" styleClass="ui-panelgrid-blank" cellspacing="20" style="width: 100%;">
-            <p:row>
-                <p:column style="padding: 0;vertical-align: top;">
-                    <p:panelGrid id="left-side-bar" styleClass="left">
-                        <p:row>
-                            <p:column>
-                                <ui:include src="profile-image.xhtml"/>
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column>
-                                <ui:include src="type.xhtml"/>
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column>
-                                <ui:include src="address.xhtml"/>
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column>
-                                <div class="box">
-                                    <div class="box-header">#{msg['venue.image.upload']}</div>
-                                    <div class="box-content">
-                                        <p:fileUpload fileUploadListener="#{fileUploadBean.fileUpload}" mode="advanced"
-                                                      dragDropSupport="true"
-                                                      update="messages :form" sizeLimit="200000"
-                                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" multiple="true"/>
-                                    </div>
-                                </div>
-                            </p:column>
-                        </p:row>
-                    </p:panelGrid>
-                </p:column>
-                <p:column styleClass="right" style="padding:0;">
-                    <p:panelGrid id="right-side-bar" styleClass="no-padding">
-                        <p:row>
-                            <p:column>
-                                <ui:include src="name.xhtml"/>
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column>
-                                <ui:include src="description.xhtml"/>
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column>
-                                <p:accordionPanel multiple="true" activeIndex="0,1">
-                                    <p:tab title="#{msg['venue.images']}">
-                                        <h:outputText value="#{msg['no.images']}"
-                                                      rendered="#{venueImagesBean.images.isEmpty()}"/>
-                                        <p:galleria value="#{venueImagesBean.images}" var="image" panelWidth="500"
-                                                    style="margin: 0 auto;"
-                                                    panelHeight="313" showCaption="true"
-                                                    rendered="#{!venueImagesBean.images.isEmpty()}" effect="puff"
-                                                    effectSpeed="3000" autoPlay="false" transitionInterval="500">
-                                            <p:graphicImage value="#{venueImagesLoader.image}" alt="#{image.name}"
-                                                            title="#{image.name}">
-                                                <f:param name="imageId" value="#{image.id}"/>
-                                            </p:graphicImage>
-                                        </p:galleria>
-                                    </p:tab>
-                                    <p:tab title="#{msg['venue.events']}">
-                                        <p:schedule value="#{scheduleBean.eventModel}"
-                                                    editable="true"
-                                                    widgetVar="myschedule">
-                                            <p:ajax event="dateSelect" listener="#{scheduleBean.onDateSelect}"
-                                                    update="@widgetVar(eventDialog)"
-                                                    oncomplete="PF('eventDialog').show();"/>
-                                            <p:ajax event="eventSelect" listener="#{scheduleBean.onEventSelect}"
-                                                    update="@widgetVar(eventDialog)"
-                                                    oncomplete="PF('eventDialog').show();"/>
-                                            <p:ajax event="eventMove" listener="#{scheduleBean.onEventMove}"
-                                                    update="@widgetVar(eventDialog)"/>
-                                            <p:ajax event="eventResize" listener="#{scheduleBean.onEventResize}"
-                                                    update="@widgetVar(eventDialog)"/>
-                                        </p:schedule>
-                                    </p:tab>
-                                </p:accordionPanel>
-                            </p:column>
-                        </p:row>
-                    </p:panelGrid>
-                </p:column>
-            </p:row>
-        </p:panelGrid>
     </h:form>
+    <p:panelGrid id="main-content-grid" styleClass="ui-panelgrid-blank" cellspacing="20" style="width: 100%;">
+        <p:row>
+            <p:column style="padding: 0;vertical-align: top;">
+                <p:panelGrid id="left-side-bar" styleClass="left">
+                    <p:row>
+                        <p:column>
+                            <ui:include src="profile-image.xhtml"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <ui:include src="type.xhtml"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <ui:include src="address.xhtml"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <div class="box">
+                                <div class="box-header">#{msg['venue.image.upload']}</div>
+                                <div class="box-content">
+                                    <h:form>
+                                        <p:fileUpload disabled="#{profileBean.disabled}" fileUploadListener="#{fileUploadBean.fileUpload}" mode="advanced"
+                                                      dragDropSupport="true"
+                                                      update="@widgetVar(imageDialog) :right-side-bar"
+                                                      sizeLimit="200000"
+                                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" multiple="true">
+                                        </p:fileUpload>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </p:column>
+            <p:column styleClass="right" style="padding:0;">
+                <p:panelGrid id="right-side-bar" styleClass="no-padding">
+                    <p:row>
+                        <p:column>
+                            <ui:include src="name.xhtml"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <ui:include src="description.xhtml"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:accordionPanel multiple="true" activeIndex="0,1">
+                                <p:tab id="galleria-tab" title="#{msg['venue.images']}">
+
+                                    <h:outputText value="#{msg['no.images']}"
+                                                  rendered="#{venueImagesBean.images.isEmpty()}"/>
+                                    <p:galleria value="#{venueImagesBean.images}" var="image"
+                                                panelWidth="500"
+                                                style="margin: 0 auto;"
+                                                panelHeight="313" showCaption="true"
+                                                rendered="#{!venueImagesBean.images.isEmpty()}" effect="puff"
+                                                effectSpeed="3000" autoPlay="false" transitionInterval="500">
+                                        <p:graphicImage id="galleria-image"
+                                                        value="#{venueImagesLoader.image}" alt="#{image.name}"
+                                                        title="#{image.name}">
+                                            <f:param name="imageId" value="#{image.id}"/>
+                                        </p:graphicImage>
+                                    </p:galleria>
+                                </p:tab>
+                                <p:tab title="#{msg['venue.events']}">
+                                    <p:schedule value="#{scheduleBean.eventModel}"
+                                                editable="true"
+                                                widgetVar="myschedule">
+                                        <p:ajax disabled="#{profileBean.disabled}" event="dateSelect" listener="#{scheduleBean.onDateSelect}"
+                                                update="@widgetVar(eventDialog)"
+                                                oncomplete="PF('eventDialog').show();"/>
+                                        <p:ajax disabled="#{profileBean.disabled}" event="eventSelect" listener="#{scheduleBean.onEventSelect}"
+                                                update="@widgetVar(eventDialog)"
+                                                oncomplete="PF('eventDialog').show();"/>
+                                        <p:ajax disabled="#{profileBean.disabled}" event="eventMove" listener="#{scheduleBean.onEventMove}"
+                                                update="@widgetVar(eventDialog)"/>
+                                        <p:ajax disabled="#{profileBean.disabled}" event="eventResize" listener="#{scheduleBean.onEventResize}"
+                                                update="@widgetVar(eventDialog)"/>
+                                    </p:schedule>
+                                </p:tab>
+                            </p:accordionPanel>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </p:column>
+        </p:row>
+    </p:panelGrid>
     <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
         <h:form>
             <h:panelGrid id="eventDetails" columns="2">
@@ -113,7 +120,6 @@
                 <p:commandButton value="Save" oncomplete="PF('eventDialog').hide(); PF('myschedule').update();"
                                  actionListener="#{scheduleBean.addEvent}" process="@this, @form"/>
             </h:panelGrid>
-            <p:messages/>
         </h:form>
     </p:dialog>
 </ui:composition>
