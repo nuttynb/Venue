@@ -1,5 +1,7 @@
 package hu.schonherz.training.venue.presentation.managedbeans.view;
 
+import hu.schonherz.training.venue.presentation.wrappers.EventVoWrapper;
+import hu.schonherz.training.venue.service.EventsService;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -7,8 +9,11 @@ import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -26,6 +31,11 @@ public class MBSchedule implements Serializable {
     private ScheduleModel eventModel;
 
     private ScheduleEvent event = new DefaultScheduleEvent();
+
+    private static Logger LOG = LoggerFactory.getLogger(MBSchedule.class);
+
+    @EJB
+    private EventsService eventsService;
 
     @PostConstruct
     public void init() {
@@ -68,7 +78,16 @@ public class MBSchedule implements Serializable {
             eventModel.updateEvent(event);
         }
 
+        LOG.info(event.toString());
+        LOG.info(event.getTitle());
+        LOG.info("Start" + event.getStartDate());
+        LOG.info("End" + event.getEndDate());
+
+        eventsService.createEvent(EventVoWrapper.toEventVo(event));
+
         event = new DefaultScheduleEvent();
+
+
     }
 
     public void onEventSelect(SelectEvent selectEvent) {

@@ -12,7 +12,7 @@ public class Events extends BaseEntity {
     private Venue venue;
 
     @Basic
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private Long bandId;
 
     @Basic
