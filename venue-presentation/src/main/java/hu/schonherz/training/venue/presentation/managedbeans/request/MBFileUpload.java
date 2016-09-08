@@ -48,7 +48,7 @@ public class MBFileUpload {
     }
 
     public void createFile(String fileName, InputStream input) throws IOException {
-        File destination = new File(System.getProperty("user.dir") + File.separator +
+        File destination = new File(System.getProperty("jboss.server.data.dir") + File.separator +
                 "venue" + File.separator + venue.getVenue().getId().toString());
         destination.mkdirs();
         Path absPath = Paths.get(destination + File.separator + fileName);
