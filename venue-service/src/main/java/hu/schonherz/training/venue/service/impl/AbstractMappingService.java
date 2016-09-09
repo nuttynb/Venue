@@ -4,12 +4,23 @@ import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.MappingException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class AbstractMappingService implements Mapper {
 
     private final Mapper mapper = new DozerBeanMapper();
 
     private Mapper getMapper() {
         return mapper;
+    }
+
+    public <T, U> List<U> map(List<T> var1, Class<U> var2) {
+        List<U> vos = new ArrayList<>();
+        for (T element : var1) {
+            vos.add(getMapper().map(element, var2));
+        }
+        return vos;
     }
 
     @Override
