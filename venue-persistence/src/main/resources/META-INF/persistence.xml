@@ -16,20 +16,19 @@
         <class>hu.schonherz.training.venue.persistence.entity.VenueImage</class>
 
 
-
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>
-         <!--<property name="hibernate.show_sql" value="true" /> -->
-            <property name="hibernate.format_sql" value="true" />
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="connection.autocommit" value="false"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop" />
-            <property name="hibernate.default_schema" value="public" />
+            <property name="hibernate.default_schema" value="public"/>
             <property name="hibernate.hbm2ddl.import_files" value="create.sql"/>
             <property name="hibernate.transaction.jta.platform"
-                      value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" />
-            <property name="hibernate.ejb.entitymanager_factory_name"
-                      value="EntityManagerJNDI" />
+                      value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform"/>
+
             <property name="hibernate.connection.useUnicode" value="true"/>
             <property name="hibernate.connection.characterEncoding"
                       value="UTF-8"/>
