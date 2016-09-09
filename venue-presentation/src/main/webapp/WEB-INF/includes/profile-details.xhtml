@@ -90,18 +90,18 @@
                                                 editable="true"
                                                 widgetVar="myschedule">
                                         <p:ajax disabled="#{profileBean.disabled}" event="dateSelect"
-                                                listener="#{scheduleBean.onDateSelect}"
+                                                listener="#{eventHandler.onDateSelect}"
                                                 update="@widgetVar(eventDialog)"
                                                 oncomplete="PF('eventDialog').show();"/>
                                         <p:ajax disabled="#{profileBean.disabled}" event="eventSelect"
-                                                listener="#{scheduleBean.onEventSelect}"
+                                                listener="#{eventHandler.onEventSelect}"
                                                 update="@widgetVar(eventDialog)"
                                                 oncomplete="PF('eventDialog').show();"/>
                                         <p:ajax disabled="#{profileBean.disabled}" event="eventMove"
-                                                listener="#{scheduleBean.onEventMove}"
+                                                listener="#{eventHandler.onEventMove}"
                                                 update="@widgetVar(eventDialog)"/>
                                         <p:ajax disabled="#{profileBean.disabled}" event="eventResize"
-                                                listener="#{scheduleBean.onEventResize}"
+                                                listener="#{eventHandler.onEventResize}"
                                                 update="@widgetVar(eventDialog)"/>
                                     </p:schedule>
                                 </p:tab>
@@ -119,24 +119,24 @@
         <h:form>
             <h:panelGrid id="eventDetails" columns="2">
                 <h:outputLabel for="title" value="Title:"/>
-                <p:inputText id="title" value="#{scheduleBean.event.title}"/>
+                <p:inputText id="title" value="#{eventHandler.event.title}"/>
 
                 <h:outputLabel for="from" value="From:"/>
-                <p:calendar id="from" value="#{scheduleBean.event.startDate}" pattern="dd/MM/yyyy HH:mm"/>
+                <p:calendar id="from" value="#{eventHandler.event.startDate}" pattern="dd/MM/yyyy HH:mm"/>
 
                 <h:outputLabel for="to" value="To:"/>
-                <p:calendar id="to" value="#{scheduleBean.event.endDate}" pattern="dd/MM/yyyy HH:mm"/>
+                <p:calendar id="to" value="#{eventHandler.event.endDate}" pattern="dd/MM/yyyy HH:mm"/>
 
                 <h:outputLabel for="description" value="Description:"/>
-                <p:inputText id="description" value="#{scheduleBean.event.description}"/>
+                <p:inputText id="description" value="#{eventHandler.event.description}"/>
 
 
                 <h:outputLabel for="allDay" value="All Day:"/>
-                <h:selectBooleanCheckbox id="allDay" value="#{scheduleBean.event.allDay}"/>
+                <h:selectBooleanCheckbox id="allDay" value="#{eventHandler.event.allDay}"/>
 
                 <p:commandButton type="reset" value="Reset"/>
                 <p:commandButton value="Save" oncomplete="PF('eventDialog').hide(); PF('myschedule').update();"
-                                 actionListener="#{scheduleBean.addEvent}" process="@this, @form"/>
+                                 actionListener="#{eventHandler.addEvent}" process="@this, @form"/>
             </h:panelGrid>
         </h:form>
     </p:dialog>
