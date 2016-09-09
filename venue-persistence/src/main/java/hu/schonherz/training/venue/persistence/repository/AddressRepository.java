@@ -7,6 +7,5 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional(propagation = Propagation.REQUIRED)
 public interface AddressRepository extends JpaRepository<Address, Long> {
 }

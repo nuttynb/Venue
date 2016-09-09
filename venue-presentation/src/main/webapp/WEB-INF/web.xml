@@ -81,7 +81,6 @@
         <servlet-name>Faces Servlet</servlet-name>
     </filter-mapping>
 
-
     <ejb-local-ref>
         <ejb-ref-name>ejb.VenueService</ejb-ref-name>
         <local>hu.schonherz.training.venue.service.VenueService</local>
@@ -91,9 +90,14 @@
         <ejb-ref-name>ejb.TypeService</ejb-ref-name>
         <local>hu.schonherz.training.venue.service.TypeService</local>
     </ejb-local-ref>
+
     <ejb-local-ref>
         <ejb-ref-name>ejb.AddressService</ejb-ref-name>
         <local>hu.schonherz.training.venue.service.AddressService</local>
     </ejb-local-ref>
 
+    <ejb-local-ref>
+        <ejb-ref-name>ejb.GeocoderService</ejb-ref-name>
+        <local>hu.schonherz.training.venue.service.GeocoderService</local>
+    </ejb-local-ref>
 </web-app>

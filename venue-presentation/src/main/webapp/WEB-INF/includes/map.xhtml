@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyBLmMvpnM-2vU-IHA0FJNpXIffXSYIFGTw"
+            type="text/javascript"></script>
+    <h:form>
+        <p:gmap id="gmap" center="#{latLngBean.latLng.lat}, #{latLngBean.latLng.lng}" zoom="18" type="HYBRID"
+                model="#{mapInfoBean.advancedModel}" style="width:100%;height:500px">
+
+            <p:ajax event="overlaySelect" listener="#{mapInfoBean.onMarkerSelect}"/>
+
+            <p:gmapInfoWindow id="infoWindow">
+                <p:outputPanel style="text-align: center; display: block; margin: auto">
+
+                    <p:graphicImage styleClass="profile-image centered-block" value="#{venueImagesLoader.image}"
+                                    alt="#{venueBean.venue.profileImage.name}"
+                                    title="#{venueBean.venue.profileImage.name}"
+                                    width="200" rendered="#{venueBean.venue.profileImage ne null}">
+                        <f:param name="imageId" value="#{venueBean.venue.profileImage.id}"/>
+                    </p:graphicImage>
+                    <h:outputText value="#{venueBean.venue.name}"/>
+
+                </p:outputPanel>
+            </p:gmapInfoWindow>
+        </p:gmap>
+    </h:form>
+</ui:composition>

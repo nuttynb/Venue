@@ -12,7 +12,7 @@
             <f:metadata>
                 <f:viewParam name="id" value="#{userBean.id}"/>
                 <f:viewParam name="name" value="#{userBean.name}"/>
-                <f:event type="preRenderView" listener="#{profileBean.onLoad}"/>
+                <f:viewAction action="#{profileBean.onLoad}"/>
             </f:metadata>
             <div class="main">
                 <ui:fragment styleClass="profile-details" rendered="#{venueBean.venue ne null}">
@@ -20,7 +20,7 @@
                 </ui:fragment>
                 <h:form rendered="#{venueBean.venue eq null}">
                     <h:outputText value="#{msg['no.venue']}"/>
-                    <p:button styleClass="create" outcome="createVenue" value="Create New Venue"
+                    <p:button styleClass="create" outcome="createVenue" value="#{msg['create.new.venue']}"
                               icon="ui-icon-plus"></p:button>
                 </h:form>
             </div>

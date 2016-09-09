@@ -3,7 +3,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:outputScript library="js" name="calendar.js" />
+    <h:outputScript library="js" name="calendar.js"/>
     <div class="box venue-name">#{userBean.name}#{msg['user.venue']}</div>
     <h:form id="form">
         <p:growl id="messages" showDetail="true" autoUpdate="true"/>
@@ -33,16 +33,18 @@
                                 <div class="box-header">#{msg['venue.image.upload']}</div>
                                 <div class="box-content">
                                     <h:form>
-                                        <p:fileUpload disabled="#{profileBean.disabled}" fileUploadListener="#{fileUploadBean.fileUpload}"
+
+                                        <p:fileUpload disabled="#{profileBean.disabled}"
+                                                      fileUploadListener="#{fileUploadBean.fileUpload}"
                                                       uploadLabel="#{msg['fileupload.wizard.label.upload']}"
                                                       label="#{msg['fileupload.wizard.label.choose']}"
                                                       cancelLabel="#{msg['fileupload.wizard.label.cancel']}"
                                                       invalidSizeMessage="#{msg['fileupload.wizard.label.size']}"
                                                       mode="advanced"
                                                       dragDropSupport="true"
-                                                      update="@widgetVar(imageDialog) :right-side-bar"
                                                       sizeLimit="200000"
-                                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" multiple="true">
+                                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" multiple="true" oncomplete="onLoadRemote();">
+                                            <p:remoteCommand name="onLoadRemote" actionListener="#{profileBean.onLoad}" update="@widgetVar(imageDialog) :right-side-bar"/>
                                         </p:fileUpload>
                                     </h:form>
                                 </div>
@@ -65,7 +67,7 @@
                     </p:row>
                     <p:row>
                         <p:column>
-                            <p:accordionPanel multiple="true" activeIndex="0,1">
+                            <p:accordionPanel multiple="true" activeIndex="0,1,2">
                                 <p:tab id="galleria-tab" title="#{msg['venue.images']}">
 
                                     <h:outputText value="#{msg['no.images']}"
@@ -87,17 +89,24 @@
                                     <p:schedule value="#{scheduleBean.eventModel}"
                                                 editable="true"
                                                 widgetVar="myschedule">
-                                        <p:ajax disabled="#{profileBean.disabled}" event="dateSelect" listener="#{scheduleBean.onDateSelect}"
+                                        <p:ajax disabled="#{profileBean.disabled}" event="dateSelect"
+                                                listener="#{scheduleBean.onDateSelect}"
                                                 update="@widgetVar(eventDialog)"
                                                 oncomplete="PF('eventDialog').show();"/>
-                                        <p:ajax disabled="#{profileBean.disabled}" event="eventSelect" listener="#{scheduleBean.onEventSelect}"
+                                        <p:ajax disabled="#{profileBean.disabled}" event="eventSelect"
+                                                listener="#{scheduleBean.onEventSelect}"
                                                 update="@widgetVar(eventDialog)"
                                                 oncomplete="PF('eventDialog').show();"/>
-                                        <p:ajax disabled="#{profileBean.disabled}" event="eventMove" listener="#{scheduleBean.onEventMove}"
+                                        <p:ajax disabled="#{profileBean.disabled}" event="eventMove"
+                                                listener="#{scheduleBean.onEventMove}"
                                                 update="@widgetVar(eventDialog)"/>
-                                        <p:ajax disabled="#{profileBean.disabled}" event="eventResize" listener="#{scheduleBean.onEventResize}"
+                                        <p:ajax disabled="#{profileBean.disabled}" event="eventResize"
+                                                listener="#{scheduleBean.onEventResize}"
                                                 update="@widgetVar(eventDialog)"/>
                                     </p:schedule>
+                                </p:tab>
+                                <p:tab title="#{msg['venue.location']}">
+                                    <ui:include src="map.xhtml"/>
                                 </p:tab>
                             </p:accordionPanel>
                         </p:column>

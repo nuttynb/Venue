@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
 
 @Repository
-@Transactional(propagation = Propagation.REQUIRED)
 public interface VenueRepository extends JpaRepository<Venue , Long>{
 
     Venue findVenueByOwnerId(Long ownerId);

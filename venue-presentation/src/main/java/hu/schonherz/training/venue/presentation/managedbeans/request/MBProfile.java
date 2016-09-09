@@ -1,12 +1,15 @@
 package hu.schonherz.training.venue.presentation.managedbeans.request;
 
 import hu.schonherz.training.venue.presentation.managedbeans.session.MBUser;
+import hu.schonherz.training.venue.presentation.managedbeans.view.MBLatLng;
 import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenue;
 import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenueImage;
 import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenueImages;
 import hu.schonherz.training.venue.service.AddressService;
+import hu.schonherz.training.venue.service.GeocoderService;
 import hu.schonherz.training.venue.service.VenueImageService;
 import hu.schonherz.training.venue.service.VenueService;
+import hu.schonherz.training.venue.vo.LatLngVo;
 import hu.schonherz.training.venue.vo.VenueVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +33,8 @@ public class MBProfile {
     private MBVenueImages venueImages;
     @ManagedProperty(value = "#{param.profileImageId}")
     private Long profileImageId;
+    @ManagedProperty(value = "#{latLngBean}")
+    MBLatLng latLng;
     private boolean disabled = false;
 
     @EJB
@@ -38,6 +43,8 @@ public class MBProfile {
     AddressService addressService;
     @EJB
     VenueImageService venueImageService;
+    @EJB
+    GeocoderService geocoder;
 
     private static Logger LOG = LoggerFactory.getLogger(MBProfile.class);
 
@@ -47,8 +54,10 @@ public class MBProfile {
         //    fc.getApplication().getNavigationHandler().handleNavigation(fc, null, "error");
         //}
         VenueVo possibleVenue = venueService.getVenueByOwnerId(user.getId());
+
         if (possibleVenue != null) {
             venueImages.setImages(venueImageService.getVenueImagesByVenueId(possibleVenue.getId()));
+            latLng.setLatLng(geocoder.getLatitudeAndLongitudeByAddress(possibleVenue.getAddress()));
         }
         venue.setVenue(possibleVenue);
         LOG.info("onLoad completed.");
@@ -119,5 +128,13 @@ public class MBProfile {
 
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
+    }
+
+    public MBLatLng getLatLng() {
+        return latLng;
+    }
+
+    public void setLatLng(MBLatLng latLng) {
+        this.latLng = latLng;
     }
 }

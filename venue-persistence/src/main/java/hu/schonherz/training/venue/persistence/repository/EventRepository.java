@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 
 @Repository
-@Transactional(propagation = Propagation.REQUIRED)
 public interface EventRepository extends JpaRepository<Event, Long>{
 
     Event findByVenue_IdAndBeginDateAndEndDate(Long venueId, Date begin, Date end);
