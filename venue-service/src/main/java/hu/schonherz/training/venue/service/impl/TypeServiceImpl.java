@@ -1,7 +1,7 @@
 package hu.schonherz.training.venue.service.impl;
 
-import hu.schonherz.training.venue.persistence.entity.Type;
-import hu.schonherz.training.venue.persistence.repository.TypeRepository;
+import hu.schonherz.training.venue.persistence.entity.VenueType;
+import hu.schonherz.training.venue.persistence.repository.VenueTypeRepository;
 import hu.schonherz.training.venue.service.TypeService;
 import hu.schonherz.training.venue.vo.TypeVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +20,11 @@ import java.util.List;
 public class TypeServiceImpl extends AbstractMappingService implements TypeService {
 
     @Autowired
-    private TypeRepository typeRepository;
+    private VenueTypeRepository typeRepository;
 
-    public List<TypeVo> toTypeVo(List<Type> types) {
+    public List<TypeVo> toTypeVo(List<VenueType> types) {
         List<TypeVo> typeVos = new ArrayList<>();
-        for (Type type : types) {
+        for (VenueType type : types) {
             typeVos.add(map(type, TypeVo.class));
         }
         return typeVos;
