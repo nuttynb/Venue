@@ -24,6 +24,9 @@ public class EventVo implements Serializable {
 
     private String description;
 
+    private TypeVo type;
+
+
     /**
      * Return the id of event.
      *
@@ -138,5 +141,13 @@ public class EventVo implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public TypeVo getType() {
+        return type;
+    }
+
+    public void setType(TypeVo type) {
+        this.type = type;
     }
 }
