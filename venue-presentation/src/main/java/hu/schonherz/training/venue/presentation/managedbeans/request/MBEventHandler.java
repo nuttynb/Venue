@@ -9,6 +9,8 @@ import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.ScheduleEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -36,6 +38,8 @@ public class MBEventHandler implements Serializable{
     private EventService eventService;
 
     private ScheduleEvent event = new DefaultScheduleEvent();
+
+    private static Logger LOG = LoggerFactory.getLogger(MBEventHandler.class);
 
     public void addEvent(ActionEvent actionEvent) {
         if (event.getId() == null) {
