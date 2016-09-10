@@ -18,7 +18,7 @@ public class MBType implements Serializable {
     private static final long serialVersionUID = 7869189274417139148L;
     private List<TypeVo> types = new ArrayList<>();
 
-    @EJB
+    @EJB(beanName = "VenueTypeService")
     TypeService typeService;
 
     @PostConstruct

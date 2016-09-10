@@ -86,10 +86,6 @@
         <local>hu.schonherz.training.venue.service.VenueService</local>
     </ejb-local-ref>
 
-    <ejb-local-ref>
-        <ejb-ref-name>ejb.TypeService</ejb-ref-name>
-        <local>hu.schonherz.training.venue.service.TypeService</local>
-    </ejb-local-ref>
 
     <ejb-local-ref>
         <ejb-ref-name>ejb.AddressService</ejb-ref-name>
