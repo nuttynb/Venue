@@ -7,7 +7,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <ui:composition template="/templates/pageTemplate.xhtml">
-        <ui:define name="title">Create new venue</ui:define>
+        <ui:define name="title">#{msg['create.new.venue']}</ui:define>
         <ui:define name="body">
             <h:outputStylesheet name="css/venue.css"/>
             <div class="main">
@@ -67,10 +67,6 @@
                                     <h:panelGrid columns="2" columnClasses="label, value">
                                         <h:outputText styleClass="output-label" value="#{msg['venue.name']}"/>
                                         <h:outputText value="#{venueBean.venue.name}" styleClass="output-label"/>
-
-                                        <h:outputText styleClass="output-label" value="#{msg['venue.description']}"/>
-                                        <h:outputText value="#{venueBean.venue.description}" styleClass="output-label"
-                                                      style="word-wrap:break-word;"/>
                                         <h:outputText styleClass="output-label" value="#{msg['venue.type']}"/>
                                         <h:outputText value="#{venueBean.venue.type.name}" styleClass="output-label"/>
                                     </h:panelGrid>
@@ -95,6 +91,15 @@
                                                       styleClass="output-label"/>
                                     </h:panelGrid>
                                 </h:panelGrid>
+                                <div>
+                                    <h:panelGrid columns="1" columnClasses="label, value">
+                                        <h:outputText styleClass="output-label"
+                                                      value="#{msg['venue.description']}"/>
+                                        <h:outputText value="#{venueBean.venue.description}"
+                                                      styleClass="output-label"
+                                                      style="word-wrap:break-word;"/>
+                                    </h:panelGrid>
+                                </div>
                                 <p:commandButton value="#{msg['createvenue.wizard.submit']}"
                                                  action="#{createVenueBean.doCreate}" process="@this"/>
                             </p:panel>

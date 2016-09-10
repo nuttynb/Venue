@@ -68,6 +68,10 @@ public class MBProfile {
         venueService.saveVenue(venue.getVenue());
     }
 
+    public void onUpdateAfterUploading(){
+        venueImages.setImages(venueImageService.getVenueImagesByVenueId(venue.getVenue().getId()));
+    }
+
     public void onClickedProfileImage() {
         venue.getVenue().setProfileImage(venueImageService.getVenueImageById(profileImageId));
         venueService.saveVenue(venue.getVenue());

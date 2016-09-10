@@ -33,7 +33,6 @@
                                 <div class="box-header">#{msg['venue.image.upload']}</div>
                                 <div class="box-content">
                                     <h:form>
-
                                         <p:fileUpload disabled="#{profileBean.disabled}"
                                                       fileUploadListener="#{fileUploadBean.fileUpload}"
                                                       uploadLabel="#{msg['fileupload.wizard.label.upload']}"
@@ -42,9 +41,12 @@
                                                       invalidSizeMessage="#{msg['fileupload.wizard.label.size']}"
                                                       mode="advanced"
                                                       dragDropSupport="true"
-                                                      sizeLimit="200000"
-                                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" multiple="true" oncomplete="onLoadRemote();">
-                                            <p:remoteCommand name="onLoadRemote" actionListener="#{profileBean.onLoad}" update="@widgetVar(imageDialog) :right-side-bar"/>
+                                                      sizeLimit="4000000"
+                                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" multiple="true"
+                                                      oncomplete="afterUploadingRemote();">
+                                            <p:remoteCommand name="afterUploadingRemote"
+                                                             actionListener="#{profileBean.onUpdateAfterUploading}"
+                                                             update="@widgetVar(imageDialog) :right-side-bar"/>
                                         </p:fileUpload>
                                     </h:form>
                                 </div>
@@ -53,7 +55,7 @@
                     </p:row>
                 </p:panelGrid>
             </p:column>
-            <p:column styleClass="right" style="padding:0;">
+            <p:column styleClass="right" style="padding:0;width:100%;">
                 <p:panelGrid id="right-side-bar" styleClass="no-padding">
                     <p:row>
                         <p:column>
@@ -73,14 +75,14 @@
                                     <h:outputText value="#{msg['no.images']}"
                                                   rendered="#{venueImagesBean.images.isEmpty()}"/>
                                     <p:galleria value="#{venueImagesBean.images}" var="image"
-                                                panelWidth="500"
+                                                panelWidth="500" panelHeight="300"
                                                 style="margin: 0 auto;"
-                                                panelHeight="313" showCaption="true"
+                                                showCaption="true"
                                                 rendered="#{!venueImagesBean.images.isEmpty()}" effect="puff"
                                                 effectSpeed="3000" autoPlay="false" transitionInterval="500">
                                         <p:graphicImage id="galleria-image"
                                                         value="#{venueImagesLoader.image}" alt="#{image.name}"
-                                                        title="#{image.name}">
+                                                        title="#{image.name}" width="600">
                                             <f:param name="imageId" value="#{image.id}"/>
                                         </p:graphicImage>
                                     </p:galleria>
