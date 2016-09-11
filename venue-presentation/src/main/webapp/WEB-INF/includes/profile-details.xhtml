@@ -33,7 +33,6 @@
                                 <div class="box-header">#{msg['venue.image.upload']}</div>
                                 <div class="box-content">
                                     <h:form>
-
                                         <p:fileUpload disabled="#{profileBean.disabled}"
                                                       fileUploadListener="#{fileUploadBean.fileUpload}"
                                                       uploadLabel="#{msg['fileupload.wizard.label.upload']}"
@@ -42,9 +41,12 @@
                                                       invalidSizeMessage="#{msg['fileupload.wizard.label.size']}"
                                                       mode="advanced"
                                                       dragDropSupport="true"
-                                                      sizeLimit="200000"
-                                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" multiple="true" oncomplete="onLoadRemote();">
-                                            <p:remoteCommand name="onLoadRemote" actionListener="#{profileBean.onLoad}" update="@widgetVar(imageDialog) :right-side-bar"/>
+                                                      sizeLimit="4000000"
+                                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" multiple="true"
+                                                      oncomplete="afterUploadingRemote();">
+                                            <p:remoteCommand name="afterUploadingRemote"
+                                                             actionListener="#{profileBean.onUpdateAfterUploading}"
+                                                             update="@widgetVar(imageDialog) :right-side-bar"/>
                                         </p:fileUpload>
                                     </h:form>
                                 </div>
@@ -53,7 +55,7 @@
                     </p:row>
                 </p:panelGrid>
             </p:column>
-            <p:column styleClass="right" style="padding:0;">
+            <p:column styleClass="right" style="padding:0;width:100%;">
                 <p:panelGrid id="right-side-bar" styleClass="no-padding">
                     <p:row>
                         <p:column>
@@ -73,14 +75,14 @@
                                     <h:outputText value="#{msg['no.images']}"
                                                   rendered="#{venueImagesBean.images.isEmpty()}"/>
                                     <p:galleria value="#{venueImagesBean.images}" var="image"
-                                                panelWidth="500"
+                                                panelWidth="500" panelHeight="300"
                                                 style="margin: 0 auto;"
-                                                panelHeight="313" showCaption="true"
+                                                showCaption="true"
                                                 rendered="#{!venueImagesBean.images.isEmpty()}" effect="puff"
                                                 effectSpeed="3000" autoPlay="false" transitionInterval="500">
                                         <p:graphicImage id="galleria-image"
                                                         value="#{venueImagesLoader.image}" alt="#{image.name}"
-                                                        title="#{image.name}">
+                                                        title="#{image.name}" width="600">
                                             <f:param name="imageId" value="#{image.id}"/>
                                         </p:graphicImage>
                                     </p:galleria>
@@ -90,18 +92,18 @@
                                                 editable="true"
                                                 widgetVar="myschedule">
                                         <p:ajax disabled="#{profileBean.disabled}" event="dateSelect"
-                                                listener="#{scheduleBean.onDateSelect}"
+                                                listener="#{eventHandler.onDateSelect}"
                                                 update="@widgetVar(eventDialog)"
                                                 oncomplete="PF('eventDialog').show();"/>
                                         <p:ajax disabled="#{profileBean.disabled}" event="eventSelect"
-                                                listener="#{scheduleBean.onEventSelect}"
+                                                listener="#{eventHandler.onEventSelect}"
                                                 update="@widgetVar(eventDialog)"
                                                 oncomplete="PF('eventDialog').show();"/>
                                         <p:ajax disabled="#{profileBean.disabled}" event="eventMove"
-                                                listener="#{scheduleBean.onEventMove}"
+                                                listener="#{eventHandler.onEventMove}"
                                                 update="@widgetVar(eventDialog)"/>
                                         <p:ajax disabled="#{profileBean.disabled}" event="eventResize"
-                                                listener="#{scheduleBean.onEventResize}"
+                                                listener="#{eventHandler.onEventResize}"
                                                 update="@widgetVar(eventDialog)"/>
                                     </p:schedule>
                                 </p:tab>
@@ -119,25 +121,47 @@
         <h:form>
             <h:panelGrid id="eventDetails" columns="2">
                 <h:outputLabel for="title" value="Title:"/>
-                <p:inputText id="title" value="#{scheduleBean.event.title}"/>
+                <p:inputText id="title" value="#{eventHandler.event.title}"/>
 
                 <h:outputLabel for="from" value="From:"/>
-                <p:calendar id="from" value="#{scheduleBean.event.startDate}" pattern="dd/MM/yyyy HH:mm"/>
+                <p:calendar id="from" value="#{eventHandler.event.startDate}" pattern="dd/MM/yyyy HH:mm"/>
 
                 <h:outputLabel for="to" value="To:"/>
-                <p:calendar id="to" value="#{scheduleBean.event.endDate}" pattern="dd/MM/yyyy HH:mm"/>
+                <p:calendar id="to" value="#{eventHandler.event.endDate}" pattern="dd/MM/yyyy HH:mm"/>
 
                 <h:outputLabel for="description" value="Description:"/>
-                <p:inputText id="description" value="#{scheduleBean.event.description}"/>
+                <p:inputText id="description" value="#{eventHandler.event.description}"/>
 
 
                 <h:outputLabel for="allDay" value="All Day:"/>
-                <h:selectBooleanCheckbox id="allDay" value="#{scheduleBean.event.allDay}"/>
+                <h:selectBooleanCheckbox id="allDay" value="#{eventHandler.event.allDay}"/>
+
+                <h:outputLabel value="Select Type:"/>
+
+                <p:selectOneMenu styleClass="centered-block centered-text" style="width:125px" required="true"
+                                 value="#{eventHandler.event.styleClass}">
+                    <f:selectItem itemLabel="#{msg['selectonemenu.select']}" itemValue=""/>
+                    <f:selectItems value="#{typeBean.eventTypes}" var="type"
+                                   itemLabel="#{type.name}" itemValue="#{type.id}"/>
+                </p:selectOneMenu>
 
                 <p:commandButton type="reset" value="Reset"/>
                 <p:commandButton value="Save" oncomplete="PF('eventDialog').hide(); PF('myschedule').update();"
-                                 actionListener="#{scheduleBean.addEvent}" process="@this, @form"/>
+                                 actionListener="#{eventHandler.addEvent}" />
+
             </h:panelGrid>
+        </h:form>
+        <h:form>
+            <p:selectOneMenu styleClass="centered-block centered-text" style="width:125px" required="true"
+                             value="#{eventHandler.event.styleClass}" converter="typeVoConverter"
+                             requiredMessage="#{msg['venue.type']} #{msg['createvenue.wizard.requiredmessage']}">
+                <f:selectItem itemLabel="#{msg['selectonemenu.select']}" itemValue=""/>
+                <f:selectItems value="#{typeBean.eventTypes}" var="type"
+                               itemLabel="#{type.name}" itemValue="#{type.name}"/>
+            </p:selectOneMenu>
+            <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
+                             oncomplete="if(!args.validationFailed){PF('typeDialog').hide();}"
+                             icon="ui-icon-check" actionListener="#{eventHandler.addEvent}" process="@this, @form"/>
         </h:form>
     </p:dialog>
 </ui:composition>

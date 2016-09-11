@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:composition template="/templates/pageTemplate.xhtml">
-        <ui:define name="title">#{venueBean.venue.name} profile</ui:define>
+        <ui:define name="title">#{venueBean.venue.name} #{msg['profile']}</ui:define>
         <ui:define name="body">
             <h:outputStylesheet name="css/venue.css"/>
             <f:metadata>

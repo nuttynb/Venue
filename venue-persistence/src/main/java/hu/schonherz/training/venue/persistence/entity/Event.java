@@ -27,6 +27,10 @@ public class Event extends BaseEntity {
     @Column(nullable = false, name = "end_date")
     private Date endDate;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "type_id")
+    private EventType type;
+
     @Basic
     private String description;
 

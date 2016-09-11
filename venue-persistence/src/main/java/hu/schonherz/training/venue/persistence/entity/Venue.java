@@ -19,7 +19,7 @@ public class Venue extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "type_id")
-    private Type type;
+    private VenueType type;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
@@ -60,11 +60,11 @@ public class Venue extends BaseEntity {
         this.description = description;
     }
 
-    public Type getType() {
+    public VenueType getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(VenueType type) {
         this.type = type;
     }
 

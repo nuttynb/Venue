@@ -1,5 +1,6 @@
 package hu.schonherz.training.venue.presentation.managedbeans.request;
 
+import hu.schonherz.training.venue.presentation.managedbeans.view.MBSchedule;
 import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenue;
 import hu.schonherz.training.venue.presentation.wrappers.EventVoWrapper;
 import hu.schonherz.training.venue.service.EventService;
@@ -7,13 +8,10 @@ import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
-import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
-import org.primefaces.model.ScheduleModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -24,63 +22,30 @@ import javax.faces.event.ActionEvent;
 import java.io.Serializable;
 import java.util.Date;
 
-@ManagedBean(name = "scheduleBean")
+@ManagedBean(name = "eventHandler")
 @RequestScoped
-public class MBSchedule implements Serializable {
+public class MBEventHandler implements Serializable{
+
+    private static final long serialVersionUID = 6146151326262641557L;
 
     @ManagedProperty(value = "#{venueBean}")
     private MBVenue venue;
 
-    private static final long serialVersionUID = 1237458387432819321L;
-
-    private ScheduleModel eventModel;
-
-    private ScheduleEvent event = new DefaultScheduleEvent();
-
-    private static Logger LOG = LoggerFactory.getLogger(MBSchedule.class);
+    @ManagedProperty(value = "#{scheduleBean}")
+    private MBSchedule schedule;
 
     @EJB
     private EventService eventService;
 
-    @PostConstruct
-    public void init() {
-        eventModel = new DefaultScheduleModel();
-    }
+    private ScheduleEvent event = new DefaultScheduleEvent();
 
-    /*
-        public Date getInitialDate() {
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(calendar.get(Calendar.YEAR), Calendar.FEBRUARY, calendar.get(Calendar.DATE), 0, 0, 0);
-
-            return calendar.getTime();
-        }
-    */
-    public ScheduleModel getEventModel() {
-        return eventModel;
-    }
-
-    /*
-    private Calendar today() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);
-
-        return calendar;
-    }
-*/
-
-    public ScheduleEvent getEvent() {
-        return event;
-    }
-
-    public void setEvent(ScheduleEvent event) {
-        this.event = event;
-    }
+    private static Logger LOG = LoggerFactory.getLogger(MBEventHandler.class);
 
     public void addEvent(ActionEvent actionEvent) {
         if (event.getId() == null) {
-            eventModel.addEvent(event);
+            schedule.getEventModel().addEvent(event);
         } else {
-            eventModel.updateEvent(event);
+            schedule.getEventModel().updateEvent(event);
         }
 
         eventService.createEvent(EventVoWrapper.toEventVo(event,venue.getVenue()));
@@ -114,11 +79,36 @@ public class MBSchedule implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
+
     public MBVenue getVenue() {
         return venue;
     }
 
     public void setVenue(MBVenue venue) {
         this.venue = venue;
+    }
+
+    public EventService getEventService() {
+        return eventService;
+    }
+
+    public void setEventService(EventService eventService) {
+        this.eventService = eventService;
+    }
+
+    public ScheduleEvent getEvent() {
+        return event;
+    }
+
+    public void setEvent(ScheduleEvent event) {
+        this.event = event;
+    }
+
+    public MBSchedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(MBSchedule schedule) {
+        this.schedule = schedule;
     }
 }

@@ -7,11 +7,12 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.List;
 
 @Repository
 public interface VenueImageRepository extends JpaRepository<VenueImage, Long> {
 
-    Collection<VenueImage> findVenueImageByVenueId(Long venueId);
+    List<VenueImage> findVenueImageByVenueId(Long venueId);
 
     VenueImage findById(Long id);
 

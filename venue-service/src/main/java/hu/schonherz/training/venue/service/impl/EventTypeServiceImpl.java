@@ -1,6 +1,6 @@
 package hu.schonherz.training.venue.service.impl;
 
-import hu.schonherz.training.venue.persistence.repository.VenueTypeRepository;
+import hu.schonherz.training.venue.persistence.repository.EventTypeRepository;
 import hu.schonherz.training.venue.service.TypeService;
 import hu.schonherz.training.venue.vo.TypeVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +10,15 @@ import javax.ejb.*;
 import javax.interceptor.Interceptors;
 import java.util.List;
 
-@Stateless(name = "VenueTypeService", mappedName = "VenueTypeService")
+@Stateless(name = "EventTypeService", mappedName = "EventTypeService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @TransactionManagement(TransactionManagementType.CONTAINER)
 @Local(TypeService.class)
 @Interceptors({SpringBeanAutowiringInterceptor.class})
-public class TypeServiceImpl extends AbstractMappingService implements TypeService {
+public class EventTypeServiceImpl extends AbstractMappingService implements TypeService {
 
     @Autowired
-    private VenueTypeRepository typeRepository;
+    private EventTypeRepository typeRepository;
 
     @Override
     public List<TypeVo> getAllTypes() {
@@ -28,6 +28,5 @@ public class TypeServiceImpl extends AbstractMappingService implements TypeServi
 
     @Override
     public TypeVo getTypeById(Long id) {
-        return map(typeRepository.findById(id), TypeVo.class);
-    }
+        return map(typeRepository.findById(id), TypeVo.class);    }
 }

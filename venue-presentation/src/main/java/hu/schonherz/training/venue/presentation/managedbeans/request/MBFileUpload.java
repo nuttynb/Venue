@@ -48,11 +48,7 @@ public class MBFileUpload {
     }
 
     public void createFile(String fileName, InputStream input) throws IOException {
-        File destination = new File(System.getProperty("jboss.server.data.dir") + File.separator +
-                "venue" + File.separator + venue.getVenue().getId().toString());
-        destination.mkdirs();
-        Path absPath = Paths.get(destination + File.separator + fileName);
-
+        Path absPath = Paths.get(createDir() + File.separator + fileName);
         Files.copy(input, absPath, StandardCopyOption.REPLACE_EXISTING);
         saveImageInDb(absPath.toString(), fileName);
     }
@@ -63,6 +59,16 @@ public class MBFileUpload {
         venueImageVo.setRoot(path);
         venueImageVo.setVenue(venue.getVenue());
         venueImageService.saveVenueImage(venueImageVo);
+    }
+
+    public File createDir() {
+        File destination = new File(System.getProperty("jboss.server.data.dir") + File.separator +
+                "venue" + File.separator + venue.getVenue().getId().toString());
+        if (!destination.exists()) {
+            destination.mkdirs();
+            LOG.info("Directory is created.");
+        }
+        return destination;
     }
 
     public MBVenue getVenue() {
