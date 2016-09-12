@@ -4,6 +4,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:outputScript library="js" name="calendar.js"/>
+
     <div class="box venue-name">#{userBean.name}#{msg['user.venue']}</div>
     <h:form id="form">
         <p:growl id="messages" showDetail="true" autoUpdate="true"/>
@@ -132,36 +133,24 @@
                 <h:outputLabel for="description" value="Description:"/>
                 <p:inputText id="description" value="#{eventHandler.event.description}"/>
 
-
-                <h:outputLabel for="allDay" value="All Day:"/>
-                <h:selectBooleanCheckbox id="allDay" value="#{eventHandler.event.allDay}"/>
-
                 <h:outputLabel value="Select Type:"/>
 
                 <p:selectOneMenu styleClass="centered-block centered-text" style="width:125px" required="true"
-                                 value="#{eventHandler.event.styleClass}">
+                                 converter="typeVoConverter"
+                                 value="#{eventHandler.event.type}">
                     <f:selectItem itemLabel="#{msg['selectonemenu.select']}" itemValue=""/>
                     <f:selectItems value="#{typeBean.eventTypes}" var="type"
-                                   itemLabel="#{type.name}" itemValue="#{type.id}"/>
+                                   itemLabel="#{type.name}" itemValue="#{type}"/>
                 </p:selectOneMenu>
 
                 <p:commandButton type="reset" value="Reset"/>
-                <p:commandButton value="Save" oncomplete="PF('eventDialog').hide(); PF('myschedule').update();"
-                                 actionListener="#{eventHandler.addEvent}" />
+                <p:commandButton value="Save"
+                                 process="@this,@form"
+                                 update="@form"
+                                 actionListener="#{eventHandler.addEvent}"/>
 
             </h:panelGrid>
         </h:form>
-        <h:form>
-            <p:selectOneMenu styleClass="centered-block centered-text" style="width:125px" required="true"
-                             value="#{eventHandler.event.styleClass}" converter="typeVoConverter"
-                             requiredMessage="#{msg['venue.type']} #{msg['createvenue.wizard.requiredmessage']}">
-                <f:selectItem itemLabel="#{msg['selectonemenu.select']}" itemValue=""/>
-                <f:selectItems value="#{typeBean.eventTypes}" var="type"
-                               itemLabel="#{type.name}" itemValue="#{type.name}"/>
-            </p:selectOneMenu>
-            <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
-                             oncomplete="if(!args.validationFailed){PF('typeDialog').hide();}"
-                             icon="ui-icon-check" actionListener="#{eventHandler.addEvent}" process="@this, @form"/>
-        </h:form>
+
     </p:dialog>
 </ui:composition>

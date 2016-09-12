@@ -24,7 +24,7 @@ import java.util.Date;
 
 @ManagedBean(name = "eventHandler")
 @RequestScoped
-public class MBEventHandler implements Serializable{
+public class MBEventHandler implements Serializable {
 
     private static final long serialVersionUID = 6146151326262641557L;
 
@@ -37,7 +37,7 @@ public class MBEventHandler implements Serializable{
     @EJB
     private EventService eventService;
 
-    private ScheduleEvent event = new DefaultScheduleEvent();
+    private EventVoWrapper event = new EventVoWrapper();
 
     private static Logger LOG = LoggerFactory.getLogger(MBEventHandler.class);
 
@@ -48,19 +48,16 @@ public class MBEventHandler implements Serializable{
             schedule.getEventModel().updateEvent(event);
         }
 
-        eventService.createEvent(EventVoWrapper.toEventVo(event,venue.getVenue()));
-
-        event = new DefaultScheduleEvent();
-
+        eventService.createEvent(event.getEventVo());
 
     }
 
     public void onEventSelect(SelectEvent selectEvent) {
-        event = (ScheduleEvent) selectEvent.getObject();
+        event = (EventVoWrapper) selectEvent.getObject();
     }
 
     public void onDateSelect(SelectEvent selectEvent) {
-        event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
+        event = new EventVoWrapper((Date) selectEvent.getObject());
     }
 
     public void onEventMove(ScheduleEntryMoveEvent event) {
@@ -80,32 +77,20 @@ public class MBEventHandler implements Serializable{
     }
 
 
-    public MBVenue getVenue() {
-        return venue;
-    }
-
     public void setVenue(MBVenue venue) {
         this.venue = venue;
-    }
-
-    public EventService getEventService() {
-        return eventService;
     }
 
     public void setEventService(EventService eventService) {
         this.eventService = eventService;
     }
 
-    public ScheduleEvent getEvent() {
+    public EventVoWrapper getEvent() {
         return event;
     }
 
-    public void setEvent(ScheduleEvent event) {
+    public void setEvent(EventVoWrapper event) {
         this.event = event;
-    }
-
-    public MBSchedule getSchedule() {
-        return schedule;
     }
 
     public void setSchedule(MBSchedule schedule) {
