@@ -1,6 +1,6 @@
 package hu.schonherz.training.venue.vo;
 
-public class SimpleMailVo implements Sendable {
+public class OrganizingMailVo implements Sendable {
 
     private String toEmailAddress;
     private String receiverName;

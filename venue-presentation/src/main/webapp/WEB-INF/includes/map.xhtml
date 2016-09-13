@@ -6,7 +6,7 @@
     <script src="http://maps.google.com/maps/api/js?key=AIzaSyBLmMvpnM-2vU-IHA0FJNpXIffXSYIFGTw"
             type="text/javascript"></script>
     <h:form>
-        <p:gmap id="gmap" center="#{latLngBean.latLng.lat}, #{latLngBean.latLng.lng}" zoom="18" type="HYBRID"
+        <p:gmap id="gmap" widgetVar="gmap" center="#{latLngBean.latLng.lat}, #{latLngBean.latLng.lng}" zoom="18" type="HYBRID"
                 model="#{mapInfoBean.advancedModel}" style="width:100%;height:500px">
 
             <p:ajax event="overlaySelect" listener="#{mapInfoBean.onMarkerSelect}"/>

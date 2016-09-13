@@ -96,4 +96,8 @@
         <ejb-ref-name>ejb.GeocoderService</ejb-ref-name>
         <local>hu.schonherz.training.venue.service.GeocoderService</local>
     </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>ejb.MailService</ejb-ref-name>
+        <local>hu.schonherz.training.venue.service.MailService</local>
+    </ejb-local-ref>
 </web-app>
