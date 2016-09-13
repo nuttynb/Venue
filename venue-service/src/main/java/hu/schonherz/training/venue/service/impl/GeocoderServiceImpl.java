@@ -28,7 +28,7 @@ public class GeocoderServiceImpl implements GeocoderService {
     }
 
     public LatLngVo getLatitudeAndLongitudeByAddress(AddressVo addressVo) {
-        String address = addressVo.getStreet() + " " + addressVo.getNumber() + " " + addressVo.getPostcode() + " " + addressVo.getCity() + ", " + addressVo.getCountry();
+        String address = getFormattedAddress(addressVo);
         GeocodingApiRequest request = GeocodingApi.geocode(context, address);
         LatLngVo latLngVo = new LatLngVo(0, 0);
         try {
@@ -40,6 +40,16 @@ public class GeocoderServiceImpl implements GeocoderService {
             LOG.error(e.toString());
         }
         return latLngVo;
+    }
+
+    private String getFormattedAddress(AddressVo addressVo) {
+        StringBuffer address = new StringBuffer();
+        address.append(addressVo.getStreet()).append(" ");
+        address.append(addressVo.getNumber()).append(" ");
+        address.append(addressVo.getPostcode()).append(" ");
+        address.append(addressVo.getCity()).append(", ");
+        address.append(addressVo.getCountry());
+        return address.toString();
     }
 
     private LatLngVo getLatLngVoFromResult(GeocodingResult result) {

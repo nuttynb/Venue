@@ -30,10 +30,4 @@
         <property name="apiKey" value="${APIKEY}"/>
     </bean>
 
-    <jee:jndi-lookup id="mailSession" jndi-name="java:jboss/mail/VenueMail" resource-ref="true"/>
-
-    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="session" ref="mailSession"/>
-    </bean>
-    <bean id="mailutils" class="hu.schonherz.training.venue.service.impl.MailServiceImpl"></bean>
 </beans>
