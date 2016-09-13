@@ -5,6 +5,9 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:outputScript library="js" name="calendar.js"/>
     <div class="box venue-name">#{userBean.name}#{msg['user.venue']}</div>
+    <p:column>
+        <ui:include src="review.xhtml"/>
+    </p:column>
     <h:form id="form">
         <p:growl id="messages" showDetail="true" autoUpdate="true"/>
     </h:form>

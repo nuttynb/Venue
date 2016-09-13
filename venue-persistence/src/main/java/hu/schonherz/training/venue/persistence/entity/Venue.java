@@ -35,6 +35,13 @@ public class Venue extends BaseEntity {
     @JoinColumn(name = "profile_image_id")
     private VenueImage profileImage;
 
+    @Basic
+    @Column(name="admin_message")
+    private String adminMessage;
+
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private Boolean enabled;
+
     public Long getOwnerId() {
         return ownerId;
     }
@@ -97,5 +104,21 @@ public class Venue extends BaseEntity {
 
     public void setProfileImage(VenueImage profileImage) {
         this.profileImage = profileImage;
+    }
+
+    public String getAdminMessage() {
+        return adminMessage;
+    }
+
+    public void setAdminMessage(String adminMessage) {
+        this.adminMessage = adminMessage;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

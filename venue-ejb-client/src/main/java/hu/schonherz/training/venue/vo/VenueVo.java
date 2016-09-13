@@ -25,6 +25,9 @@ public class VenueVo implements Serializable {
 
     private VenueImageVo profileImage;
 
+    private String adminMessage;
+
+    private Boolean enabled = Boolean.TRUE;
 
     public VenueVo() {
         address = new AddressVo();
@@ -144,5 +147,21 @@ public class VenueVo implements Serializable {
 
     public void setProfileImage(VenueImageVo profileImage) {
         this.profileImage = profileImage;
+    }
+
+    public String getAdminMessage() {
+        return adminMessage;
+    }
+
+    public void setAdminMessage(String adminMessage) {
+        this.adminMessage = adminMessage;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }
