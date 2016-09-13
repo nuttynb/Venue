@@ -19,7 +19,6 @@ import javax.interceptor.Interceptors;
 @Local(MailService.class)
 @Interceptors({SpringBeanAutowiringInterceptor.class})
 public class MailServiceImpl implements MailService {
-
     @Autowired
     private MailSender mailSender;
 

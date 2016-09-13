@@ -6,6 +6,7 @@ import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenue;
 import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenueImage;
 import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenueImages;
 import hu.schonherz.training.venue.service.*;
+import hu.schonherz.training.venue.vo.OrganizingMailVo;
 import hu.schonherz.training.venue.vo.VenueVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,24 +42,11 @@ public class MBProfile {
     VenueImageService venueImageService;
     @EJB
     GeocoderService geocoder;
-    @EJB
-    MailService mailService;
 
     private static Logger LOG = LoggerFactory.getLogger(MBProfile.class);
 
     public void onLoad() {
-        //if (user.getId() == null) {
-        //    FacesContext fc = FacesContext.getCurrentInstance();
-        //    fc.getApplication().getNavigationHandler().handleNavigation(fc, null, "error");
-        //}
         VenueVo possibleVenue = venueService.getVenueByOwnerId(user.getId());
-        /*OrganizingMailVo mail = new OrganizingMailVo();
-        mail.setReceiverName("doxy");
-        mail.setAcceptationLink("fogaddel");
-        mail.setBandProfileLink("bandaprofil");
-        mail.setRejectionLink("nefogaddel");
-        mail.setToEmailAddress("nuttyka@gmail.com");
-        mailService.send(mail);*/
         if (possibleVenue != null) {
             venueImages.setImages(venueImageService.getVenueImagesByVenueId(possibleVenue.getId()));
             latLng.setLatLng(geocoder.getLatitudeAndLongitudeByAddress(possibleVenue.getAddress()));
@@ -72,13 +60,14 @@ public class MBProfile {
         venueService.saveVenue(venue.getVenue());
     }
 
-    public void onUpdateAfterUploading(){
+    public void onUpdateAfterUploading() {
         venueImages.setImages(venueImageService.getVenueImagesByVenueId(venue.getVenue().getId()));
     }
 
-    public void onUpdateMap(){
+    public void onUpdateMap() {
         latLng.setLatLng(geocoder.getLatitudeAndLongitudeByAddress(venue.getVenue().getAddress()));
     }
+
     public void onClickedProfileImage() {
         venue.getVenue().setProfileImage(venueImageService.getVenueImageById(profileImageId));
         venueService.saveVenue(venue.getVenue());
