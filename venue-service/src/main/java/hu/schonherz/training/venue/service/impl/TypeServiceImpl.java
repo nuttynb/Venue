@@ -1,6 +1,6 @@
 package hu.schonherz.training.venue.service.impl;
 
-import hu.schonherz.training.venue.persistence.repository.VenueTypeRepository;
+import hu.schonherz.training.venue.persistence.repository.TypeRepository;
 import hu.schonherz.training.venue.service.TypeService;
 import hu.schonherz.training.venue.vo.TypeVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import javax.ejb.*;
 import javax.interceptor.Interceptors;
 import java.util.List;
 
-@Stateless(name = "VenueTypeService", mappedName = "VenueTypeService")
+@Stateless(name = "TypeService", mappedName = "TypeService")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @TransactionManagement(TransactionManagementType.CONTAINER)
 @Local(TypeService.class)
@@ -18,7 +18,7 @@ import java.util.List;
 public class TypeServiceImpl extends AbstractMappingService implements TypeService {
 
     @Autowired
-    private VenueTypeRepository typeRepository;
+    private TypeRepository typeRepository;
 
     @Override
     public List<TypeVo> getAllTypes() {

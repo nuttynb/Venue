@@ -1,5 +1,7 @@
 package hu.schonherz.training.venue.persistence.entity;
 
+import hu.schonherz.training.venue.persistence.entity.enums.EventType;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -27,12 +29,12 @@ public class Event extends BaseEntity {
     @Column(nullable = false, name = "end_date")
     private Date endDate;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "type_id")
-    private EventType type;
-
     @Basic
     private String description;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private EventType type;
 
     public Long getBandId() {
         return bandId;
@@ -80,5 +82,13 @@ public class Event extends BaseEntity {
 
     public void setVenue(Venue venue) {
         this.venue = venue;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
     }
 }

@@ -18,21 +18,13 @@ public class MBType implements Serializable {
     private static final long serialVersionUID = 7869189274417139148L;
     private List<TypeVo> types = new ArrayList<>();
 
-    private List<TypeVo> eventTypes = new ArrayList<>();
-
-    @EJB(beanName = "VenueTypeService")
+    @EJB
     TypeService typeService;
-
-    @EJB(beanName = "EventTypeService")
-    TypeService eventTypeService;
-
 
     @PostConstruct
     public void init() {
         types = typeService.getAllTypes();
-        eventTypes = eventTypeService.getAllTypes();
     }
-
 
     public List<TypeVo> getTypes() {
         return types;
@@ -52,21 +44,5 @@ public class MBType implements Serializable {
 
     public void setTypeService(TypeService typeService) {
         this.typeService = typeService;
-    }
-
-    public TypeService getEventTypeService() {
-        return eventTypeService;
-    }
-
-    public void setEventTypeService(TypeService eventTypeService) {
-        this.eventTypeService = eventTypeService;
-    }
-
-    public List<TypeVo> getEventTypes() {
-        return eventTypes;
-    }
-
-    public void setEventTypes(List<TypeVo> eventTypes) {
-        this.eventTypes = eventTypes;
     }
 }

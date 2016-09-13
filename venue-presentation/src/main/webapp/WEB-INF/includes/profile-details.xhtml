@@ -141,8 +141,8 @@
                 <p:selectOneMenu styleClass="centered-block centered-text" style="width:125px" required="true"
                                  value="#{eventHandler.event.styleClass}">
                     <f:selectItem itemLabel="#{msg['selectonemenu.select']}" itemValue=""/>
-                    <f:selectItems value="#{typeBean.eventTypes}" var="type"
-                                   itemLabel="#{type.name}" itemValue="#{type.id}"/>
+                    <!--<f:selectItems value="#{typeBean.eventTypes}" var="type"
+                                   itemLabel="#{type.name}" itemValue="#{type.id}"/>-->
                 </p:selectOneMenu>
 
                 <p:commandButton type="reset" value="Reset"/>
@@ -156,8 +156,8 @@
                              value="#{eventHandler.event.styleClass}" converter="typeVoConverter"
                              requiredMessage="#{msg['venue.type']} #{msg['createvenue.wizard.requiredmessage']}">
                 <f:selectItem itemLabel="#{msg['selectonemenu.select']}" itemValue=""/>
-                <f:selectItems value="#{typeBean.eventTypes}" var="type"
-                               itemLabel="#{type.name}" itemValue="#{type.name}"/>
+                <!--<f:selectItems value="#{typeBean.eventTypes}" var="type"
+                               itemLabel="#{type.name}" itemValue="#{type.name}"/>-->
             </p:selectOneMenu>
             <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
                              oncomplete="if(!args.validationFailed){PF('typeDialog').hide();}"

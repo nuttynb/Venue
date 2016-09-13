@@ -19,7 +19,7 @@ public class Venue extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "type_id")
-    private VenueType type;
+    private Type type;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
@@ -34,7 +34,6 @@ public class Venue extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "profile_image_id")
     private VenueImage profileImage;
-
 
     public Long getOwnerId() {
         return ownerId;
@@ -60,11 +59,11 @@ public class Venue extends BaseEntity {
         this.description = description;
     }
 
-    public VenueType getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(VenueType type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
