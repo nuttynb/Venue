@@ -1,5 +1,6 @@
 package hu.schonherz.training.venue.service.impl;
 
+import hu.schonherz.training.venue.ejb.remote.stateless.EventRemoteService;
 import hu.schonherz.training.venue.persistence.entity.Event;
 import hu.schonherz.training.venue.persistence.repository.EventRepository;
 import hu.schonherz.training.venue.service.EventService;
@@ -17,8 +18,9 @@ import java.util.List;
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 @TransactionManagement(TransactionManagementType.CONTAINER)
 @Local(EventService.class)
+@Remote(EventRemoteService.class)
 @Interceptors({SpringBeanAutowiringInterceptor.class})
-public class EventServiceImpl extends AbstractMappingService implements EventService {
+public class EventServiceImpl extends AbstractMappingService implements EventService, EventRemoteService {
 
     @Autowired
     private EventRepository eventRepository;
@@ -65,6 +67,13 @@ public class EventServiceImpl extends AbstractMappingService implements EventSer
 
     @Override
     public void deleteEvent(EventVo eventVo) {
+
+    }
+
+    @Override
+    public void registerBandForEvent(Long eventId, Long bandId) {
+
+        eventRepository.getOne(eventId).setBandId(bandId);
 
     }
 }
