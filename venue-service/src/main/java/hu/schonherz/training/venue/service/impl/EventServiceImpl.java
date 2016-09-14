@@ -2,6 +2,7 @@ package hu.schonherz.training.venue.service.impl;
 
 import hu.schonherz.training.venue.ejb.remote.stateless.EventRemoteService;
 import hu.schonherz.training.venue.persistence.entity.Event;
+import hu.schonherz.training.venue.persistence.entity.enums.EventType;
 import hu.schonherz.training.venue.persistence.repository.EventRepository;
 import hu.schonherz.training.venue.service.EventService;
 import hu.schonherz.training.venue.vo.EventVo;
@@ -37,7 +38,7 @@ public class EventServiceImpl extends AbstractMappingService implements EventSer
 
     @Override
     public List<EventVo> getEventsByVenueId(Long venueid) {
-        return null;
+        return map(eventRepository.findByVenue_Id(venueid),EventVo.class);
     }
 
     @Override
@@ -52,12 +53,12 @@ public class EventServiceImpl extends AbstractMappingService implements EventSer
 
     @Override
     public List<EventVo> getEventsByBandId(Long bandId) {
-        return null;
+        return map(eventRepository.findByBandId(bandId),EventVo.class);
     }
 
     @Override
     public List<EventVo> getEventsByDate(Date date) {
-        return null;
+        return map(eventRepository.findByBegin_Date(date),EventVo.class);
     }
 
     @Override
@@ -79,6 +80,6 @@ public class EventServiceImpl extends AbstractMappingService implements EventSer
 
     @Override
     public List<EventVo> getEventsByType(String type) {
-        return null;
+        return map(eventRepository.findByEventType(EventType.valueOf(type)),EventVo.class);
     }
 }
