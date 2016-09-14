@@ -58,7 +58,7 @@ public class EventServiceImpl extends AbstractMappingService implements EventSer
 
     @Override
     public List<EventVo> getEventsByDate(Date date) {
-        return map(eventRepository.findByBegin_Date(date),EventVo.class);
+        return map(eventRepository.findByBeginDate(date),EventVo.class);
     }
 
     @Override
@@ -80,6 +80,6 @@ public class EventServiceImpl extends AbstractMappingService implements EventSer
 
     @Override
     public List<EventVo> getEventsByType(String type) {
-        return map(eventRepository.findByEventType(EventType.valueOf(type)),EventVo.class);
+        return map(eventRepository.findByType(EventType.valueOf(type)),EventVo.class);
     }
 }

@@ -17,7 +17,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     List<Event> findByBandId(Long bandId);
 
-    List<Event> findByBegin_Date(Date beginDate);
+    List<Event> findByBeginDate(Date beginDate);
 
-    List<Event> findByEventType(EventType eventType);
+    List<Event> findByType(EventType type);
 }
