@@ -35,6 +35,7 @@ public class MBFileUpload {
     private static Logger LOG = LoggerFactory.getLogger(MBFileUpload.class);
 
     public void fileUpload(FileUploadEvent event) {
+        //FacesContext.getCurrentInstance().getViewRoot().getViewId();
         FacesMessage message;
         try {
             createFile(event.getFile().getFileName(), event.getFile().getInputstream());

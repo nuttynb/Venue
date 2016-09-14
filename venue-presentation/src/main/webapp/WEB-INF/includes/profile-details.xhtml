@@ -111,6 +111,8 @@
                                         <p:ajax disabled="#{profileBean.disabled}" event="eventResize"
                                                 listener="#{eventHandler.onEventResize}"
                                                 update="@widgetVar(eventDialog)"/>
+                                        <p:ajax disabled="#{!profileBean.disabled}" event="eventSelect"
+                                                oncomplete="alert('mukodik')"/>
                                     </p:schedule>
                                 </p:tab>
                                 <p:tab title="#{msg['venue.location']}">
@@ -145,16 +147,18 @@
                 <h:outputLabel value="Select Type:"/>
 
                 <p:selectOneMenu styleClass="centered-block centered-text" style="width:125px" required="true"
-                                 value="#{eventHandler.event.styleClass}">
+                                 value="#{eventHandler.event.eventVo.type}">
                     <f:selectItem itemLabel="#{msg['selectonemenu.select']}" itemValue=""/>
-                    <!--<f:selectItems value="#{typeBean.eventTypes}" var="type"
-                                   itemLabel="#{type.name}" itemValue="#{type.id}"/>-->
+                    <f:selectItems value="#{eventTypeBean.eventType}" var="type"
+                                   itemLabel="#{type.name()}" itemValue="#{type}"/>
                 </p:selectOneMenu>
 
                 <p:commandButton type="reset" value="Reset"/>
-                <p:commandButton value="Save" oncomplete="PF('eventDialog').hide(); PF('myschedule').update();"
+                <p:commandButton value="Save"
+                                 oncomplete="PF('eventDialog').hide();addEvent(); PF('myschedule').update();"
                                  actionListener="#{eventHandler.addEvent}"/>
-
+                <p:remoteCommand name="addEvent"
+                                 actionListener="#{profileBean.onUpdateAfterNewEvent}"/>
             </h:panelGrid>
         </h:form>
         <h:form>

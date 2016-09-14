@@ -1,11 +1,10 @@
 package hu.schonherz.training.venue.presentation.managedbeans.request;
 
 import hu.schonherz.training.venue.presentation.managedbeans.session.MBUser;
-import hu.schonherz.training.venue.presentation.managedbeans.view.MBLatLng;
-import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenue;
-import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenueImage;
-import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenueImages;
+import hu.schonherz.training.venue.presentation.managedbeans.view.*;
+import hu.schonherz.training.venue.presentation.wrappers.EventVoWrapper;
 import hu.schonherz.training.venue.service.*;
+import hu.schonherz.training.venue.vo.EventVo;
 import hu.schonherz.training.venue.vo.OrganizingMailVo;
 import hu.schonherz.training.venue.vo.VenueVo;
 import org.slf4j.Logger;
@@ -16,6 +15,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @ManagedBean(name = "profileBean")
 @RequestScoped
@@ -32,7 +33,13 @@ public class MBProfile {
     private Long profileImageId;
     @ManagedProperty(value = "#{latLngBean}")
     MBLatLng latLng;
-    private boolean disabled = false;
+    @ManagedProperty(value = "#{scheduleBean}")
+    MBSchedule schedule;
+    @ManagedProperty(value = "#{eventBean}")
+    MBEvent event;
+
+    private boolean disabled = true;
+
 
     @EJB
     VenueService venueService;
@@ -42,6 +49,8 @@ public class MBProfile {
     VenueImageService venueImageService;
     @EJB
     GeocoderService geocoder;
+    @EJB
+    EventService eventService;
 
     private static Logger LOG = LoggerFactory.getLogger(MBProfile.class);
 
@@ -50,6 +59,13 @@ public class MBProfile {
         if (possibleVenue != null) {
             venueImages.setImages(venueImageService.getVenueImagesByVenueId(possibleVenue.getId()));
             latLng.setLatLng(geocoder.getLatitudeAndLongitudeByAddress(possibleVenue.getAddress()));
+            List<EventVo> events = eventService.getEventsByVenueId(possibleVenue.getId());
+            if (events != null)
+                schedule.getEventModel()
+                        .getEvents()
+                        .addAll(events.stream()
+                                .map(eventVo -> new EventVoWrapper(eventVo))
+                                .collect(Collectors.toList()));
         }
         venue.setVenue(possibleVenue);
         LOG.info("onLoad completed.");
@@ -58,6 +74,16 @@ public class MBProfile {
     public void onModify() {
         LOG.info("Modifying...");
         venueService.saveVenue(venue.getVenue());
+    }
+
+    public void onUpdateAfterNewEvent(){
+        List<EventVo> events = eventService.getEventsByVenueId(venue.getVenue().getId());
+        if (events != null)
+            schedule.getEventModel()
+                    .getEvents()
+                    .addAll(events.stream()
+                            .map(eventVo -> new EventVoWrapper(eventVo))
+                            .collect(Collectors.toList()));
     }
 
     public void onUpdateAfterUploading() {
@@ -136,5 +162,21 @@ public class MBProfile {
 
     public void setLatLng(MBLatLng latLng) {
         this.latLng = latLng;
+    }
+
+    public MBSchedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(MBSchedule schedule) {
+        this.schedule = schedule;
+    }
+
+    public MBEvent getEvent() {
+        return event;
+    }
+
+    public void setEvent(MBEvent event) {
+        this.event = event;
     }
 }

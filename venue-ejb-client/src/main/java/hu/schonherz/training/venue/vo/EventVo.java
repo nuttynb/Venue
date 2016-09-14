@@ -1,5 +1,7 @@
 package hu.schonherz.training.venue.vo;
 
+import hu.schonherz.training.venue.vo.enums.EventType;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -24,7 +26,7 @@ public class EventVo implements Serializable {
 
     private String description;
 
-    private String type;
+    private EventType type;
 
     /**
      * Return the id of event.
@@ -142,11 +144,11 @@ public class EventVo implements Serializable {
         this.description = description;
     }
 
-    public String getType() {
+    public EventType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(EventType type) {
         this.type = type;
     }
 }

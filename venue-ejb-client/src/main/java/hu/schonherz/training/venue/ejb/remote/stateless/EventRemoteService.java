@@ -2,6 +2,7 @@ package hu.schonherz.training.venue.ejb.remote.stateless;
 
 
 import hu.schonherz.training.venue.vo.EventVo;
+import hu.schonherz.training.venue.vo.enums.EventType;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,6 @@ public interface EventRemoteService {
 
     List<EventVo> getEventsByVenueId(Long venueId);
 
-    List<EventVo> getEventsByType(String type);
+    List<EventVo> getEventsByType(EventType type);
 
 }

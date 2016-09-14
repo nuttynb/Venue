@@ -28,17 +28,17 @@ public class EventServiceImpl extends AbstractMappingService implements EventSer
 
     @Override
     public List<EventVo> getAllEvents() {
-        return map(eventRepository.findAll(),EventVo.class);
+        return map(eventRepository.findAll(), EventVo.class);
     }
 
     @Override
     public EventVo getEventById(Long id) {
-        return map(eventRepository.findOne(id),EventVo.class);
+        return map(eventRepository.findOne(id), EventVo.class);
     }
 
     @Override
     public List<EventVo> getEventsByVenueId(Long venueid) {
-        return map(eventRepository.findByVenue_Id(venueid),EventVo.class);
+        return map(eventRepository.findByVenue_Id(venueid), EventVo.class);
     }
 
     @Override
@@ -53,17 +53,18 @@ public class EventServiceImpl extends AbstractMappingService implements EventSer
 
     @Override
     public List<EventVo> getEventsByBandId(Long bandId) {
-        return map(eventRepository.findByBandId(bandId),EventVo.class);
+        return map(eventRepository.findByBandId(bandId), EventVo.class);
     }
 
     @Override
     public List<EventVo> getEventsByDate(Date date) {
-        return map(eventRepository.findByBeginDate(date),EventVo.class);
+        return map(eventRepository.findByBeginDate(date), EventVo.class);
     }
 
     @Override
     public void createEvent(EventVo eventVo) {
-        eventRepository.save(map(eventVo, Event.class));
+        Event converted = map(eventVo, Event.class);
+        eventRepository.save(converted);
     }
 
     @Override
@@ -79,7 +80,8 @@ public class EventServiceImpl extends AbstractMappingService implements EventSer
     }
 
     @Override
-    public List<EventVo> getEventsByType(String type) {
-        return map(eventRepository.findByType(EventType.valueOf(type)),EventVo.class);
+    public List<EventVo> getEventsByType(hu.schonherz.training.venue.vo.enums.EventType type) {
+
+        return map(eventRepository.findByType(EventType.valueOf(type.name())), EventVo.class);
     }
 }

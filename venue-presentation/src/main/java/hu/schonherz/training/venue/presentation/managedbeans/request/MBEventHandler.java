@@ -24,7 +24,7 @@ import java.util.Date;
 
 @ManagedBean(name = "eventHandler")
 @RequestScoped
-public class MBEventHandler implements Serializable{
+public class MBEventHandler implements Serializable {
 
     private static final long serialVersionUID = 6146151326262641557L;
 
@@ -37,7 +37,7 @@ public class MBEventHandler implements Serializable{
     @EJB
     private EventService eventService;
 
-    private ScheduleEvent event = new DefaultScheduleEvent();
+    private EventVoWrapper event = new EventVoWrapper();
 
     private static Logger LOG = LoggerFactory.getLogger(MBEventHandler.class);
 
@@ -47,20 +47,17 @@ public class MBEventHandler implements Serializable{
         } else {
             schedule.getEventModel().updateEvent(event);
         }
-
-        eventService.createEvent(EventVoWrapper.toEventVo(event,venue.getVenue()));
-
-        event = new DefaultScheduleEvent();
-
+        event.getEventVo().setVenue(venue.getVenue());
+        eventService.createEvent(event.getEventVo());
 
     }
 
     public void onEventSelect(SelectEvent selectEvent) {
-        event = (ScheduleEvent) selectEvent.getObject();
+        event = (EventVoWrapper) selectEvent.getObject();
     }
 
     public void onDateSelect(SelectEvent selectEvent) {
-        event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
+        event = new EventVoWrapper((Date) selectEvent.getObject());
     }
 
     public void onEventMove(ScheduleEntryMoveEvent event) {
@@ -96,11 +93,11 @@ public class MBEventHandler implements Serializable{
         this.eventService = eventService;
     }
 
-    public ScheduleEvent getEvent() {
+    public EventVoWrapper getEvent() {
         return event;
     }
 
-    public void setEvent(ScheduleEvent event) {
+    public void setEvent(EventVoWrapper event) {
         this.event = event;
     }
 
