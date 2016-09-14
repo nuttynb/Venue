@@ -1,5 +1,6 @@
 package hu.schonherz.training.venue.presentation.managedbeans.request;
 
+import hu.schonherz.training.venue.presentation.managedbeans.session.MBUser;
 import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenue;
 import hu.schonherz.training.venue.service.VenueService;
 import org.slf4j.Logger;
@@ -17,44 +18,34 @@ public class MBReview {
     @ManagedProperty(value = "#{venueBean}")
     private MBVenue venue;
 
+    @ManagedProperty(value = "#{userBean}")
+    private MBUser user;
+
     @EJB
     VenueService venueService;
 
-    private boolean profileBlocked = false;
+    private boolean profileBlocked;
     private boolean isAdmin = false;
+    private boolean isOwner;
 
-    private static Logger LOG = LoggerFactory.getLogger(MBReview.class);
-
+    private static final Logger LOG = LoggerFactory.getLogger(MBReview.class);
 
     public void blockProfile() {
-
-        LOG.info("Profile is blocked");
-        venue.getVenue().setEnabled(false);
+        LOG.info("Profile enabled:" + profileBlocked);
+        venue.getVenue().setEnabled(!profileBlocked);
         venueService.saveVenue(venue.getVenue());
     }
 
     public boolean isProfileBlocked() {
-        return profileBlocked;
-    }
-
-    public void setProfileBlocked(boolean profileBlocked) {
-        this.profileBlocked = profileBlocked;
+        return !venue.getVenue().getEnabled().booleanValue();
     }
 
     public VenueService getVenueService() {
         return venueService;
     }
 
-    public void setVenueService(VenueService venueService) {
-        this.venueService = venueService;
-    }
-
     public boolean isAdmin() {
         return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
     }
 
     public MBVenue getVenue() {
@@ -63,6 +54,18 @@ public class MBReview {
 
     public void setVenue(MBVenue venue) {
         this.venue = venue;
+    }
+
+    public boolean isOwner() {
+        return venue.getVenue().getOwnerId().equals(user.getId());
+    }
+
+    public MBUser getUser() {
+        return user;
+    }
+
+    public void setUser(MBUser user) {
+        this.user = user;
     }
 }
 

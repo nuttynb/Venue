@@ -1,10 +1,10 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
-
     <div>
-        <h:outputLink disabled="#{reviewBean.admin}" styleClass="open-dialog-link" value="javascript:void(0)"
+        <h:outputLink disabled="#{!reviewBean.admin}" styleClass="open-dialog-link" value="javascript:void(0)"
                       onclick="PF('reviewDialog').show();"
                       style="text-decoration: none;">
             <div class="box">
@@ -26,16 +26,16 @@
                 <h:outputLabel for="adminMsg" value="Admin message: "></h:outputLabel>
                 <p:inputTextarea id="adminMsg" styleClass="centered-block centered-text"
                                  value="#{venueBean.venue.adminMessage}"
-                                 required="true"
-                />
+                                 required="true"/>
                 <h:outputLabel for="checkbox" value="Block profile : "></h:outputLabel>
                 <h:selectBooleanCheckbox id="checkbox" value="#{reviewBean.profileBlocked}">
+                    <f:selectItem itemValue="#{reviewBean.profileBlocked}"/>
                 </h:selectBooleanCheckbox>
                 <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
                                  oncomplete="if(!args.validationFailed){PF('reviewDialog').hide();}"
                                  icon="ui-icon-check"
                                  actionListener="#{reviewBean.blockProfile}"
-                                 update=":adminMessage"/>
+                                 update=":adminMessage :enabled checkbox @this"/>
             </h:form>
         </p:dialog>
     </div>
