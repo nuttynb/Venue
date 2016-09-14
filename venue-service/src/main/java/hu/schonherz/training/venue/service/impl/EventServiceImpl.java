@@ -27,12 +27,12 @@ public class EventServiceImpl extends AbstractMappingService implements EventSer
 
     @Override
     public List<EventVo> getAllEvents() {
-        return null;
+        return map(eventRepository.findAll(),EventVo.class);
     }
 
     @Override
     public EventVo getEventById(Long id) {
-        return null;
+        return map(eventRepository.findOne(id),EventVo.class);
     }
 
     @Override
@@ -75,5 +75,10 @@ public class EventServiceImpl extends AbstractMappingService implements EventSer
 
         eventRepository.getOne(eventId).setBandId(bandId);
 
+    }
+
+    @Override
+    public List<EventVo> getEventsByType(String type) {
+        return null;
     }
 }
