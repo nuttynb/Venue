@@ -47,7 +47,7 @@
                         <webModule>
                             <groupId>hu.schonherz.training.venue</groupId>
                             <artifactId>venue-presentation</artifactId>
-                            <contextRoot>venue-presentation</contextRoot>
+                            <contextRoot>venue</contextRoot>
                         </webModule>
                     </modules>
                 </configuration>

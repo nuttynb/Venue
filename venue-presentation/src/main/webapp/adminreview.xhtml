@@ -10,7 +10,7 @@
     <ui:define name="body">
         <p:dataTable var="venue" value="#{venueBean.venues}">
             <p:column headerText="Name">
-                <h:outputLink value="#{request.contextPath}/?id=#{venue.id}">
+                <h:outputLink value="#{request.contextPath}/?id=#{venue.ownerId}">
                     <h:outputText value="#{venue.name}"/>
                 </h:outputLink>
             </p:column>

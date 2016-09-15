@@ -76,7 +76,7 @@ public class MBProfile {
         venueService.saveVenue(venue.getVenue());
     }
 
-    public void onUpdateAfterNewEvent(){
+    public void onUpdateAfterNewEvent() {
         List<EventVo> events = eventService.getEventsByVenueId(venue.getVenue().getId());
         if (events != null)
             schedule.getEventModel()
