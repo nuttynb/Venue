@@ -16,11 +16,10 @@
             <f:viewAction action="#{profileBean.onLoad}"/>
         </f:metadata>
         <div class="main">
-            <c:if test="#{!reviewBean.profileBlocked or reviewBean.owner}">
-                <ui:fragment styleClass="profile-details" rendered="#{venueBean.venue ne null}">
-                    <ui:include src="WEB-INF/includes/profile-details.xhtml"/>
-                </ui:fragment>
-            </c:if>
+            <ui:fragment styleClass="profile-details" rendered="#{venueBean.venue ne null
+                  or !reviewBean.profileBlocked or reviewBean.owner}">
+                <ui:include src="WEB-INF/includes/profile-details.xhtml"/>
+            </ui:fragment>
             <h:form rendered="#{venueBean.venue eq null}">
                 <h:outputText value="#{msg['no.venue']}"/>
                 <p:button styleClass="create" outcome="createVenue" value="#{msg['create.new.venue']}"

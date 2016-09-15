@@ -17,7 +17,6 @@ public class MBEventType implements Serializable {
 
     private static final long serialVersionUID = 23562834658742365L;
 
-
     private List<EventType> eventType = new ArrayList<>();
 
     public MBEventType() {

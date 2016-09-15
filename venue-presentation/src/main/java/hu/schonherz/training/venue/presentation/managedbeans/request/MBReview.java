@@ -37,7 +37,9 @@ public class MBReview {
     }
 
     public boolean isProfileBlocked() {
-        return !venue.getVenue().getEnabled().booleanValue();
+        if (venue.getVenue() != null)
+            return !venue.getVenue().getEnabled().booleanValue();
+        return true;
     }
 
     public VenueService getVenueService() {
@@ -57,7 +59,9 @@ public class MBReview {
     }
 
     public boolean isOwner() {
-        return venue.getVenue().getOwnerId().equals(user.getId());
+        if (venue.getVenue() != null)
+            return venue.getVenue().getOwnerId().equals(user.getId());
+        return false;
     }
 
     public MBUser getUser() {

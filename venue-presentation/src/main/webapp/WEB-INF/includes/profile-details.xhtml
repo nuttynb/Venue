@@ -6,10 +6,12 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:outputScript library="js" name="calendar.js"/>
     <div class="box venue-name">#{userBean.name}#{msg['user.venue']}</div>
-    <c:if test="#{!venueBean.venue.enabled or reviewBean.admin}">
-        <h:column>
-            <ui:include src="review.xhtml"/>
-        </h:column>
+    <c:if test="#{venueBean.venue ne null}">
+        <c:if test="#{!venueBean.venue.enabled or reviewBean.admin}">
+            <h:column>
+                <ui:include src="review.xhtml"/>
+            </h:column>
+        </c:if>
     </c:if>
     <h:form id="form">
         <p:growl id="messages" showDetail="true" autoUpdate="true"/>
