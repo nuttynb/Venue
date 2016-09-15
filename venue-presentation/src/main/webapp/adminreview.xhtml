@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/pageTemplate.xhtml">
+    <ui:define name="title">#{msg['create.new.venue']}</ui:define>
+    <ui:define name="body">
+        <p:dataTable var="venue" value="#{venueBean.venues}">
+            <p:column headerText="Name">
+                <h:outputLink value="#{request.contextPath}/?id=#{venue.ownerId}">
+                    <h:outputText value="#{venue.name}"/>
+                </h:outputLink>
+            </p:column>
+            <p:column headerText="Enabled">
+                <h:outputText value="#{venue.enabled}"/>
+            </p:column>
+        </p:dataTable>
+    </ui:define>
+</ui:composition>
+</html>
