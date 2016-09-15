@@ -38,7 +38,7 @@ public class MBProfile {
     @ManagedProperty(value = "#{eventBean}")
     MBEvent event;
 
-    private boolean disabled = true;
+    private boolean disabled = false;
 
 
     @EJB
