@@ -6,10 +6,10 @@
     <div>
         <h:outputLink disabled="#{profileBean.disabled}" id="profile-image" styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('imageDialog').show();">
             <p:graphicImage styleClass="profile-image centered-block" name="images/no_image.PNG"
-                            width="200" rendered="#{venueBean.venue.profileImage eq null}"/>
+                            height="200px" rendered="#{venueBean.venue.profileImage eq null}"/>
             <p:graphicImage styleClass="profile-image centered-block" value="#{venueImagesLoader.image}"
                             alt="#{venueBean.venue.profileImage.name}" title="#{venueBean.venue.profileImage.name}"
-                            width="200" rendered="#{venueBean.venue.profileImage ne null}">
+                            height="200px" rendered="#{venueBean.venue.profileImage ne null}">
                 <f:param name="imageId" value="#{venueBean.venue.profileImage.id}"/>
             </p:graphicImage>
         </h:outputLink>

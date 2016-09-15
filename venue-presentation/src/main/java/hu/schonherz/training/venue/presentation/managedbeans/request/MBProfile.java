@@ -5,13 +5,11 @@ import hu.schonherz.training.venue.presentation.managedbeans.view.*;
 import hu.schonherz.training.venue.presentation.wrappers.EventVoWrapper;
 import hu.schonherz.training.venue.service.*;
 import hu.schonherz.training.venue.vo.EventVo;
-import hu.schonherz.training.venue.vo.OrganizingMailVo;
 import hu.schonherz.training.venue.vo.VenueVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -38,7 +36,7 @@ public class MBProfile {
     @ManagedProperty(value = "#{eventBean}")
     MBEvent event;
 
-    private boolean disabled = true;
+    private boolean disabled = false;
 
 
     @EJB
