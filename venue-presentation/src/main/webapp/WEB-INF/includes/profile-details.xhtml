@@ -38,6 +38,33 @@
                             <ui:include src="address.xhtml"/>
         </div>
 
+        <div class="col-xs-12 col-md-8"></div>
+
+        <div class="col-xs-12 col-md-8">
+
+            <div class="box-header">#{msg['venue.image.upload']}</div>
+            <div class="box-content">
+                <h:form>
+                    <p:fileUpload disabled="#{profileBean.disabled}"
+                                  fileUploadListener="#{fileUploadBean.fileUpload}"
+                                  uploadLabel="#{msg['fileupload.wizard.label.upload']}"
+                                  label="#{msg['fileupload.wizard.label.choose']}"
+                                  cancelLabel="#{msg['fileupload.wizard.label.cancel']}"
+                                  invalidSizeMessage="#{msg['fileupload.wizard.label.size']}"
+                                  mode="advanced"
+                                  dragDropSupport="true"
+                                  sizeLimit="4000000"
+                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" multiple="true"
+                                  oncomplete="afterUploadingRemote();">
+                        <p:remoteCommand name="afterUploadingRemote"
+                                         actionListener="#{profileBean.onUpdateAfterUploading}"
+                                         update="@widgetVar(imageDialog)"/><!-- TODO Galleria-->
+                    </p:fileUpload>
+                </h:form>
+            </div>
+        </div>
+
+
         <div class="col-xs-12 col-md-8">
             <p:accordionPanel multiple="true" activeIndex="0,1,2">
                 <p:tab id="galleria-tab" title="#{msg['venue.images']}">
@@ -84,29 +111,7 @@
                 </p:tab>
             </p:accordionPanel>
         </div>
-        <div class="col-xs-12 col-md-4">
 
-        <div class="box-header">#{msg['venue.image.upload']}</div>
-                                <div class="box-content">
-                                    <h:form>
-                                        <p:fileUpload disabled="#{profileBean.disabled}"
-                                                      fileUploadListener="#{fileUploadBean.fileUpload}"
-                                                      uploadLabel="#{msg['fileupload.wizard.label.upload']}"
-                                                      label="#{msg['fileupload.wizard.label.choose']}"
-                                                      cancelLabel="#{msg['fileupload.wizard.label.cancel']}"
-                                                      invalidSizeMessage="#{msg['fileupload.wizard.label.size']}"
-                                                      mode="advanced"
-                                                      dragDropSupport="true"
-                                                      sizeLimit="4000000"
-                                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" multiple="true"
-                                                      oncomplete="afterUploadingRemote();">
-                                            <p:remoteCommand name="afterUploadingRemote"
-                                                             actionListener="#{profileBean.onUpdateAfterUploading}"
-                                                             update="@widgetVar(imageDialog)"/><!-- TODO Galleria-->
-                                        </p:fileUpload>
-                                    </h:form>
-                                </div>
-                            </div>
 </div>
 
     <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">

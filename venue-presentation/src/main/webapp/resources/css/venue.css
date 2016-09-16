@@ -88,7 +88,7 @@
 }
 
 .venue-name {
-    font-size: 50pt;
+    font-size: 6vw;
     font-weight: bold;
     text-align: center;
     display: block;
@@ -108,7 +108,7 @@
 }
 
 .user-name {
-    font-size: 50pt;
+    font-size: 7vw;
     font-weight: bold;
     text-align: center;
     display: block;
