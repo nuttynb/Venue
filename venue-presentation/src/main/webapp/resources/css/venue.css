@@ -115,4 +115,12 @@
     width: 100%;
 }
 
+.admin {
+    text-align: center;
+    display: block;
+    width: 100%;
+    border: none;
+    background: none;
+}
+
 

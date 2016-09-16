@@ -25,7 +25,7 @@ public class MBReview {
     VenueService venueService;
 
     private boolean profileBlocked;
-    private boolean isAdmin = false;
+    private boolean isAdmin = true;
     private boolean isOwner;
 
     private static final Logger LOG = LoggerFactory.getLogger(MBReview.class);
@@ -70,6 +70,18 @@ public class MBReview {
 
     public void setUser(MBUser user) {
         this.user = user;
+    }
+
+    public void setProfileBlocked(boolean profileBlocked) {
+        this.profileBlocked = profileBlocked;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public void setOwner(boolean owner) {
+        isOwner = owner;
     }
 }
 

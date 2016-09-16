@@ -6,17 +6,18 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:outputScript library="js" name="calendar.js"/>
 
-    <c:if test="#{venueBean.venue ne null}">
-        <c:if test="#{!venueBean.venue.enabled or reviewBean.admin}">
-            <h:column>
-                <ui:include src="review.xhtml"/>
-            </h:column>
-        </c:if>
-    </c:if>
     <h:form id="form">
         <p:growl id="messages" showDetail="true" autoUpdate="true"/>
     </h:form>
     <div class="container-fluid">
+
+        <div class="col-xs-12 col-md-12">
+            <p:panel styleClass="admin"
+                     rendered="#{venueBean.venue ne null and (!venueBean.venue.enabled or reviewBean.admin)}">
+                <ui:include src="review.xhtml"/>
+            </p:panel>
+        </div>
+
         <div class="box user-name col-xs-12 col-md-12">#{userBean.name}#{msg['user.venue']}</div>
         <div class="col-xs-12 col-md-4">
 
@@ -29,13 +30,13 @@
         </div>
 
         <div class="col-xs-12 col-md-4">
-                <ui:include src="type.xhtml"/>
+            <ui:include src="type.xhtml"/>
         </div>
         <div class="col-xs-12 col-md-8">
             <ui:include src="description.xhtml"/>
         </div>
         <div class="col-xs-12 col-md-4">
-                            <ui:include src="address.xhtml"/>
+            <ui:include src="address.xhtml"/>
         </div>
 
         <div class="col-xs-12 col-md-8"></div>
@@ -112,7 +113,7 @@
             </p:accordionPanel>
         </div>
 
-</div>
+    </div>
 
     <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
         <h:form>
