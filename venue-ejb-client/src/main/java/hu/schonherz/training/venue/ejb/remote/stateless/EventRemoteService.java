@@ -19,4 +19,7 @@ public interface EventRemoteService {
 
     List<EventVo> getEventsByType(EventType type);
 
+    List<EventVo> getFreeSlotEvents();
+
+
 }
