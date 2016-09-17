@@ -3,19 +3,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="/templates/pageTemplate.xhtml">
-    <ui:define name="title">#{msg['create.new.venue']}</ui:define>
+    <ui:define name="title">Admin panel</ui:define>
     <ui:define name="body">
-        <p:dataTable var="venue" value="#{venueBean.venues}">
-            <p:column headerText="Name">
+        <p:dataTable var="venue" value="#{venueBean.venues}"
+                     rows="20"
+                     paginator="true"
+                     paginatorPosition="bottom"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="15, 20, 50">
+            <f:facet name="header">
+                <h:outputText value="#{msg['venues.list']}"/>
+            </f:facet>
+
+            <p:column headerText="#{msg['venue.name']}" sortBy="#{venue.name}">
                 <h:outputLink value="#{request.contextPath}/?id=#{venue.ownerId}">
                     <h:outputText value="#{venue.name}"/>
                 </h:outputLink>
             </p:column>
-            <p:column headerText="Enabled">
+            <p:column headerText="#{msg['venue.type']}" sortBy="#{venue.enabled}">
+                <h:outputText value="#{venue.type.name}"/>
+            </p:column>
+            <p:column headerText="#{msg['enabled']}" sortBy="#{venue.enabled}">
                 <h:outputText value="#{venue.enabled}"/>
+            </p:column>
+            <p:column headerText="Id" sortBy="#{venue.id}">
+                <h:outputText value="#{venue.id}"/>
             </p:column>
         </p:dataTable>
     </ui:define>

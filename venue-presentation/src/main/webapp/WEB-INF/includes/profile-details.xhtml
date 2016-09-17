@@ -131,9 +131,6 @@
                 <p:inputText id="description" value="#{eventHandler.event.description}"/>
 
 
-                <h:outputLabel for="allDay" value="All Day:"/>
-                <h:selectBooleanCheckbox id="allDay" value="#{eventHandler.event.allDay}"/>
-
                 <h:outputLabel value="Select Type:"/>
 
                 <p:selectOneMenu styleClass="centered-block centered-text" style="width:125px" required="true"
@@ -150,18 +147,6 @@
                 <p:remoteCommand name="addEvent"
                                  actionListener="#{profileBean.onUpdateAfterNewEvent}"/>
             </h:panelGrid>
-        </h:form>
-        <h:form>
-            <p:selectOneMenu styleClass="centered-block centered-text" style="width:125px" required="true"
-                             value="#{eventHandler.event.styleClass}" converter="typeVoConverter"
-                             requiredMessage="#{msg['venue.type']} #{msg['createvenue.wizard.requiredmessage']}">
-                <f:selectItem itemLabel="#{msg['selectonemenu.select']}" itemValue=""/>
-                <!--<f:selectItems value="#{typeBean.eventTypes}" var="type"
-                               itemLabel="#{type.name}" itemValue="#{type.name}"/>-->
-            </p:selectOneMenu>
-            <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
-                             oncomplete="if(!args.validationFailed){PF('typeDialog').hide();}"
-                             icon="ui-icon-check" actionListener="#{eventHandler.addEvent}" process="@this, @form"/>
         </h:form>
     </p:dialog>
 </ui:composition>
