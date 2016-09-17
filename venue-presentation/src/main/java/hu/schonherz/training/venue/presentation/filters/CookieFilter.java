@@ -1,6 +1,7 @@
 package hu.schonherz.training.venue.presentation.filters;
 
-import hu.schonherz.training.venue.vo.remote.RemoteUserVo;
+import hu.schonherz.training.landing.service.remote.UserRemoteService;
+import hu.schonherz.training.landing.vo.remote.RemoteUserVo;
 
 import javax.ejb.EJB;
 import javax.servlet.*;
@@ -29,7 +30,7 @@ public class CookieFilter implements Filter {
 
         RemoteUserVo remoteUserVo = userRemoteService.getLoggedInUser(getHashFromCookies(cookies));
 
-        req.setAttribute("USER",remoteUserVo);
+        req.setAttribute("USER", remoteUserVo);
         chain.doFilter(req, resp);
     }
 
@@ -45,7 +46,7 @@ public class CookieFilter implements Filter {
 
     private String getHashFromCookies(List<Cookie> cookies) {
 
-        if(!cookies.isEmpty()) {
+        if (!cookies.isEmpty()) {
             for (Cookie cookie : cookies) {
 
                 if (cookie.getName().equals("loggedInUser")) {

@@ -101,9 +101,7 @@
         <local>hu.schonherz.training.venue.service.MailService</local>
     </ejb-local-ref>
     <ejb-ref>
-        <ejb-ref-name>java:global/landing-ear/landing-service/UserService!hu.schonherz.training.landing.service.remote.UserRemoteService
-            java:app/landing-service/UserService!hu.schonherz.training.landing.service.remote.UserRemoteService
-        </ejb-ref-name>
+        <ejb-ref-name>java:jboss/exported/landing-ear/landing-service/UserService!hu.schonherz.training.landing.service.remote.UserRemoteService</ejb-ref-name>
         <remote>hu.schonherz.training.landing.service.remote.UserRemoteService</remote>
     </ejb-ref>
 </web-app>
