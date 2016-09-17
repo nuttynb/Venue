@@ -76,12 +76,14 @@ public class MBProfile {
 
     public void onUpdateAfterNewEvent() {
         List<EventVo> events = eventService.getEventsByVenueId(venue.getVenue().getId());
-        if (events != null)
+        if (events != null) {
+            schedule.getEventModel().clear(); //TODO
             schedule.getEventModel()
                     .getEvents()
                     .addAll(events.stream()
                             .map(eventVo -> new EventVoWrapper(eventVo))
                             .collect(Collectors.toList()));
+        }
     }
 
     public void onUpdateAfterUploading() {
