@@ -84,4 +84,9 @@ public class EventServiceImpl extends AbstractMappingService implements EventSer
 
         return map(eventRepository.findByType(EventType.valueOf(type.name())), EventVo.class);
     }
+
+    @Override
+    public List<EventVo> getFreeSlotEvents() {
+        return map(eventRepository.findByType(EventType.FREE_SLOT), EventVo.class);
+    }
 }
