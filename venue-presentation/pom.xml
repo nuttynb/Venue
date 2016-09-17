@@ -67,6 +67,7 @@
         <dependency>
             <groupId>hu.schonherz.training.venue</groupId>
             <artifactId>venue-ejb-client</artifactId>
+            <scope>provided</scope>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
