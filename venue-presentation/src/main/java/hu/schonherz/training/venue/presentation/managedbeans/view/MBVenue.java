@@ -11,7 +11,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @ManagedBean(name = "venueBean")
 @ViewScoped
 public class MBVenue implements Serializable {

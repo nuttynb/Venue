@@ -35,9 +35,8 @@ public class MBProfile {
     MBSchedule schedule;
     @ManagedProperty(value = "#{eventBean}")
     MBEvent event;
-
-    private boolean disabled = false;
-
+    @ManagedProperty(value = "#{publicProfileBean}")
+    MBPublicProfile publicProfile;
 
     @EJB
     VenueService venueService;
@@ -53,8 +52,14 @@ public class MBProfile {
     private static Logger LOG = LoggerFactory.getLogger(MBProfile.class);
 
     public void onLoad() {
-
-        VenueVo possibleVenue = venueService.getVenueByOwnerId(user.getId());
+        VenueVo possibleVenue = null;
+        if (publicProfile.getVenueId() != null) {
+            possibleVenue = venueService.getVenueById(publicProfile.getVenueId());
+            publicProfile.setDisabled(Boolean.TRUE);
+        } else {
+            possibleVenue = venueService.getVenueByOwnerId(user.getId());
+            publicProfile.setDisabled(Boolean.FALSE);
+        }
         if (possibleVenue != null) {
             venueImages.setImages(venueImageService.getVenueImagesByVenueId(possibleVenue.getId()));
             latLng.setLatLng(geocoder.getLatitudeAndLongitudeByAddress(possibleVenue.getAddress()));
@@ -150,14 +155,6 @@ public class MBProfile {
         this.venueImages = venueImages;
     }
 
-    public boolean isDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-    }
-
     public MBLatLng getLatLng() {
         return latLng;
     }
@@ -180,5 +177,13 @@ public class MBProfile {
 
     public void setEvent(MBEvent event) {
         this.event = event;
+    }
+
+    public MBPublicProfile getPublicProfile() {
+        return publicProfile;
+    }
+
+    public void setPublicProfile(MBPublicProfile publicProfile) {
+        this.publicProfile = publicProfile;
     }
 }

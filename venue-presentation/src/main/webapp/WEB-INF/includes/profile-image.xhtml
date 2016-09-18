@@ -4,7 +4,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <div>
-        <h:outputLink disabled="#{profileBean.disabled}" id="profile-image" styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('imageDialog').show();">
+        <h:outputLink disabled="#{publicProfileBean.disabled}" id="profile-image" styleClass="open-dialog-link" value="javascript:void(0)" onclick="PF('imageDialog').show();">
             <p:graphicImage styleClass="profile-image centered-block" name="images/no_image.PNG"
                             height="200px" rendered="#{venueBean.venue.profileImage eq null}"/>
             <p:graphicImage styleClass="profile-image centered-block" value="#{venueImagesLoader.image}"

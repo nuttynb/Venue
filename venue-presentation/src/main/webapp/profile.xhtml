@@ -6,24 +6,28 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-<ui:composition template="/templates/pageTemplate.xhtml">
-    <ui:define name="title">#{venueBean.venue.name} #{msg['profile']}</ui:define>
-    <ui:define name="body">
-        <h:outputStylesheet name="css/venue.css"/>
-        <f:metadata>
-            <f:viewAction action="#{profileBean.onLoad}"/>
-        </f:metadata>
-        <div class="main">
-            <ui:fragment styleClass="profile-details" rendered="#{venueBean.venue ne null
+    <ui:composition template="/templates/pageTemplate.xhtml">
+        <ui:define name="title">#{venueBean.venue.name} #{msg['profile']}</ui:define>
+        <ui:define name="body">
+            <h:outputStylesheet name="css/venue.css"/>
+            <f:metadata>
+                <f:viewParam name="venueid" value="#{publicProfileBean.venueId}"/>
+                <f:viewAction action="#{profileBean.onLoad}"/>
+            </f:metadata>
+            <div class="main">
+                <ui:fragment styleClass="profile-details" rendered="#{venueBean.venue ne null
                   or !reviewBean.profileBlocked or reviewBean.owner}">
-                <ui:include src="WEB-INF/includes/profile-details.xhtml"/>
-            </ui:fragment>
-            <h:form rendered="#{venueBean.venue eq null}">
-                <h:outputText value="#{msg['no.venue']}"/>
-                <p:button styleClass="create" outcome="createVenue" value="#{msg['create.new.venue']}"
-                          icon="ui-icon-plus"></p:button>
-            </h:form>
-        </div>
-    </ui:define>
-</ui:composition>
+                    <ui:include src="WEB-INF/includes/profile-details.xhtml"/>
+                </ui:fragment>
+                <ui:fragment rendered="#{(venueBean.venue eq null) and (publicProfileBean.venueId eq null)}">
+                    <h:outputText value="#{msg['no.venue']}"/>
+                    <p:button styleClass="create" outcome="createVenue" value="#{msg['create.new.venue']}"
+                              icon="ui-icon-plus"></p:button>
+                </ui:fragment>
+                <ui:fragment rendered="#{(venueBean.venue eq null) and (publicProfileBean.venueId ne null)}">
+                    <h:outputText value="#{msg['venue.not.exists']}"/>
+                </ui:fragment>
+            </div>
+        </ui:define>
+    </ui:composition>
 </html>

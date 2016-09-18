@@ -46,7 +46,7 @@
             <div class="box-header">#{msg['venue.image.upload']}</div>
             <div class="box-content">
                 <h:form>
-                    <p:fileUpload disabled="#{profileBean.disabled}"
+                    <p:fileUpload disabled="#{publicProfileBean.disabled}"
                                   fileUploadListener="#{fileUploadBean.fileUpload}"
                                   uploadLabel="#{msg['fileupload.wizard.label.upload']}"
                                   label="#{msg['fileupload.wizard.label.choose']}"
@@ -89,21 +89,21 @@
                     <p:schedule value="#{scheduleBean.eventModel}"
                                 editable="true"
                                 widgetVar="myschedule">
-                        <p:ajax disabled="#{profileBean.disabled}" event="dateSelect"
+                        <p:ajax disabled="#{publicProfileBean.disabled}" event="dateSelect"
                                 listener="#{eventHandler.onDateSelect}"
                                 update="@widgetVar(eventDialog)"
                                 oncomplete="PF('eventDialog').show();"/>
-                        <p:ajax disabled="#{profileBean.disabled}" event="eventSelect"
+                        <p:ajax disabled="#{publicProfileBean.disabled}" event="eventSelect"
                                 listener="#{eventHandler.onEventSelect}"
                                 update="@widgetVar(eventDialog)"
                                 oncomplete="PF('eventDialog').show();"/>
-                        <p:ajax disabled="#{profileBean.disabled}" event="eventMove"
+                        <p:ajax disabled="#{publicProfileBean.disabled}" event="eventMove"
                                 listener="#{eventHandler.onEventMove}"
                                 update="@widgetVar(eventDialog)"/>
-                        <p:ajax disabled="#{profileBean.disabled}" event="eventResize"
+                        <p:ajax disabled="#{publicProfileBean.disabled}" event="eventResize"
                                 listener="#{eventHandler.onEventResize}"
                                 update="@widgetVar(eventDialog)"/>
-                        <p:ajax disabled="#{!profileBean.disabled}" event="eventSelect"
+                        <p:ajax disabled="#{!publicProfileBean.disabled}" event="eventSelect"
                                 oncomplete="alert('mukodik')"/>
                     </p:schedule>
                 </p:tab>
