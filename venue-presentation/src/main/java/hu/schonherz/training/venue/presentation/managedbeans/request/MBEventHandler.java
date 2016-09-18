@@ -37,6 +37,8 @@ public class MBEventHandler implements Serializable {
     @EJB
     private EventService eventService;
 
+    private boolean promotion;
+
     private EventVoWrapper event = new EventVoWrapper();
 
     private static Logger LOG = LoggerFactory.getLogger(MBEventHandler.class);
@@ -107,5 +109,13 @@ public class MBEventHandler implements Serializable {
 
     public void setSchedule(MBSchedule schedule) {
         this.schedule = schedule;
+    }
+
+    public boolean isPromotion() {
+        return promotion;
+    }
+
+    public void setPromotion(boolean promotion) {
+        this.promotion = promotion;
     }
 }
