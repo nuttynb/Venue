@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <div class="box-content">
+        <h:form>
+            <p:fileUpload disabled="#{publicProfileBean.disabled}" fileUploadListener="#{fileUploadBean.fileUpload}"
+                          uploadLabel="#{msg['fileupload.wizard.label.upload']}"
+                          label="#{msg['fileupload.wizard.label.choose']}"
+                          cancelLabel="#{msg['fileupload.wizard.label.cancel']}"
+                          invalidSizeMessage="#{msg['fileupload.wizard.label.size']}" mode="advanced"
+                          dragDropSupport="true" sizeLimit="4000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                          multiple="true" oncomplete="afterUploadingRemote();">
+                <p:remoteCommand name="afterUploadingRemote" actionListener="#{profileBean.onUpdateAfterUploading}"
+                                 update="@widgetVar(imageDialog) @widgetVar(galleria-panel)"/>
+            </p:fileUpload>
+        </h:form>
+    </div>
+</ui:composition>

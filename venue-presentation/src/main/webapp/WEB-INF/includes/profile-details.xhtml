@@ -14,170 +14,46 @@
         <div class="col-xs-12 col-md-12">
             <p:panel styleClass="admin"
                      rendered="#{venueBean.venue ne null and (!venueBean.venue.enabled or reviewBean.admin)}">
-                <ui:include src="review.xhtml"/>
+                <ui:include src="profile_details_elements/review.xhtml"/>
             </p:panel>
         </div>
 
         <div class="box user-name col-xs-12 col-md-12">#{USER.name}#{msg['user.venue']}</div>
+
         <div class="col-xs-12 col-md-4">
-
-            <ui:include src="profile-image.xhtml"/>
-
+            <ui:include src="profile_details_elements/profile-image.xhtml"/>
         </div>
         <div class="col-xs-12 col-md-8">
-
-            <ui:include src="name.xhtml"/>
+            <ui:include src="profile_details_elements/name.xhtml"/>
         </div>
 
         <div class="col-xs-12 col-md-4">
-            <ui:include src="type.xhtml"/>
+            <ui:include src="profile_details_elements/type.xhtml"/>
         </div>
+
         <div class="col-xs-12 col-md-8">
-            <ui:include src="description.xhtml"/>
+            <ui:include src="profile_details_elements/description.xhtml"/>
         </div>
+
         <div class="col-xs-12 col-md-4">
-            <ui:include src="address.xhtml"/>
-        </div>
-
-        <div class="col-xs-12 col-md-8"></div>
-
-        <div class="col-xs-12 col-md-8">
-
-            <div class="box-header">#{msg['venue.image.upload']}</div>
-            <div class="box-content">
-                <h:form>
-                    <p:fileUpload disabled="#{publicProfileBean.disabled}"
-                                  fileUploadListener="#{fileUploadBean.fileUpload}"
-                                  uploadLabel="#{msg['fileupload.wizard.label.upload']}"
-                                  label="#{msg['fileupload.wizard.label.choose']}"
-                                  cancelLabel="#{msg['fileupload.wizard.label.cancel']}"
-                                  invalidSizeMessage="#{msg['fileupload.wizard.label.size']}"
-                                  mode="advanced"
-                                  dragDropSupport="true"
-                                  sizeLimit="4000000"
-                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" multiple="true"
-                                  oncomplete="afterUploadingRemote();">
-                        <p:remoteCommand name="afterUploadingRemote"
-                                         actionListener="#{profileBean.onUpdateAfterUploading}"
-                                         update="@widgetVar(imageDialog) @widgetVar(galleria-panel)"/>
-                    </p:fileUpload>
-                </h:form>
-            </div>
+            <ui:include src="profile_details_elements/address.xhtml"/>
         </div>
 
         <div class="col-xs-12 col-md-8">
-            <p:accordionPanel multiple="true" activeIndex="0,1,2">
+            <p:accordionPanel multiple="true" activeIndex="1,2,3">
+                <p:tab title="#{msg['venue.image.upload']}">
+                    <ui:include src="profile_details_elements/fileupload.xhtml"/>
+                </p:tab>
                 <p:tab title="#{msg['venue.images']}">
-                    <p:panel widgetVar="galleria-panel">
-                        <h:outputText value="#{msg['no.images']}"
-                                      rendered="#{venueImagesBean.images.isEmpty()}"/>
-                        <p:galleria value="#{venueImagesBean.images}" var="image"
-                                    panelWidth="500" panelHeight="300"
-                                    style="margin: 0 auto;"
-                                    showCaption="true"
-                                    rendered="#{!venueImagesBean.images.isEmpty()}" effect="puff"
-                                    effectSpeed="3000" autoPlay="false" transitionInterval="500">
-                            <p:graphicImage id="galleria-image"
-                                            value="#{venueImagesLoader.image}" alt="#{image.name}"
-                                            title="#{image.name}" width="600">
-                                <f:param name="imageId" value="#{image.id}"/>
-                            </p:graphicImage>
-                        </p:galleria>
-                    </p:panel>
+                    <ui:include src="profile_details_elements/galleria.xhtml"/>
                 </p:tab>
                 <p:tab title="#{msg['venue.events']}">
-                    <p:schedule value="#{scheduleBean.eventModel}"
-                                editable="true"
-                                widgetVar="myschedule">
-                        <p:ajax disabled="#{publicProfileBean.disabled}" event="dateSelect"
-                                listener="#{eventHandler.onDateSelect}"
-                                update="@widgetVar(eventDialog)"
-                                oncomplete="PF('eventDialog').show();"/>
-                        <p:ajax disabled="#{publicProfileBean.disabled}" event="eventSelect"
-                                listener="#{eventHandler.onEventSelect}"
-                                update="@widgetVar(eventDialog)"
-                                oncomplete="PF('eventDialog').show();"/>
-                        <p:ajax disabled="#{publicProfileBean.disabled}" event="eventMove"
-                                listener="#{eventHandler.onEventMove}"
-                                update="@widgetVar(eventDialog)"/>
-                        <p:ajax disabled="#{publicProfileBean.disabled}" event="eventResize"
-                                listener="#{eventHandler.onEventResize}"
-                                update="@widgetVar(eventDialog)"/>
-                        <p:ajax disabled="#{!publicProfileBean.disabled}" event="eventSelect"
-                                oncomplete="alert('mukodik')"/>
-                    </p:schedule>
+                    <ui:include src="profile_details_elements/events.xhtml"/>
                 </p:tab>
                 <p:tab title="#{msg['venue.location']}">
-                    <ui:include src="map.xhtml"/>
+                    <ui:include src="profile_details_elements/map.xhtml"/>
                 </p:tab>
             </p:accordionPanel>
         </div>
-
     </div>
-
-    <p:dialog widgetVar="eventDialog" header="#{msg['event.details']}" showEffect="clip" hideEffect="clip">
-        <h:form>
-            <h:panelGrid id="eventDetails" columns="2">
-                <h:outputLabel for="title" value="#{msg['event.title']}:"/>
-                <p:inputText id="title" value="#{eventHandler.event.title}"/>
-
-                <h:outputLabel for="from" value="#{msg['event.from']}:"/>
-                <p:calendar id="from" value="#{eventHandler.event.startDate}" pattern="dd/MM/yyyy HH:mm"/>
-
-                <h:outputLabel for="to" value="#{msg['event.to']}:"/>
-                <p:calendar id="to" value="#{eventHandler.event.endDate}" pattern="dd/MM/yyyy HH:mm"/>
-
-                <h:outputLabel for="description" value="#{msg['event.description']}:"/>
-                <p:inputText id="description" value="#{eventHandler.event.description}"/>
-
-
-                <h:outputLabel for="radio" value="#{msg['event.promotion']}"/>
-
-                <h:selectOneRadio id="radio" value="#{eventHandler.promotion}" required="true">
-                    <f:selectItem id="yes" itemValue="#{true}" itemLabel="#{msg['yes']}"/>
-                    <f:selectItem id="no" itemValue="#{false}" itemLabel="#{msg['no']}"/>
-                    <p:ajax update="prominputs promlabels radio" event="change"/>
-                </h:selectOneRadio>
-
-                <p:outputPanel id="promlabels">
-                    <h:panelGrid rendered="#{eventHandler.promotion}">
-                        <h:outputLabel for="description" value="#{msg['event.description']}:"/>
-                        <h:outputLabel for="value" value="#{msg['amount']}:"/>
-                        <h:outputLabel for="percent" value="%:"/>
-                    </h:panelGrid>
-
-                </p:outputPanel>
-
-                <p:outputPanel id="prominputs">
-                    <h:panelGrid id="prom" rendered="#{eventHandler.promotion}">
-                        <p:inputText id="promodescription" value=""/>
-                        <p:inputText id="value" value="">
-                            <f:convertNumber type="currency" currencySymbol="$"/>
-                        </p:inputText>
-                        <p:message for="value"/>
-                        <p:inputText id="percent" value="">
-                            <f:convertNumber type="percent"/>
-                        </p:inputText>
-                        <p:message for="percent"/>
-                    </h:panelGrid>
-                </p:outputPanel>
-
-                <h:outputLabel value="#{msg['event.type']}:"/>
-
-                <p:selectOneMenu styleClass="centered-block centered-text" style="width:125px" required="true"
-                                 value="#{eventHandler.event.eventVo.type}">
-                    <f:selectItem itemLabel="#{msg['selectonemenu.select']}" itemValue=""/>
-                    <f:selectItems value="#{eventTypeBean.eventType}" var="type"
-                                   itemLabel="#{msg['enum.event.type.'+=type.name()]}" itemValue="#{type}"/>
-                </p:selectOneMenu>
-                <p:commandButton value="#{msg['dialog.save']}"
-                                 oncomplete="PF('eventDialog').hide();addEvent(); PF('myschedule').update();"
-                                 actionListener="#{eventHandler.addEvent}"
-                                 validateClient="true"/>
-                <p:commandButton type="reset" value="#{msg['event.reset']}"/>
-                <p:remoteCommand name="addEvent"
-                                 actionListener="#{profileBean.onUpdateAfterNewEvent}"/>
-            </h:panelGrid>
-        </h:form>
-    </p:dialog>
 </ui:composition>
