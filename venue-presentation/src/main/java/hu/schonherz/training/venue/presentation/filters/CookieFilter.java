@@ -2,10 +2,10 @@ package hu.schonherz.training.venue.presentation.filters;
 
 import hu.schonherz.training.landing.service.remote.UserRemoteService;
 import hu.schonherz.training.landing.vo.remote.RemoteUserVo;
+import hu.schonherz.training.venue.presentation.hu.schonherz.training.venue.presentation.util.RemoteEJBClientLookup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.ejb.EJB;
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.*;
 import javax.servlet.http.Cookie;
@@ -13,14 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Hashtable;
 import java.util.List;
 
 
 public class CookieFilter implements Filter {
 
-
     UserRemoteService userRemoteService;
+    private static Logger LOG = LoggerFactory.getLogger(CookieFilter.class);
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -28,13 +27,14 @@ public class CookieFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-
-        List<Cookie> cookies = Arrays.asList(req.getCookies());
-        String cookieValue = getHashFromCookies(cookies);
         RemoteUserVo remoteUserVo = null;
-        if (cookieValue != null) {
-            remoteUserVo = userRemoteService.getLoggedInUser(cookieValue);
-            req.setAttribute("USER", remoteUserVo);
+        if (req.getCookies() != null) {
+            List<Cookie> cookies = Arrays.asList(req.getCookies());
+            String cookieValue = getHashFromCookies(cookies);
+            if (cookieValue != null) {
+                remoteUserVo = userRemoteService.getLoggedInUser(cookieValue);
+                req.setAttribute("USER", remoteUserVo);
+            }
         }
         if (remoteUserVo == null) {
             ((HttpServletResponse) response).sendRedirect("/../landing");
@@ -45,29 +45,16 @@ public class CookieFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+        final String appName = "landing-ear";
+        final String moduleName = "landing-service";
+        final String distinctName = "";
+        final String beanName = "UserService";
+
         try {
-            final Hashtable jndiProperties = new Hashtable();
-            jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-
-            final Context context = new InitialContext(jndiProperties);
-
-
-            final String appName = "landing-ear";
-            final String moduleName = "landing-service";
-            final String distinctName = "";
-            final String beanName = "UserService";
-
-            final String viewClassName = UserRemoteService.class.getName();
-            System.out.println("Looking EJB via JNDI ");
-            System.out.println("ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
-
-            userRemoteService = (UserRemoteService) context.lookup("ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
-
-
+            userRemoteService = RemoteEJBClientLookup.lookup(UserRemoteService.class, appName, moduleName, distinctName, beanName);
         } catch (NamingException ne) {
-            ne.printStackTrace();
+            LOG.error(ne.toString());
         }
-
     }
 
     @Override

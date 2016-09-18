@@ -18,7 +18,7 @@
             </p:panel>
         </div>
 
-        <div class="box user-name col-xs-12 col-md-12">#{userBean.name}#{msg['user.venue']}</div>
+        <div class="box user-name col-xs-12 col-md-12">#{USER.name}#{msg['user.venue']}</div>
         <div class="col-xs-12 col-md-4">
 
             <ui:include src="profile-image.xhtml"/>
@@ -59,31 +59,31 @@
                                   oncomplete="afterUploadingRemote();">
                         <p:remoteCommand name="afterUploadingRemote"
                                          actionListener="#{profileBean.onUpdateAfterUploading}"
-                                         update="@widgetVar(imageDialog)"/><!-- TODO Galleria-->
+                                         update="@widgetVar(imageDialog) @widgetVar(galleria-panel)"/>
                     </p:fileUpload>
                 </h:form>
             </div>
         </div>
 
-
         <div class="col-xs-12 col-md-8">
             <p:accordionPanel multiple="true" activeIndex="0,1,2">
-                <p:tab id="galleria-tab" title="#{msg['venue.images']}">
-
-                    <h:outputText value="#{msg['no.images']}"
-                                  rendered="#{venueImagesBean.images.isEmpty()}"/>
-                    <p:galleria value="#{venueImagesBean.images}" var="image"
-                                panelWidth="500" panelHeight="300"
-                                style="margin: 0 auto;"
-                                showCaption="true"
-                                rendered="#{!venueImagesBean.images.isEmpty()}" effect="puff"
-                                effectSpeed="3000" autoPlay="false" transitionInterval="500">
-                        <p:graphicImage id="galleria-image"
-                                        value="#{venueImagesLoader.image}" alt="#{image.name}"
-                                        title="#{image.name}" width="600">
-                            <f:param name="imageId" value="#{image.id}"/>
-                        </p:graphicImage>
-                    </p:galleria>
+                <p:tab title="#{msg['venue.images']}">
+                    <p:panel widgetVar="galleria-panel">
+                        <h:outputText value="#{msg['no.images']}"
+                                      rendered="#{venueImagesBean.images.isEmpty()}"/>
+                        <p:galleria value="#{venueImagesBean.images}" var="image"
+                                    panelWidth="500" panelHeight="300"
+                                    style="margin: 0 auto;"
+                                    showCaption="true"
+                                    rendered="#{!venueImagesBean.images.isEmpty()}" effect="puff"
+                                    effectSpeed="3000" autoPlay="false" transitionInterval="500">
+                            <p:graphicImage id="galleria-image"
+                                            value="#{venueImagesLoader.image}" alt="#{image.name}"
+                                            title="#{image.name}" width="600">
+                                <f:param name="imageId" value="#{image.id}"/>
+                            </p:graphicImage>
+                        </p:galleria>
+                    </p:panel>
                 </p:tab>
                 <p:tab title="#{msg['venue.events']}">
                     <p:schedule value="#{scheduleBean.eventModel}"

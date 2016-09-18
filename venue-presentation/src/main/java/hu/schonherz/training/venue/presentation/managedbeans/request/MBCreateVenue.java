@@ -1,6 +1,6 @@
 package hu.schonherz.training.venue.presentation.managedbeans.request;
 
-import hu.schonherz.training.venue.presentation.managedbeans.session.MBUser;
+import hu.schonherz.training.landing.vo.remote.RemoteUserVo;
 import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenue;
 
 import hu.schonherz.training.venue.service.VenueService;
@@ -17,8 +17,8 @@ import javax.faces.bean.RequestScoped;
 public class MBCreateVenue {
     @ManagedProperty(value = "#{venueBean}")
     private MBVenue venue;
-    @ManagedProperty(value = "#{userBean}")
-    private MBUser user;
+    @ManagedProperty(value = "#{USER}")
+    private RemoteUserVo user;
     @EJB
     VenueService venueService;
 
@@ -48,11 +48,11 @@ public class MBCreateVenue {
         this.venueService = venueService;
     }
 
-    public MBUser getUser() {
+    public RemoteUserVo getUser() {
         return user;
     }
 
-    public void setUser(MBUser user) {
+    public void setUser(RemoteUserVo user) {
         this.user = user;
     }
 }

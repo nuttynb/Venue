@@ -1,6 +1,6 @@
 package hu.schonherz.training.venue.presentation.managedbeans.request;
 
-import hu.schonherz.training.venue.presentation.managedbeans.session.MBUser;
+import hu.schonherz.training.landing.vo.remote.RemoteUserVo;
 import hu.schonherz.training.venue.presentation.managedbeans.view.*;
 import hu.schonherz.training.venue.presentation.wrappers.EventVoWrapper;
 import hu.schonherz.training.venue.service.*;
@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 public class MBProfile {
     @ManagedProperty(value = "#{venueBean}")
     private MBVenue venue;
-    @ManagedProperty(value = "#{userBean}")
-    private MBUser user;
+    @ManagedProperty(value = "#{USER}")
+    private RemoteUserVo user;
     @ManagedProperty(value = "#{venueImageBean}")
     private MBVenueImage venueImage;
     @ManagedProperty(value = "#{venueImagesBean}")
@@ -53,17 +53,19 @@ public class MBProfile {
     private static Logger LOG = LoggerFactory.getLogger(MBProfile.class);
 
     public void onLoad() {
+
         VenueVo possibleVenue = venueService.getVenueByOwnerId(user.getId());
         if (possibleVenue != null) {
             venueImages.setImages(venueImageService.getVenueImagesByVenueId(possibleVenue.getId()));
             latLng.setLatLng(geocoder.getLatitudeAndLongitudeByAddress(possibleVenue.getAddress()));
             List<EventVo> events = eventService.getEventsByVenueId(possibleVenue.getId());
-            if (events != null)
+            if (events != null) {
                 schedule.getEventModel()
                         .getEvents()
                         .addAll(events.stream()
                                 .map(eventVo -> new EventVoWrapper(eventVo))
                                 .collect(Collectors.toList()));
+            }
         }
         venue.setVenue(possibleVenue);
         LOG.info("onLoad completed.");
@@ -116,11 +118,11 @@ public class MBProfile {
         this.venueService = venueService;
     }
 
-    public MBUser getUser() {
+    public RemoteUserVo getUser() {
         return user;
     }
 
-    public void setUser(MBUser user) {
+    public void setUser(RemoteUserVo user) {
         this.user = user;
     }
 
