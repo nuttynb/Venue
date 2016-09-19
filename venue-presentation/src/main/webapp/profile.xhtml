@@ -16,7 +16,7 @@
             </f:metadata>
             <div class="main">
                 <ui:fragment styleClass="profile-details" rendered="#{venueBean.venue ne null
-                  or !reviewBean.profileBlocked or reviewBean.owner}">
+                  and (!reviewBean.profileBlocked or publicProfileBean.owner)}">
                     <ui:include src="WEB-INF/includes/profile-details.xhtml"/>
                 </ui:fragment>
                 <ui:fragment rendered="#{(venueBean.venue eq null) and (publicProfileBean.venueId eq null)}">

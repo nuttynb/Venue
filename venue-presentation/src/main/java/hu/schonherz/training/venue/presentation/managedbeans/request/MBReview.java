@@ -1,6 +1,5 @@
 package hu.schonherz.training.venue.presentation.managedbeans.request;
 
-import hu.schonherz.training.landing.vo.remote.RemoteUserVo;
 import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenue;
 import hu.schonherz.training.venue.service.VenueService;
 import org.slf4j.Logger;
@@ -18,15 +17,10 @@ public class MBReview {
     @ManagedProperty(value = "#{venueBean}")
     private MBVenue venue;
 
-    @ManagedProperty(value = "#{USER}")
-    private RemoteUserVo user;
-
     @EJB
     VenueService venueService;
 
     private boolean profileBlocked;
-    private boolean isAdmin = true;
-    private boolean isOwner;
 
     private static final Logger LOG = LoggerFactory.getLogger(MBReview.class);
 
@@ -37,17 +31,14 @@ public class MBReview {
     }
 
     public boolean isProfileBlocked() {
-        if (venue.getVenue() != null)
+        if (venue.getVenue() != null) {
             return !venue.getVenue().getEnabled().booleanValue();
+        }
         return true;
     }
 
     public VenueService getVenueService() {
         return venueService;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
     }
 
     public MBVenue getVenue() {
@@ -58,30 +49,9 @@ public class MBReview {
         this.venue = venue;
     }
 
-    public boolean isOwner() {
-        if (venue.getVenue() != null)
-            return venue.getVenue().getOwnerId().equals(user.getId());
-        return false;
-    }
-
-    public RemoteUserVo getUser() {
-        return user;
-    }
-
-    public void setUser(RemoteUserVo user) {
-        this.user = user;
-    }
-
     public void setProfileBlocked(boolean profileBlocked) {
         this.profileBlocked = profileBlocked;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
-    }
-
-    public void setOwner(boolean owner) {
-        isOwner = owner;
-    }
 }
 

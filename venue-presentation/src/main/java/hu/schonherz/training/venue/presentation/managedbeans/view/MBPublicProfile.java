@@ -10,6 +10,8 @@ public class MBPublicProfile implements Serializable {
     private static final long serialVersionUID = 3120995162929031446L;
     private Long venueId = null;
     private boolean disabled = false;
+    private boolean isAdmin;
+    private boolean isOwner;
 
     public Long getVenueId() {
         return venueId;
@@ -25,5 +27,21 @@ public class MBPublicProfile implements Serializable {
 
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public boolean isOwner() {
+        return isOwner;
+    }
+
+    public void setOwner(boolean owner) {
+        isOwner = owner;
     }
 }

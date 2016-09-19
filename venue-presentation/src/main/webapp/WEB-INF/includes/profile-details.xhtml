@@ -13,12 +13,10 @@
 
         <div class="col-xs-12 col-md-12">
             <p:panel styleClass="admin"
-                     rendered="#{venueBean.venue ne null and (!venueBean.venue.enabled or reviewBean.admin)}">
+                     rendered="#{venueBean.venue ne null and (publicProfileBean.admin or !venueBean.venue.enabled )}">
                 <ui:include src="profile_details_elements/review.xhtml"/>
             </p:panel>
         </div>
-
-        <div class="box user-name col-xs-12 col-md-12">#{USER.name}#{msg['user.venue']}</div>
 
         <div class="col-xs-12 col-md-4">
             <ui:include src="profile_details_elements/profile-image.xhtml"/>

@@ -1,5 +1,6 @@
 package hu.schonherz.training.venue.presentation.managedbeans.request;
 
+import hu.schonherz.training.landing.vo.remote.RemoteRoleVo;
 import hu.schonherz.training.landing.vo.remote.RemoteUserVo;
 import hu.schonherz.training.venue.presentation.managedbeans.view.*;
 import hu.schonherz.training.venue.presentation.wrappers.EventVoWrapper;
@@ -54,6 +55,8 @@ public class MBProfile {
 
     public void onLoad() {
         VenueVo possibleVenue;
+        setAdmin();
+        setOwner();
         if (publicProfile.getVenueId() != null) {
             possibleVenue = venueService.getVenueById(publicProfile.getVenueId());
             publicProfile.setDisabled(Boolean.TRUE);
@@ -75,6 +78,22 @@ public class MBProfile {
         }
         venue.setVenue(possibleVenue);
         LOG.info("onLoad completed.");
+    }
+
+    private void setAdmin() {
+        for (RemoteRoleVo roleVo : user.getRoles()) {
+            if ("ADMIN".equals(roleVo.getName())) {
+                publicProfile.setAdmin(true);
+            }
+        }
+    }
+
+    private void setOwner() {
+        if (venue.getVenue() != null) {
+            if (user.getId().equals(venue.getVenue().getOwnerId())) {
+                publicProfile.setOwner(true);
+            }
+        }
     }
 
     public void onModify() {
