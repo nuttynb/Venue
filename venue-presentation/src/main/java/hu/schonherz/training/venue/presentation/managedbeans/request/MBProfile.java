@@ -5,6 +5,7 @@ import hu.schonherz.training.venue.presentation.managedbeans.view.*;
 import hu.schonherz.training.venue.presentation.wrappers.EventVoWrapper;
 import hu.schonherz.training.venue.service.*;
 import hu.schonherz.training.venue.vo.EventVo;
+import hu.schonherz.training.venue.vo.OrganizingMailVo;
 import hu.schonherz.training.venue.vo.VenueVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +53,7 @@ public class MBProfile {
     private static Logger LOG = LoggerFactory.getLogger(MBProfile.class);
 
     public void onLoad() {
-        VenueVo possibleVenue = null;
+        VenueVo possibleVenue;
         if (publicProfile.getVenueId() != null) {
             possibleVenue = venueService.getVenueById(publicProfile.getVenueId());
             publicProfile.setDisabled(Boolean.TRUE);

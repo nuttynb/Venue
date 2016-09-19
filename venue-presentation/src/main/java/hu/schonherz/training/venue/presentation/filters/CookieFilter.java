@@ -2,7 +2,7 @@ package hu.schonherz.training.venue.presentation.filters;
 
 import hu.schonherz.training.landing.service.remote.UserRemoteService;
 import hu.schonherz.training.landing.vo.remote.RemoteUserVo;
-import hu.schonherz.training.venue.presentation.hu.schonherz.training.venue.presentation.util.RemoteEJBClientLookup;
+import hu.schonherz.training.venue.presentation.util.RemoteEJBClientLookup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,7 +1,6 @@
 package hu.schonherz.training.venue.presentation.managedbeans.view;
 
 import hu.schonherz.training.venue.presentation.wrappers.EventVoWrapper;
-import hu.schonherz.training.venue.vo.EventVo;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;

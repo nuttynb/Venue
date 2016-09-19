@@ -1,4 +1,4 @@
-package hu.schonherz.training.venue.presentation.hu.schonherz.training.venue.presentation.util;
+package hu.schonherz.training.venue.presentation.util;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
