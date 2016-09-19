@@ -20,8 +20,8 @@
                     <h:outputText styleClass="pic-helper" value="#{msg['no.profile.image']}"
                                   rendered="#{venueImagesBean.images.isEmpty()}"/>
                 </div>
-                <p:ring id="custom" value="#{venueImagesBean.images}" var="image" autoplay="true" easing="easeInOutBack"
-                        autoplayPauseOnHover="true" autoplayDuration="5000" style="height: 280px;">
+                <p:ring value="#{venueImagesBean.images}" var="image" autoplay="true" easing="easeInOutBack"
+                        autoplayPauseOnHover="true" autoplayDuration="5000" style="height: 280px;" autoplayInitialDelay="0">
                     <h:commandLink>
                         <f:param name="profileImageId" value="#{image.id}"/>
                         <p:graphicImage value="#{venueImagesLoader.image}" alt="#{image.name}" title="#{image.name}"

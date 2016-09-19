@@ -11,7 +11,7 @@
                 <div class="box-header">
                     <h:outputText value="#{msg['createvenue.wizard.label.address']}"/>
                 </div>
-                <div class="box-content">
+                <div class="box-content address">
                     <h:panelGrid id="address" columns="2" columnClasses="label, value"
                                  cellspacing="100">
                         <h:outputText styleClass="output-label"
@@ -39,9 +39,9 @@
             </div>
         </h:outputLink>
         <p:dialog modal="true" closeOnEscape="true" header="#{msg['createvenue.wizard.label.address']}"
-                  widgetVar="addressDialog" showEffect="fade" hideEffect="fade" minHeight="100">
+                  widgetVar="addressDialog" showEffect="fade" hideEffect="fade" resizable="false">
             <h:form>
-                <h:panelGrid styleClass="centered-block" columns="2" columnClasses="label, value" cellspacing="20">
+                <h:panelGrid columns="2" columnClasses="label, value" style="margin-right: 70px;">
                     <h:outputText styleClass="input-label" value="#{msg['venue.address.country']} *"/>
                     <p:inputText value="#{venueBean.venue.address.country}" required="true"
                                  requiredMessage="#{msg['venue.address.country']} #{msg['createvenue.wizard.requiredmessage']}"/>

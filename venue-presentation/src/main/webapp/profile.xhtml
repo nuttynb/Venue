@@ -20,12 +20,16 @@
                     <ui:include src="WEB-INF/includes/profile-details.xhtml"/>
                 </ui:fragment>
                 <ui:fragment rendered="#{(venueBean.venue eq null) and (publicProfileBean.venueId eq null)}">
-                    <h:outputText value="#{msg['no.venue']}"/>
+                    <div class="centered-block centered-text">
+                        <h:outputText styleClass="no-venue" value="#{msg['no.venue']}"/>
+                    </div>
                     <p:button styleClass="create" outcome="createVenue" value="#{msg['create.new.venue']}"
                               icon="ui-icon-plus"></p:button>
                 </ui:fragment>
                 <ui:fragment rendered="#{(venueBean.venue eq null) and (publicProfileBean.venueId ne null)}">
-                    <h:outputText value="#{msg['venue.not.exists']}"/>
+                    <div class="centered-block centered-text">
+                        <h:outputText styleClass="no-venue" value="#{msg['venue.not.exists']}"/>
+                    </div>
                 </ui:fragment>
             </div>
         </ui:define>

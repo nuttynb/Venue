@@ -63,6 +63,8 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+
+    <!-- Enable filtering -->
     <filter>
         <filter-name>CookieFilter</filter-name>
         <filter-class>hu.schonherz.training.venue.presentation.filters.CookieFilter</filter-class>
@@ -71,34 +73,26 @@
         <filter-name>CookieFilter</filter-name>
         <servlet-name>Faces Servlet</servlet-name>
     </filter-mapping>
+
+    <!-- Enable PF FileUpload -->
     <filter>
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
-        <!--<init-param>
-            <param-name>thresholdSize</param-name>
-            <param-value>51200</param-value>
-        </init-param>
-        <init-param>
-            <param-name>uploadDirectory</param-name>
-            <param-value>C:\temp\vkj</param-value>
-        </init-param> -->
     </filter>
     <filter-mapping>
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <servlet-name>Faces Servlet</servlet-name>
     </filter-mapping>
 
+    <!-- For EJB Local Services -->
     <ejb-local-ref>
         <ejb-ref-name>ejb.VenueService</ejb-ref-name>
         <local>hu.schonherz.training.venue.service.VenueService</local>
     </ejb-local-ref>
-
-
     <ejb-local-ref>
         <ejb-ref-name>ejb.AddressService</ejb-ref-name>
         <local>hu.schonherz.training.venue.service.AddressService</local>
     </ejb-local-ref>
-
     <ejb-local-ref>
         <ejb-ref-name>ejb.GeocoderService</ejb-ref-name>
         <local>hu.schonherz.training.venue.service.GeocoderService</local>
@@ -107,5 +101,4 @@
         <ejb-ref-name>ejb.MailService</ejb-ref-name>
         <local>hu.schonherz.training.venue.service.MailService</local>
     </ejb-local-ref>
-
 </web-app>
