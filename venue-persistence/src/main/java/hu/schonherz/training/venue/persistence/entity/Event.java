@@ -32,6 +32,15 @@ public class Event extends BaseEntity {
     @Basic
     private String description;
 
+    @Basic
+    private String promoDescription;
+
+    @Basic
+    private double amount;
+
+    @Basic
+    private double percent;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private EventType type;
@@ -90,5 +99,29 @@ public class Event extends BaseEntity {
 
     public void setType(EventType type) {
         this.type = type;
+    }
+
+    public String getPromoDescription() {
+        return promoDescription;
+    }
+
+    public void setPromoDescription(String promoDescription) {
+        this.promoDescription = promoDescription;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public double getPercent() {
+        return percent;
+    }
+
+    public void setPercent(double percent) {
+        this.percent = percent;
     }
 }
