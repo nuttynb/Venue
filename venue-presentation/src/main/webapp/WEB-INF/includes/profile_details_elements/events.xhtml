@@ -47,7 +47,7 @@
                     </h:selectOneRadio>
                     <p:outputPanel id="promlabels">
                         <h:panelGrid rendered="#{eventHandler.promotion}">
-                            <h:outputLabel for="description" value="#{msg['event.description']}:"/>
+                            <h:outputLabel for="promodescription" value="#{msg['event.description']}:"/>
                             <h:outputLabel for="value" value="#{msg['amount']}:"/>
                             <h:outputLabel for="percent" value="%:"/>
                         </h:panelGrid>
@@ -55,12 +55,14 @@
                     </p:outputPanel>
                     <p:outputPanel id="prominputs">
                         <h:panelGrid id="prom" rendered="#{eventHandler.promotion}">
-                            <p:inputText id="promodescription" value=""/>
-                            <p:inputText id="value" value="">
+                            <p:inputText id="promodescription"
+                                         value="#{eventHandler.event.eventVo.promoDescripton}"/>
+                            <p:inputText id="value"
+                                         value="#{eventHandler.event.eventVo.amount}">
                                 <f:convertNumber type="currency" currencySymbol="$"/>
                             </p:inputText>
                             <p:message for="value"/>
-                            <p:inputText id="percent" value="">
+                            <p:inputText id="percent" value="#{eventHandler.event.eventVo.percent}">
                                 <f:convertNumber type="percent"/>
                             </p:inputText>
                             <p:message for="percent"/>

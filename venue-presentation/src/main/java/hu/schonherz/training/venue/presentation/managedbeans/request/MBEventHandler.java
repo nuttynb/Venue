@@ -7,8 +7,6 @@ import hu.schonherz.training.venue.service.EventService;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.model.DefaultScheduleEvent;
-import org.primefaces.model.ScheduleEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +48,9 @@ public class MBEventHandler implements Serializable {
             schedule.getEventModel().updateEvent(event);
         }
         event.getEventVo().setVenue(venue.getVenue());
+        LOG.info("!!!!!" + event.getEventVo().getPromoDescripton());
+        LOG.info(";;;;;;;" + event.getEventVo().getAmount());
+        LOG.info("________" + event.getEventVo().getPercent());
         eventService.createEvent(event.getEventVo());
 
     }

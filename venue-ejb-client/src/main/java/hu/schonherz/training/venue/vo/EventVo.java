@@ -26,6 +26,12 @@ public class EventVo implements Serializable {
 
     private String description;
 
+    private String promoDescripton;
+
+    private double amount;
+
+    private double percent;
+
     private EventType type;
 
     /**
@@ -150,5 +156,29 @@ public class EventVo implements Serializable {
 
     public void setType(EventType type) {
         this.type = type;
+    }
+
+    public String getPromoDescripton() {
+        return promoDescripton;
+    }
+
+    public void setPromoDescripton(String promoDescripton) {
+        this.promoDescripton = promoDescripton;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public double getPercent() {
+        return percent;
+    }
+
+    public void setPercent(double percent) {
+        this.percent = percent;
     }
 }

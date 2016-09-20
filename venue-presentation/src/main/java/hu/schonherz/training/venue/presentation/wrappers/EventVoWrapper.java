@@ -1,11 +1,7 @@
 package hu.schonherz.training.venue.presentation.wrappers;
 
-import hu.schonherz.training.venue.service.TypeService;
 import hu.schonherz.training.venue.vo.EventVo;
-import hu.schonherz.training.venue.vo.TypeVo;
-import hu.schonherz.training.venue.vo.VenueVo;
 import org.primefaces.model.DefaultScheduleEvent;
-import org.primefaces.model.ScheduleEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -99,7 +95,6 @@ public class EventVoWrapper extends DefaultScheduleEvent {
     public void setDescription(String description) {
         eventVo.setDescription(description);
     }
-
 
 
 
