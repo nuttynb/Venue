@@ -28,13 +28,13 @@
                                  value="#{venueBean.venue.adminMessage}"
                                  required="true"/>
                 <h:outputLabel for="checkbox" value="#{msg['block.profile']}"></h:outputLabel>
-                <h:selectBooleanCheckbox id="checkbox" value="#{reviewBean.profileBlocked}">
-                    <f:selectItem itemValue="#{reviewBean.profileBlocked}"/>
+                <h:selectBooleanCheckbox id="checkbox" value="#{publicProfileBean.blocked}">
+                    <f:selectItem itemValue="#{publicProfileBean.blocked}"/>
                 </h:selectBooleanCheckbox>
                 <p:commandButton styleClass="centered-block" value="#{msg['dialog.save']}"
                                  oncomplete="if(!args.validationFailed){PF('reviewDialog').hide();}"
                                  icon="ui-icon-check"
-                                 actionListener="#{reviewBean.blockProfile}"
+                                 actionListener="#{profileBean.blockProfile}"
                                  update=":adminMessage :enabled checkbox @this"/>
             </h:form>
         </p:dialog>

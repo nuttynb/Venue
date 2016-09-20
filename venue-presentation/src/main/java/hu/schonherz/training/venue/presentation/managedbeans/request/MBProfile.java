@@ -56,7 +56,7 @@ public class MBProfile {
     public void onLoad() {
         VenueVo possibleVenue;
         setAdmin();
-        setOwner();
+        isProfileBlocked();
         if (publicProfile.getVenueId() != null) {
             possibleVenue = venueService.getVenueById(publicProfile.getVenueId());
             publicProfile.setDisabled(Boolean.TRUE);
@@ -77,6 +77,7 @@ public class MBProfile {
             }
         }
         venue.setVenue(possibleVenue);
+        setOwner();
         LOG.info("onLoad completed.");
     }
 
@@ -84,6 +85,7 @@ public class MBProfile {
         for (RemoteRoleVo roleVo : user.getRoles()) {
             if ("ADMIN".equals(roleVo.getName())) {
                 publicProfile.setAdmin(true);
+                System.out.print("admin");
             }
         }
     }
@@ -93,7 +95,20 @@ public class MBProfile {
             if (user.getId().equals(venue.getVenue().getOwnerId())) {
                 publicProfile.setOwner(true);
             }
+
         }
+    }
+
+    public void isProfileBlocked() {
+        if (venue.getVenue() != null) {
+            publicProfile.setBlocked(venue.getVenue().getEnabled().booleanValue());
+        }
+    }
+
+    public void blockProfile() {
+        LOG.info("Profile enabled:" + publicProfile.isBlocked());
+        venue.getVenue().setEnabled(!publicProfile.isBlocked());
+        venueService.saveVenue(venue.getVenue());
     }
 
     public void onModify() {

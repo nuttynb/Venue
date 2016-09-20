@@ -15,8 +15,9 @@
                 <f:viewAction action="#{profileBean.onLoad}"/>
             </f:metadata>
             <div class="main">
-                <ui:fragment styleClass="profile-details" rendered="#{venueBean.venue ne null
-                  and (!reviewBean.profileBlocked or publicProfileBean.owner)}">
+
+                <ui:fragment styleClass="profile-details" rendered="#{venueBean.venue ne null and
+                  (venueBean.venue.enabled or publicProfileBean.owner or publicProfileBean.admin)}">
                     <ui:include src="WEB-INF/includes/profile-details.xhtml"/>
                 </ui:fragment>
                 <ui:fragment rendered="#{(venueBean.venue eq null) and (publicProfileBean.venueId eq null)}">

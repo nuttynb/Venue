@@ -12,6 +12,7 @@ public class MBPublicProfile implements Serializable {
     private boolean disabled = false;
     private boolean isAdmin;
     private boolean isOwner;
+    private boolean isBlocked;
 
     public Long getVenueId() {
         return venueId;
@@ -43,5 +44,13 @@ public class MBPublicProfile implements Serializable {
 
     public void setOwner(boolean owner) {
         isOwner = owner;
+    }
+
+    public boolean isBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
     }
 }
