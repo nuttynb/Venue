@@ -8,6 +8,19 @@
         <div class="col-xs-12 col-md-12">
             #{eventBean.event.name}
         </div>
+        <div class="col-xs-12 col-md-12">
+            <p:panel widgetVar="galleria-panel">
+                <h:outputText value="#{msg['no.image']}" rendered="#{eventImagesBean.images.isEmpty()}"/>
+                <p:galleria value="#{eventImagesBean.images}" var="image" panelWidth="500" panelHeight="300"
+                            style="margin: 0 auto;" showCaption="true" rendered="#{!eventImagesBean.images.isEmpty()}"
+                            effect="puff" effectSpeed="3000" autoPlay="false" transitionInterval="500">
+                    <p:graphicImage id="galleria-image" value="#{eventImagesLoader.image}" alt="#{image.name}"
+                                    title="#{image.name}" width="600">
+                        <f:param name="imageId" value="#{image.id}"/>
+                    </p:graphicImage>
+                </p:galleria>
+            </p:panel>
+        </div>
         <div class="col-xs-12 col-md-6">
             #{eventBean.event.beginDate}
         </div>
@@ -37,13 +50,16 @@
         </div>
         <div class="col-xs-12 col-md-12">
             <h:form>
-                <p:fileUpload fileUploadListener="#{fileUploadBean.fileUpload}"
+                <p:fileUpload fileUploadListener="#{eventFileUpload.fileUpload}"
                               uploadLabel="#{msg['fileupload.wizard.label.upload']}"
                               label="#{msg['fileupload.wizard.label.choose']}"
                               cancelLabel="#{msg['fileupload.wizard.label.cancel']}"
                               invalidSizeMessage="#{msg['fileupload.wizard.label.size']}" mode="advanced"
                               dragDropSupport="true" sizeLimit="4000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                              multiple="true">
+                              multiple="true" update="@this"
+                              oncomplete="afterUploading">
+                    <p:remoteCommand name="afterUploading" actionListener="#{eventProfileBean.onUpdateafterUploading}"
+                                     update="@widgetVar(galleria-panel)"/>
                 </p:fileUpload>
             </h:form>
         </div>

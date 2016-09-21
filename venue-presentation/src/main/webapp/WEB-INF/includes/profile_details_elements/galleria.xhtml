@@ -4,7 +4,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <p:panel widgetVar="galleria-panel">
-        <h:outputText value="#{msg['no.images']}" rendered="#{venueImagesBean.images.isEmpty()}"/>
+        <h:outputText value="#{msg['no.image']}" rendered="#{venueImagesBean.images.isEmpty()}"/>
         <p:galleria value="#{venueImagesBean.images}" var="image" panelWidth="500" panelHeight="300"
                     style="margin: 0 auto;" showCaption="true" rendered="#{!venueImagesBean.images.isEmpty()}"
                     effect="puff" effectSpeed="3000" autoPlay="false" transitionInterval="500">

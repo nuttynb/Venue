@@ -3,6 +3,7 @@ package hu.schonherz.training.venue.persistence.entity;
 import hu.schonherz.training.venue.persistence.entity.enums.EventType;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -44,6 +45,9 @@ public class Event extends BaseEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private EventType type;
+
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Collection<EventImage> images;
 
     public Long getBandId() {
         return bandId;
@@ -123,5 +127,13 @@ public class Event extends BaseEntity {
 
     public void setPercent(double percent) {
         this.percent = percent;
+    }
+
+    public Collection<EventImage> getImages() {
+        return images;
+    }
+
+    public void setImages(Collection<EventImage> images) {
+        this.images = images;
     }
 }

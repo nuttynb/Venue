@@ -28,7 +28,7 @@ public class VenueImageServiceImpl extends AbstractMappingService implements Ven
 
     @Override
     public List<VenueImageVo> getVenueImagesByVenueId(Long venueId) {
-        return map(venueImageRepository.findVenueImageByVenueId(venueId), VenueImageVo.class);
+        return map(venueImageRepository.findByVenueId(venueId), VenueImageVo.class);
     }
 
     @Override

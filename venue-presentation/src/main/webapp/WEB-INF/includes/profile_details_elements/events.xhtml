@@ -50,13 +50,13 @@
                     <p:outputPanel id="prominputs">
                         <h:panelGrid id="prom" rendered="#{eventVoWrapperBean.promotion}">
                             <p:inputText id="promodescription"
-                                         value="#{eventVoWrapperBean.event.eventVo.promoDescription}"/>
+                                         value="#{eventVoWrapperBean.event.event.promoDescription}"/>
                             <p:inputText id="value"
-                                         value="#{eventVoWrapperBean.event.eventVo.amount}">
+                                         value="#{eventVoWrapperBean.event.event.amount}">
                                 <f:convertNumber type="currency" currencySymbol="$"/>
                             </p:inputText>
                             <p:message for="value"/>
-                            <p:inputText id="percent" value="#{eventVoWrapperBean.event.eventVo.percent}">
+                            <p:inputText id="percent" value="#{eventVoWrapperBean.event.event.percent}">
                                 <f:convertNumber type="percent"/>
                             </p:inputText>
                             <p:message for="percent"/>

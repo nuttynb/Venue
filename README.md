@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/schonherz-java-ee-2016-summer/project/master/Template/src/main/resources/META-INF/resources/images/logo.png" width="50px" height="50px"> Concert Organizer
+# <img src="https://raw.githubusercontent.com/schonherz-java-ee-2016-summer/project/master/Template/src/main/resources/META-INF/resources/image/logo.png" width="50px" height="50px"> Concert Organizer
 ## Venue Module
 The Venue Module of ConOrg is responsible for managing venue data and public profiles.
 ### Synopsis
