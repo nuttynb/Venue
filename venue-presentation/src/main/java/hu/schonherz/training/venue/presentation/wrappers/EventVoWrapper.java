@@ -2,19 +2,10 @@ package hu.schonherz.training.venue.presentation.wrappers;
 
 import hu.schonherz.training.venue.vo.EventVo;
 import org.primefaces.model.DefaultScheduleEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 
-/**
- * Created by Home on 2016. 09. 08..
- */
-
-
 public class EventVoWrapper extends DefaultScheduleEvent {
-
-    private static Logger LOG = LoggerFactory.getLogger(EventVoWrapper.class);
 
     private EventVo eventVo;
 
@@ -41,7 +32,7 @@ public class EventVoWrapper extends DefaultScheduleEvent {
         return String.valueOf(eventVo.getId());
     }
 
-    /*@Override
+   /* @Override
     public void setId(String id) {
         eventVo.setId(Long.valueOf(id));
     }*/
@@ -95,7 +86,5 @@ public class EventVoWrapper extends DefaultScheduleEvent {
     public void setDescription(String description) {
         eventVo.setDescription(description);
     }
-
-
 
 }

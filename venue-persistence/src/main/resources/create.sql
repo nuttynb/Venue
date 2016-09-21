@@ -1,5 +1,5 @@
-INSERT INTO public.type( id, name ) VALUES (1, 'Rock kocsma');
-INSERT INTO public.type( id, name ) VALUES (2, 'Rom kocsma');
+INSERT INTO public.type( id, name ) VALUES (1, 'Rock pub');
+INSERT INTO public.type( id, name ) VALUES (2, 'Ruin pub');
 INSERT INTO public.type( id, name ) VALUES (3, 'Bar');
 INSERT INTO public.type( id, name ) VALUES (4, 'Nightclub');
 INSERT INTO public.type( id, name ) VALUES (5, 'Disco');

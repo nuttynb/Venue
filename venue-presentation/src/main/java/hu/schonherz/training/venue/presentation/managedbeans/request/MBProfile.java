@@ -6,7 +6,6 @@ import hu.schonherz.training.venue.presentation.managedbeans.view.*;
 import hu.schonherz.training.venue.presentation.wrappers.EventVoWrapper;
 import hu.schonherz.training.venue.service.*;
 import hu.schonherz.training.venue.vo.EventVo;
-import hu.schonherz.training.venue.vo.OrganizingMailVo;
 import hu.schonherz.training.venue.vo.VenueVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,8 +24,6 @@ public class MBProfile {
     private MBVenue venue;
     @ManagedProperty(value = "#{USER}")
     private RemoteUserVo user;
-    @ManagedProperty(value = "#{venueImageBean}")
-    private MBVenueImage venueImage;
     @ManagedProperty(value = "#{venueImagesBean}")
     private MBVenueImages venueImages;
     @ManagedProperty(value = "#{param.profileImageId}")
@@ -35,8 +32,6 @@ public class MBProfile {
     MBLatLng latLng;
     @ManagedProperty(value = "#{scheduleBean}")
     MBSchedule schedule;
-    @ManagedProperty(value = "#{eventBean}")
-    MBEvent event;
     @ManagedProperty(value = "#{publicProfileBean}")
     MBPublicProfile publicProfile;
 
@@ -166,14 +161,6 @@ public class MBProfile {
         this.user = user;
     }
 
-    public MBVenueImage getVenueImage() {
-        return venueImage;
-    }
-
-    public void setVenueImage(MBVenueImage venueImage) {
-        this.venueImage = venueImage;
-    }
-
     public Long getProfileImageId() {
         return profileImageId;
     }
@@ -204,14 +191,6 @@ public class MBProfile {
 
     public void setSchedule(MBSchedule schedule) {
         this.schedule = schedule;
-    }
-
-    public MBEvent getEvent() {
-        return event;
-    }
-
-    public void setEvent(MBEvent event) {
-        this.event = event;
     }
 
     public MBPublicProfile getPublicProfile() {

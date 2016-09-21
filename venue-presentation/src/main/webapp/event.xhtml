@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/templates/pageTemplate.xhtml">
+        <ui:define name="title">#{eventBean.event.name} #{msg['profile']}</ui:define>
+        <ui:define name="body">
+            <h:outputStylesheet name="css/venue.css"/>
+            <f:metadata>
+                <f:viewParam name="eventid" value="#{eventBean.eventId}"/>
+                <f:viewAction action="#{eventProfileBean.onLoad}"/>
+            </f:metadata>
+            <div class="box">
+                <h:outputText value="#{eventBean.event.name}"/>
+                <h:outputText value="#{eventBean.event.beginDate}"/>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

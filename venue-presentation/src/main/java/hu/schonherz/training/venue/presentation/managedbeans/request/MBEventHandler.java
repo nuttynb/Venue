@@ -62,7 +62,7 @@ public class MBEventHandler implements Serializable {
     public void onDateSelect(SelectEvent selectEvent) {
         event = new EventVoWrapper((Date) selectEvent.getObject());
     }
-
+/*
     public void onEventMove(ScheduleEntryMoveEvent event) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
 
@@ -78,7 +78,7 @@ public class MBEventHandler implements Serializable {
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-
+*/
 
     public MBVenue getVenue() {
         return venue;

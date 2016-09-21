@@ -16,8 +16,8 @@
             </f:metadata>
             <div class="main">
 
-                <ui:fragment styleClass="profile-details" rendered="#{venueBean.venue ne null and
-                  (venueBean.venue.enabled or publicProfileBean.owner or publicProfileBean.admin)}">
+                <ui:fragment
+                        rendered="#{venueBean.venue ne null and (venueBean.venue.enabled or publicProfileBean.owner or publicProfileBean.admin)}">
                     <ui:include src="WEB-INF/includes/profile-details.xhtml"/>
                 </ui:fragment>
                 <ui:fragment rendered="#{(venueBean.venue eq null) and (publicProfileBean.venueId eq null)}">
@@ -30,6 +30,11 @@
                 <ui:fragment rendered="#{(venueBean.venue eq null) and (publicProfileBean.venueId ne null)}">
                     <div class="centered-block centered-text">
                         <h:outputText styleClass="no-venue" value="#{msg['venue.not.exists']}"/>
+                    </div>
+                </ui:fragment>
+                <ui:fragment rendered="#{(venueBean.venue ne null) and (!venueBean.venue.enabled)}">
+                    <div class="centered-block centered-text">
+                        <h:outputText styleClass="no-venue" value="#{msg['venue.blocked']}"/>
                     </div>
                 </ui:fragment>
             </div>

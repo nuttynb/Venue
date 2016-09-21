@@ -15,14 +15,13 @@
                     listener="#{eventHandler.onEventSelect}"
                     update="@widgetVar(eventDialog)"
                     oncomplete="PF('eventDialog').show();"/>
-            <p:ajax disabled="#{publicProfileBean.disabled}" event="eventMove"
+          <!--  <p:ajax disabled="#{publicProfileBean.disabled}" event="eventMove"
                     listener="#{eventHandler.onEventMove}"
                     update="@widgetVar(eventDialog)"/>
             <p:ajax disabled="#{publicProfileBean.disabled}" event="eventResize"
                     listener="#{eventHandler.onEventResize}"
-                    update="@widgetVar(eventDialog)"/>
-            <p:ajax disabled="#{!publicProfileBean.disabled}" event="eventSelect"
-                    oncomplete="alert('mukodik')"/>
+                    update="@widgetVar(eventDialog)"/> -->
+            <p:ajax disabled="#{!publicProfileBean.disabled}" event="eventSelect" listener="#{eventProfileBean.onShowEvent}"/>
         </p:schedule>
         <p:dialog widgetVar="eventDialog" header="#{msg['event.details']}" showEffect="clip" hideEffect="clip">
             <h:form>
@@ -79,7 +78,7 @@
                     <p:commandButton value="#{msg['dialog.save']}"
                                      oncomplete="PF('eventDialog').hide();addEvent(); PF('myschedule').update();"
                                      actionListener="#{eventHandler.addEvent}" validateClient="true"/>
-                    <p:commandButton type="reset" value="#{msg['event.reset']}"/>
+                   <!-- <p:commandButton type="reset" value="#{msg['event.reset']}"/> -->
                     <p:remoteCommand name="addEvent" actionListener="#{profileBean.onUpdateAfterNewEvent}"/>
                 </h:panelGrid>
             </h:form>

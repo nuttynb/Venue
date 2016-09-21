@@ -3,7 +3,6 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
-    <div class="box-content">
         <h:form>
             <p:fileUpload disabled="#{publicProfileBean.disabled}" fileUploadListener="#{fileUploadBean.fileUpload}"
                           uploadLabel="#{msg['fileupload.wizard.label.upload']}"
@@ -16,5 +15,4 @@
                                  update="@widgetVar(imageDialog) @widgetVar(galleria-panel)"/>
             </p:fileUpload>
         </h:form>
-    </div>
 </ui:composition>
