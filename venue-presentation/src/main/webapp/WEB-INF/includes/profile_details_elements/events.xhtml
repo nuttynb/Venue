@@ -15,37 +15,38 @@
                     listener="#{eventHandler.onEventSelect}"
                     update="@widgetVar(eventDialog)"
                     oncomplete="PF('eventDialog').show();"/>
-          <!--  <p:ajax disabled="#{publicProfileBean.disabled}" event="eventMove"
-                    listener="#{eventHandler.onEventMove}"
-                    update="@widgetVar(eventDialog)"/>
-            <p:ajax disabled="#{publicProfileBean.disabled}" event="eventResize"
-                    listener="#{eventHandler.onEventResize}"
-                    update="@widgetVar(eventDialog)"/> -->
-            <p:ajax disabled="#{!publicProfileBean.disabled}" event="eventSelect" listener="#{eventProfileBean.onShowEvent}"/>
+            <!--  <p:ajax disabled="#{publicProfileBean.disabled}" event="eventMove"
+                      listener="#{eventHandler.onEventMove}"
+                      update="@widgetVar(eventDialog)"/>
+              <p:ajax disabled="#{publicProfileBean.disabled}" event="eventResize"
+                      listener="#{eventHandler.onEventResize}"
+                      update="@widgetVar(eventDialog)"/> -->
+            <p:ajax disabled="#{!publicProfileBean.disabled}" event="eventSelect"
+                    listener="#{eventProfileBean.onShowEvent}"/>
         </p:schedule>
         <p:dialog widgetVar="eventDialog" header="#{msg['event.details']}" showEffect="clip" hideEffect="clip">
             <h:form>
                 <h:panelGrid id="eventDetails" columns="2">
                     <h:outputLabel for="title" value="#{msg['event.title']}:"/>
-                    <p:inputText id="title" value="#{eventHandler.event.title}"/>
+                    <p:inputText id="title" value="#{eventVoWrapperBean.event.title}"/>
 
                     <h:outputLabel for="from" value="#{msg['event.from']}:"/>
-                    <p:calendar id="from" value="#{eventHandler.event.startDate}" pattern="dd/MM/yyyy HH:mm"/>
+                    <p:calendar id="from" value="#{eventVoWrapperBean.event.startDate}" pattern="dd/MM/yyyy HH:mm"/>
 
                     <h:outputLabel for="to" value="#{msg['event.to']}:"/>
-                    <p:calendar id="to" value="#{eventHandler.event.endDate}" pattern="dd/MM/yyyy HH:mm"/>
+                    <p:calendar id="to" value="#{eventVoWrapperBean.event.endDate}" pattern="dd/MM/yyyy HH:mm"/>
 
                     <h:outputLabel for="description" value="#{msg['event.description']}:"/>
-                    <p:inputText id="description" value="#{eventHandler.event.description}"/>
+                    <p:inputText id="description" value="#{eventVoWrapperBean.event.description}"/>
 
                     <h:outputLabel for="radio" value="#{msg['event.promotion']}"/>
-                    <h:selectOneRadio id="radio" value="#{eventHandler.promotion}" required="true">
+                    <h:selectOneRadio id="radio" value="#{eventVoWrapperBean.promotion}" required="true">
                         <f:selectItem id="yes" itemValue="#{true}" itemLabel="#{msg['yes']}"/>
                         <f:selectItem id="no" itemValue="#{false}" itemLabel="#{msg['no']}"/>
                         <p:ajax update="prominputs promlabels radio" event="change"/>
                     </h:selectOneRadio>
                     <p:outputPanel id="promlabels">
-                        <h:panelGrid rendered="#{eventHandler.promotion}">
+                        <h:panelGrid rendered="#{eventVoWrapperBean.promotion}">
                             <h:outputLabel for="promodescription" value="#{msg['event.description']}:"/>
                             <h:outputLabel for="value" value="#{msg['amount']}:"/>
                             <h:outputLabel for="percent" value="%:"/>
@@ -53,24 +54,24 @@
 
                     </p:outputPanel>
                     <p:outputPanel id="prominputs">
-                        <h:panelGrid id="prom" rendered="#{eventHandler.promotion}">
-                            <p:inputText id="promodescription"
-                                         value="#{eventHandler.event.eventVo.promoDescripton}"/>
-                            <p:inputText id="value"
-                                         value="#{eventHandler.event.eventVo.amount}">
-                                <f:convertNumber type="currency" currencySymbol="$"/>
-                            </p:inputText>
-                            <p:message for="value"/>
-                            <p:inputText id="percent" value="#{eventHandler.event.eventVo.percent}">
-                                <f:convertNumber type="percent"/>
-                            </p:inputText>
-                            <p:message for="percent"/>
+                        <h:panelGrid id="prom" rendered="#{eventVoWrapperBean.promotion}">
+                                <p:inputText id="promodescription"
+                                             value="#{eventVoWrapperBean.event.eventVo.promoDescription}"/>
+                                <p:inputText id="value"
+                                             value="#{eventVoWrapperBean.event.eventVo.amount}">
+                                    <f:convertNumber type="currency" currencySymbol="$"/>
+                                </p:inputText>
+                                <p:message for="value"/>
+                                <p:inputText id="percent" value="#{eventVoWrapperBean.event.eventVo.percent}">
+                                    <f:convertNumber type="percent"/>
+                                </p:inputText>
+                                <p:message for="percent"/>
                         </h:panelGrid>
                     </p:outputPanel>
                     <h:outputLabel value="#{msg['event.type']}:"/>
 
                     <p:selectOneMenu styleClass="centered-block centered-text" style="width:125px" required="true"
-                                     value="#{eventHandler.event.eventVo.type}">
+                                     value="#{eventVoWrapperBean.event.eventVo.type}">
                         <f:selectItem itemLabel="#{msg['selectonemenu.select']}" itemValue=""/>
                         <f:selectItems value="#{eventTypeBean.eventType}" var="type"
                                        itemLabel="#{msg['enum.event.type.'+=type.name()]}" itemValue="#{type}"/>
@@ -78,7 +79,7 @@
                     <p:commandButton value="#{msg['dialog.save']}"
                                      oncomplete="PF('eventDialog').hide();addEvent(); PF('myschedule').update();"
                                      actionListener="#{eventHandler.addEvent}" validateClient="true"/>
-                   <!-- <p:commandButton type="reset" value="#{msg['event.reset']}"/> -->
+                    <!-- <p:commandButton type="reset" value="#{msg['event.reset']}"/> -->
                     <p:remoteCommand name="addEvent" actionListener="#{profileBean.onUpdateAfterNewEvent}"/>
                 </h:panelGrid>
             </h:form>
