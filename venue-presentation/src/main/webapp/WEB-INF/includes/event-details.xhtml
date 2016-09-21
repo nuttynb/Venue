@@ -5,38 +5,37 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <div class="container-fluid">
-        <div>
+        <div class="col-xs-12 col-md-12">
             #{eventBean.event.name}
         </div>
-        <div>
+        <div class="col-xs-12 col-md-6">
             #{eventBean.event.beginDate}
         </div>
-        <div>
+        <div class="col-xs-12 col-md-6">
             #{eventBean.event.endDate}
         </div>
-        <div>
+        <div class="col-xs-12 col-md-6">
             #{eventBean.event.bandId}
         </div>
-        <div>
-            #{eventBean.event.id}
-        </div>
-        <div>
+        <div class="col-xs-12 col-md-6">
             #{eventBean.event.type}
         </div>
-        <div>
+        <div class="col-xs-12 col-md-6">
+            #{eventBean.event.id}
+        </div>
+        <div class="col-xs-12 col-md-6">
             #{eventBean.event.description}
         </div>
-        <div>
+        <div class="col-xs-12 col-md-12">
             #{eventBean.event.promoDescription}
-
         </div>
-        <div>
+        <div class="col-xs-12 col-md-6">
             #{eventBean.event.amount}
         </div>
-        <div>
+        <div class="col-xs-12 col-md-6">
             #{eventBean.event.percent}
         </div>
-        <div>
+        <div class="col-xs-12 col-md-12">
             <h:form>
                 <p:fileUpload fileUploadListener="#{fileUploadBean.fileUpload}"
                               uploadLabel="#{msg['fileupload.wizard.label.upload']}"
