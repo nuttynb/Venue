@@ -14,10 +14,17 @@
                 <f:viewParam name="eventid" value="#{eventBean.eventId}"/>
                 <f:viewAction action="#{eventProfileBean.onLoad}"/>
             </f:metadata>
-            <div class="box">
-                <h:outputText value="#{eventBean.event.name}"/>
-                <h:outputText value="#{eventBean.event.beginDate}"/>
-            </div>
+            <ui:fragment rendered="#{eventBean.event eq null}">
+                <div class="centered-block centered-text">
+                    <h:outputText styleClass="info-font" value="#{msg['event.not.exists']}"/>
+                </div>
+            </ui:fragment>
+            <ui:fragment rendered="#{eventBean.event ne null}">
+                <div class="box">
+                    <h:outputText value="#{eventBean.event.name}"/>
+                    <h:outputText value="#{eventBean.event.beginDate}"/>
+                </div>
+            </ui:fragment>
         </ui:define>
     </ui:composition>
 </html>

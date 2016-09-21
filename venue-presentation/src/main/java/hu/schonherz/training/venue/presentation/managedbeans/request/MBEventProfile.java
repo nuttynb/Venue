@@ -21,7 +21,9 @@ public class MBEventProfile {
     EventService eventService;
 
     public void onLoad() {
-        event.setEvent(eventService.getEventById(event.getEventId()));
+        if (event.getEventId() != null) {
+            event.setEvent(eventService.getEventById(event.getEventId()));
+        }
     }
 
     public void onShowEvent(SelectEvent selectEvent) {

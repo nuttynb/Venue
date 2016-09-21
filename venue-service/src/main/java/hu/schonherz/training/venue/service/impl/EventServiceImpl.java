@@ -33,7 +33,12 @@ public class EventServiceImpl extends AbstractMappingService implements EventSer
 
     @Override
     public EventVo getEventById(Long id) {
-        return map(eventRepository.findOne(id), EventVo.class);
+        Event event = eventRepository.findOne(id);
+        if (event != null) {
+            return map(event, EventVo.class);
+        } else {
+            return null;
+        }
     }
 
     @Override

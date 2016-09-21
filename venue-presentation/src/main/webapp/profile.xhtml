@@ -22,19 +22,19 @@
                 </ui:fragment>
                 <ui:fragment rendered="#{(venueBean.venue eq null) and (publicProfileBean.venueId eq null)}">
                     <div class="centered-block centered-text">
-                        <h:outputText styleClass="no-venue" value="#{msg['no.venue']}"/>
+                        <h:outputText styleClass="info-font" value="#{msg['no.venue']}"/>
                     </div>
                     <p:button styleClass="create" outcome="createVenue" value="#{msg['create.new.venue']}"
                               icon="ui-icon-plus"></p:button>
                 </ui:fragment>
                 <ui:fragment rendered="#{(venueBean.venue eq null) and (publicProfileBean.venueId ne null)}">
                     <div class="centered-block centered-text">
-                        <h:outputText styleClass="no-venue" value="#{msg['venue.not.exists']}"/>
+                        <h:outputText styleClass="info-font" value="#{msg['venue.not.exists']}"/>
                     </div>
                 </ui:fragment>
                 <ui:fragment rendered="#{(venueBean.venue ne null) and (!venueBean.venue.enabled)}">
                     <div class="centered-block centered-text">
-                        <h:outputText styleClass="no-venue" value="#{msg['venue.blocked']}"/>
+                        <h:outputText styleClass="info-font" value="#{msg['venue.blocked']}"/>
                     </div>
                 </ui:fragment>
             </div>
