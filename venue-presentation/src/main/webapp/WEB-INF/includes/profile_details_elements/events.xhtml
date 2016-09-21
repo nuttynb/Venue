@@ -4,7 +4,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <div>
-        <p:schedule value="#{scheduleBean.eventModel}"
+        <p:schedule value="#{scheduleBean.eventModel}" draggable="false"
                     editable="true"
                     widgetVar="myschedule">
             <p:ajax disabled="#{publicProfileBean.disabled}" event="dateSelect"
@@ -15,12 +15,6 @@
                     listener="#{eventHandler.onEventSelect}"
                     update="@widgetVar(eventDialog)"
                     oncomplete="PF('eventDialog').show();"/>
-            <!--  <p:ajax disabled="#{publicProfileBean.disabled}" event="eventMove"
-                      listener="#{eventHandler.onEventMove}"
-                      update="@widgetVar(eventDialog)"/>
-              <p:ajax disabled="#{publicProfileBean.disabled}" event="eventResize"
-                      listener="#{eventHandler.onEventResize}"
-                      update="@widgetVar(eventDialog)"/> -->
             <p:ajax disabled="#{!publicProfileBean.disabled}" event="eventSelect"
                     listener="#{eventProfileBean.onShowEvent}"/>
         </p:schedule>
@@ -55,17 +49,17 @@
                     </p:outputPanel>
                     <p:outputPanel id="prominputs">
                         <h:panelGrid id="prom" rendered="#{eventVoWrapperBean.promotion}">
-                                <p:inputText id="promodescription"
-                                             value="#{eventVoWrapperBean.event.eventVo.promoDescription}"/>
-                                <p:inputText id="value"
-                                             value="#{eventVoWrapperBean.event.eventVo.amount}">
-                                    <f:convertNumber type="currency" currencySymbol="$"/>
-                                </p:inputText>
-                                <p:message for="value"/>
-                                <p:inputText id="percent" value="#{eventVoWrapperBean.event.eventVo.percent}">
-                                    <f:convertNumber type="percent"/>
-                                </p:inputText>
-                                <p:message for="percent"/>
+                            <p:inputText id="promodescription"
+                                         value="#{eventVoWrapperBean.event.eventVo.promoDescription}"/>
+                            <p:inputText id="value"
+                                         value="#{eventVoWrapperBean.event.eventVo.amount}">
+                                <f:convertNumber type="currency" currencySymbol="$"/>
+                            </p:inputText>
+                            <p:message for="value"/>
+                            <p:inputText id="percent" value="#{eventVoWrapperBean.event.eventVo.percent}">
+                                <f:convertNumber type="percent"/>
+                            </p:inputText>
+                            <p:message for="percent"/>
                         </h:panelGrid>
                     </p:outputPanel>
                     <h:outputLabel value="#{msg['event.type']}:"/>

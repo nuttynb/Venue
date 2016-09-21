@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <div class="container-fluid">
+        <div>
+            #{eventBean.event.name}
+        </div>
+        <div>
+            #{eventBean.event.beginDate}
+        </div>
+        <div>
+            #{eventBean.event.endDate}
+        </div>
+        <div>
+            #{eventBean.event.bandId}
+        </div>
+        <div>
+            #{eventBean.event.id}
+        </div>
+        <div>
+            #{eventBean.event.type}
+        </div>
+        <div>
+            #{eventBean.event.description}
+        </div>
+        <div>
+            #{eventBean.event.promoDescription}
+
+        </div>
+        <div>
+            #{eventBean.event.amount}
+        </div>
+        <div>
+            #{eventBean.event.percent}
+        </div>
+        <div>
+            <h:form>
+                <p:fileUpload fileUploadListener="#{fileUploadBean.fileUpload}"
+                              uploadLabel="#{msg['fileupload.wizard.label.upload']}"
+                              label="#{msg['fileupload.wizard.label.choose']}"
+                              cancelLabel="#{msg['fileupload.wizard.label.cancel']}"
+                              invalidSizeMessage="#{msg['fileupload.wizard.label.size']}" mode="advanced"
+                              dragDropSupport="true" sizeLimit="4000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                              multiple="true">
+                </p:fileUpload>
+            </h:form>
+        </div>
+    </div>
+</ui:composition>

@@ -20,10 +20,7 @@
                 </div>
             </ui:fragment>
             <ui:fragment rendered="#{eventBean.event ne null}">
-                <div class="box">
-                    <h:outputText value="#{eventBean.event.name}"/>
-                    <h:outputText value="#{eventBean.event.beginDate}"/>
-                </div>
+                <ui:include src="WEB-INF/includes/event-details.xhtml"/>
             </ui:fragment>
         </ui:define>
     </ui:composition>
