@@ -46,6 +46,9 @@ public class Event extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private EventType type;
 
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean promotion;
+
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<EventImage> images;
 
@@ -135,5 +138,13 @@ public class Event extends BaseEntity {
 
     public void setImages(Collection<EventImage> images) {
         this.images = images;
+    }
+
+    public boolean isPromotion() {
+        return promotion;
+    }
+
+    public void setPromotion(boolean promotion) {
+        this.promotion = promotion;
     }
 }

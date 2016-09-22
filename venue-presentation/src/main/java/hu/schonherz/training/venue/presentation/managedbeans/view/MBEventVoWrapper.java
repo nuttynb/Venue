@@ -14,8 +14,6 @@ public class MBEventVoWrapper implements Serializable {
 
     EventVoWrapper event = new EventVoWrapper();
 
-    private boolean promotion;
-
     public EventVoWrapper getEvent() {
         return event;
     }
@@ -24,11 +22,4 @@ public class MBEventVoWrapper implements Serializable {
         this.event = event;
     }
 
-    public boolean isPromotion() {
-        return promotion;
-    }
-
-    public void setPromotion(boolean promotion) {
-        this.promotion = promotion;
-    }
 }

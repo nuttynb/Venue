@@ -26,6 +26,8 @@ public class EventVo implements Serializable {
 
     private String description;
 
+    private boolean promotion = false;
+
     private String promoDescription;
 
     private double amount;
@@ -180,5 +182,13 @@ public class EventVo implements Serializable {
 
     public void setPercent(double percent) {
         this.percent = percent;
+    }
+
+    public boolean isPromotion() {
+        return promotion;
+    }
+
+    public void setPromotion(boolean promotion) {
+        this.promotion = promotion;
     }
 }

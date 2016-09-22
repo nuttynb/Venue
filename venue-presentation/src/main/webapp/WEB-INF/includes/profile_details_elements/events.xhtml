@@ -34,13 +34,13 @@
                     <p:inputText id="description" value="#{eventVoWrapperBean.event.description}"/>
 
                     <h:outputLabel for="radio" value="#{msg['event.promotion']}"/>
-                    <h:selectOneRadio id="radio" value="#{eventVoWrapperBean.promotion}" required="true">
+                    <h:selectOneRadio id="radio" value="#{eventVoWrapperBean.event.eventVo.promotion}" required="true">
                         <f:selectItem id="yes" itemValue="#{true}" itemLabel="#{msg['yes']}"/>
                         <f:selectItem id="no" itemValue="#{false}" itemLabel="#{msg['no']}"/>
-                        <p:ajax update="prominputs promlabels radio" event="change"/>
+                        <p:ajax update="prominputs promlabels radio promodescription" event="change"/>
                     </h:selectOneRadio>
                     <p:outputPanel id="promlabels">
-                        <h:panelGrid rendered="#{eventVoWrapperBean.promotion}">
+                        <h:panelGrid rendered="#{eventVoWrapperBean.event.eventVo.promotion}">
                             <h:outputLabel for="promodescription" value="#{msg['event.description']}:"/>
                             <h:outputLabel for="value" value="#{msg['amount']}:"/>
                             <h:outputLabel for="percent" value="%:"/>
@@ -48,18 +48,17 @@
 
                     </p:outputPanel>
                     <p:outputPanel id="prominputs">
-                        <h:panelGrid id="prom" rendered="#{eventVoWrapperBean.promotion}">
+                        <h:panelGrid id="prom" rendered="#{eventVoWrapperBean.event.eventVo.promotion}">
                             <p:inputText id="promodescription"
-                                         value="#{eventVoWrapperBean.event.event.promoDescription}"/>
+                                         value="#{eventVoWrapperBean.event.eventVo.promoDescription}"/>
                             <p:inputText id="value"
-                                         value="#{eventVoWrapperBean.event.event.amount}">
-                                <f:convertNumber type="currency" currencySymbol="$"/>
+                                         value="#{eventVoWrapperBean.event.eventVo.amount}">
+                                <p:clientValidator/>
                             </p:inputText>
-                            <p:message for="value"/>
-                            <p:inputText id="percent" value="#{eventVoWrapperBean.event.event.percent}">
-                                <f:convertNumber type="percent"/>
+                            <p:inputText id="percent" value="#{eventVoWrapperBean.event.eventVo.percent}">
+                                <f:validateLongRange maximum="100" minimum="0"/>
+                                <p:clientValidator/>
                             </p:inputText>
-                            <p:message for="percent"/>
                         </h:panelGrid>
                     </p:outputPanel>
                     <h:outputLabel value="#{msg['event.type']}:"/>
@@ -71,8 +70,12 @@
                                        itemLabel="#{msg['enum.event.type.'+=type.name()]}" itemValue="#{type}"/>
                     </p:selectOneMenu>
                     <p:commandButton value="#{msg['dialog.save']}"
+                                     validateClient="true"
                                      oncomplete="PF('eventDialog').hide();addEvent(); PF('myschedule').update();"
-                                     actionListener="#{eventHandler.addEvent}" validateClient="true"/>
+                                     actionListener="#{eventHandler.addEvent}"
+                    >
+
+                    </p:commandButton>
                     <!-- <p:commandButton type="reset" value="#{msg['event.reset']}"/> -->
                     <p:remoteCommand name="addEvent" actionListener="#{profileBean.onUpdateAfterNewEvent}"/>
                 </h:panelGrid>

@@ -9,6 +9,7 @@ import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -37,6 +38,15 @@ public class MBEventHandler implements Serializable {
 
 
     private static Logger LOG = LoggerFactory.getLogger(MBEventHandler.class);
+
+    @PostConstruct
+    public void init() {
+        if (!event.getEvent().getEventVo().isPromotion()) {
+            event.getEvent().getEventVo().setAmount(0.0);
+            event.getEvent().getEventVo().setPromoDescription("");
+            event.getEvent().getEventVo().setPercent(0.0);
+        }
+    }
 
     public void addEvent(ActionEvent actionEvent) {
         if (event.getEvent().getId() == null) {
