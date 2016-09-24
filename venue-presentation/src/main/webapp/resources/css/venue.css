@@ -166,3 +166,7 @@ a .box:hover {
 .box .label {
     padding-left: 0;
 }
+
+.promotion {
+    float: right;
+}

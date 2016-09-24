@@ -6,7 +6,11 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <div class="container-fluid">
         <div class="col-xs-12 col-md-12">
-            #{eventBean.event.name}
+            <div class="box">
+                <div class="box-header">
+                    #{eventBean.event.name}
+                </div>
+            </div>
         </div>
         <div class="col-xs-12 col-md-12">
             <p:panel widgetVar="event-galleria-panel">
@@ -22,32 +26,81 @@
             </p:panel>
         </div>
         <div class="col-xs-12 col-md-6">
-            #{eventBean.event.beginDate}
+            <div class="box">
+                <div class="box-header">
+                    #{eventBean.event.beginDate}
+                </div>
+            </div>
         </div>
         <div class="col-xs-12 col-md-6">
-            #{eventBean.event.endDate}
+            <div class="box">
+                <div class="box-header">
+                    #{eventBean.event.endDate}
+                 </div>
+            </div>
         </div>
         <div class="col-xs-12 col-md-6">
+            <div class="box">
+                <div class="box-header">
             #{eventBean.event.bandId}
+                </div>
+            </div>
         </div>
         <div class="col-xs-12 col-md-6">
+    <div class="box">
+        <div class="box-header">
             #{eventBean.event.type}
         </div>
-        <div class="col-xs-12 col-md-6">
-            #{eventBean.event.id}
+    </div>
         </div>
         <div class="col-xs-12 col-md-6">
+    <div class="box">
+    <div class="box-header">
+            #{eventBean.event.id}
+    </div>
+    </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+    <div class="box">
+        <div class="box-header">
             #{eventBean.event.description}
         </div>
-        <div class="col-xs-12 col-md-12">
-            #{eventBean.event.promoDescription}
+    </div>
         </div>
+        <div class="col-xs-12 col-md-12" >
+            <h:panelGrid rendered="#{eventBean.event.promotion}">
+                <div class="box promotion">
+                    <div class="box-header">
+                #{eventBean.event.promoDescription}
+                    </div>
+                </div>
+                <div class="box promotion">
+                    <div class="box-header">
+                        #{eventBean.event.amount}
+                    </div>
+                </div>
+                <div class="box promotion">
+                    <div class="box-header">
+                        #{eventBean.event.percent}
+                    </div>
+                </div>
+            </h:panelGrid>
+        </div>
+        <!--
         <div class="col-xs-12 col-md-6">
+            <div class="box">
+                <div class="box-header">
             #{eventBean.event.amount}
+                </div>
+            </div>
         </div>
         <div class="col-xs-12 col-md-6">
+            <div class="box">
+                <div class="box-header">
             #{eventBean.event.percent}
-        </div>
+                </div>
+            </div>
+        </div>-->
         <div class="col-xs-12 col-md-12">
             <h:form>
                 <p:fileUpload fileUploadListener="#{eventFileUpload.fileUpload}"
