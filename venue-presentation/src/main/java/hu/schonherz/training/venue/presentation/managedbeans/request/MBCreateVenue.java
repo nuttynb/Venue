@@ -5,6 +5,7 @@ import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenue;
 
 import hu.schonherz.training.venue.service.VenueService;
 
+import hu.schonherz.training.venue.vo.VenueVo;
 import org.primefaces.event.FlowEvent;
 
 import javax.ejb.EJB;
@@ -26,6 +27,16 @@ public class MBCreateVenue {
         venue.getVenue().setOwnerId(user.getId());
         venueService.saveVenue(venue.getVenue());
         return "profile";
+    }
+
+    public boolean hasVenueAlready() {
+        VenueVo possibleVenue;
+        possibleVenue = venueService.getVenueByOwnerId(user.getId());
+        if (possibleVenue == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public String onFlowProcess(FlowEvent event) {

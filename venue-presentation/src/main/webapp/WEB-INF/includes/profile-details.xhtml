@@ -18,7 +18,8 @@
             </p:panel>
         </div>
         <div class="col-xs-12 col-md-12">
-            <h:outputLink value="profile.xhtml?venueid=#{venueBean.venue.id}">Watch my public profile</h:outputLink>
+            <h:outputLink value="profile.xhtml?venueid=#{venueBean.venue.id}"
+                          style="margin-left: 20px">#{msg['venue.profile.watch.public']}</h:outputLink>
         </div>
         <div class="col-xs-12 col-md-4">
             <ui:include src="profile_details_elements/profile-image.xhtml"/>

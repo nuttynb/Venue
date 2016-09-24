@@ -16,7 +16,14 @@ public class RemoteEJBClientLookup {
         final Context context = new InitialContext(jndiProperties);
 
         final String viewClassName = ejbClass.getName();
+        String slash = "/";
+        StringBuilder name = new StringBuilder("ejb:");
+        name.append(appName).append(slash)
+                .append(moduleName).append(slash)
+                .append(distinctName).append(slash)
+                .append(beanName).append("!")
+                .append(viewClassName);
 
-        return (T) context.lookup("ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
+        return (T) context.lookup(name.toString());
     }
 }

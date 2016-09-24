@@ -9,7 +9,7 @@
             #{eventBean.event.name}
         </div>
         <div class="col-xs-12 col-md-12">
-            <p:panel widgetVar="galleria-panel">
+            <p:panel widgetVar="event-galleria-panel">
                 <h:outputText value="#{msg['no.image']}" rendered="#{eventImagesBean.images.isEmpty()}"/>
                 <p:galleria value="#{eventImagesBean.images}" var="image" panelWidth="500" panelHeight="300"
                             style="margin: 0 auto;" showCaption="true" rendered="#{!eventImagesBean.images.isEmpty()}"
@@ -56,10 +56,9 @@
                               cancelLabel="#{msg['fileupload.wizard.label.cancel']}"
                               invalidSizeMessage="#{msg['fileupload.wizard.label.size']}" mode="advanced"
                               dragDropSupport="true" sizeLimit="4000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                              multiple="true" update="@this"
-                              oncomplete="afterUploading">
-                    <p:remoteCommand name="afterUploading" actionListener="#{eventProfileBean.onUpdateafterUploading}"
-                                     update="@widgetVar(galleria-panel)"/>
+                              multiple="true" oncomplete="afterEventUploading();">
+                    <p:remoteCommand name="afterEventUploading" actionListener="#{eventProfileBean.onUpdateafterUploading}"
+                                     update="@widgetVar(event-galleria-panel)"/>
                 </p:fileUpload>
             </h:form>
         </div>

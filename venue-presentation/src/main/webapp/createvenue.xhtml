@@ -10,117 +10,133 @@
         <ui:define name="title">#{msg['create.new.venue']}</ui:define>
         <ui:define name="body">
             <h:outputStylesheet name="css/venue.css"/>
-            <div class="main">
-                <h:form id="form">
-                    <p:wizard styleClass="wizard" flowListener="#{createVenueBean.onFlowProcess}">
-                        <p:tab id="general" title="#{msg['createvenue.wizard.label.general']}">
-                            <p:panel header="#{msg['createvenue.wizard.label.general.informations']}">
-                                <div class="centered-block">
-                                    <p:messages/>
-                                    <h:panelGrid columns="2" columnClasses="label, value">
-                                        <h:outputText styleClass="input-label" value="#{msg['venue.name']} *"/>
-                                        <p:inputText value="#{venueBean.venue.name}" required="true"
-                                                     requiredMessage="#{msg['venue.name']} #{msg['createvenue.wizard.requiredmessage']}"/>
-                                        <h:outputText styleClass="input-label" value="#{msg['venue.description']} *"/>
-                                        <p:inputTextarea value="#{venueBean.venue.description}" required="true" rows="4"
-                                                         cols="40"
-                                                         requiredMessage="#{msg['venue.description']} #{msg['createvenue.wizard.requiredmessage']}"/>
-                                        <h:outputText styleClass="input-label" for="type"
-                                                      value="#{msg['venue.type']} *"/>
-                                        <p:selectOneMenu id="type" style="width:150px" required="true"
-                                                         value="#{venueBean.venue.type}" converter="typeVoConverter"
-                                                         requiredMessage="#{msg['venue.type']} #{msg['createvenue.wizard.requiredmessage']}">
-                                            <f:selectItem itemLabel="#{msg['selectonemenu.select']}" itemValue=""/>
-                                            <f:selectItems value="#{typeBean.types}" var="type"
-                                                           itemLabel="#{type.name}" itemValue="#{type}"/>
-                                        </p:selectOneMenu>
-                                    </h:panelGrid>
-                                </div>
-                            </p:panel>
-                        </p:tab>
-
-                        <p:tab id="address" title="#{msg['createvenue.wizard.label.address']}">
-                            <p:panel header="#{msg['createvenue.wizard.label.address.details']}">
-                                <div class="wizard-padding">
-                                    <p:messages/>
-                                    <h:panelGrid columns="2" columnClasses="label, value">
-                                        <h:outputText styleClass="input-label"
-                                                      value="#{msg['venue.address.country']} *"/>
-                                        <p:inputText value="#{venueBean.venue.address.country}" required="true"
-                                                     requiredMessage="#{msg['venue.address.country']} #{msg['createvenue.wizard.requiredmessage']}"/>
-                                        <h:outputText styleClass="input-label"
-                                                      value="#{msg['venue.address.postalcode']} *"/>
-                                        <p:inputText value="#{venueBean.venue.address.postcode}" required="true"
-                                                     label="#{msg['venue.address.postalcode']}"
-                                                     requiredMessage="#{msg['venue.address.postalcode']} #{msg['createvenue.wizard.requiredmessage']}"/>
-                                        <h:outputText styleClass="input-label" value="#{msg['venue.address.city']} *"/>
-                                        <p:inputText value="#{venueBean.venue.address.city}" required="true"
-                                                     requiredMessage="#{msg['venue.address.city']} #{msg['createvenue.wizard.requiredmessage']}"/>
-                                        <h:outputText styleClass="input-label"
-                                                      value="#{msg['venue.address.street']} *"/>
-                                        <p:inputText value="#{venueBean.venue.address.street}" required="true"
-                                                     requiredMessage="#{msg['venue.address.street']} #{msg['createvenue.wizard.requiredmessage']}"/>
-                                        <h:outputText styleClass="input-label"
-                                                      value="#{msg['venue.address.number']} *"/>
-                                        <p:inputText value="#{venueBean.venue.address.number}" required="true"
-                                                     requiredMessage="#{msg['venue.address.number']} #{msg['createvenue.wizard.requiredmessage']}"/>
-                                    </h:panelGrid>
-                                </div>
-                            </p:panel>
-                        </p:tab>
-
-                        <p:tab id="confirm" title="#{msg['createvenue.wizard.label.confirmation']}">
-                            <p:panel header="#{msg['createvenue.wizard.label.confirmation']}">
-                                <div class="wizard-padding">
-                                    <h:panelGrid id="confirmation" columns="2" columnClasses="grid,grid">
+            <ui:fragment rendered="#{createVenueBean.hasVenueAlready()}">
+                <div class="centered-block centered-text">
+                    <h:outputText styleClass="info-font" value="#{msg['createvenue.already.got.venue']}"/>
+                </div>
+            </ui:fragment>
+            <ui:fragment rendered="#{!createVenueBean.hasVenueAlready()}">
+                <div class="main">
+                    <h:form id="form">
+                        <p:wizard styleClass="wizard" flowListener="#{createVenueBean.onFlowProcess}">
+                            <p:tab id="general" title="#{msg['createvenue.wizard.label.general']}">
+                                <p:panel header="#{msg['createvenue.wizard.label.general.informations']}">
+                                    <div class="centered-block">
+                                        <p:messages/>
                                         <h:panelGrid columns="2" columnClasses="label, value">
-                                            <h:outputText styleClass="output-label" value="#{msg['venue.name']}"/>
-                                            <h:outputText value="#{venueBean.venue.name}" styleClass="output-label"/>
-                                            <h:outputText styleClass="output-label" value="#{msg['venue.type']}"/>
-                                            <h:outputText value="#{venueBean.venue.type.name}"
-                                                          styleClass="output-label"/>
-                                        </h:panelGrid>
-
-                                        <h:panelGrid columns="2" columnClasses="label, value">
-                                            <h:outputText styleClass="output-label"
-                                                          value="#{msg['venue.address.country']}"/>
-                                            <h:outputText value="#{venueBean.venue.address.country}"
-                                                          styleClass="output-label"/>
-                                            <h:outputText styleClass="output-label"
-                                                          value="#{msg['venue.address.postalcode']}"/>
-                                            <h:outputText value="#{venueBean.venue.address.postcode}"
-                                                          styleClass="output-label"/>
-                                            <h:outputText styleClass="output-label"
-                                                          value="#{msg['venue.address.city']}"/>
-                                            <h:outputText value="#{venueBean.venue.address.city}"
-                                                          styleClass="output-label"/>
-                                            <h:outputText styleClass="output-label"
-                                                          value="#{msg['venue.address.street']}"/>
-                                            <h:outputText value="#{venueBean.venue.address.street}"
-                                                          styleClass="output-label"/>
-                                            <h:outputText styleClass="output-label"
-                                                          value="#{msg['venue.address.number']}"/>
-                                            <h:outputText value="#{venueBean.venue.address.number}"
-                                                          styleClass="output-label"/>
-                                        </h:panelGrid>
-                                    </h:panelGrid>
-                                    <div class="grid">
-                                        <h:panelGrid columns="2" columnClasses="label, value">
-                                            <h:outputText styleClass="output-label"
-                                                          value="#{msg['venue.description']}"/>
-                                            <h:outputText value="#{venueBean.venue.description}"
-                                                          styleClass="output-label"
-                                                          style="word-wrap:break-word;"/>
+                                            <h:outputText styleClass="input-label" value="#{msg['venue.name']} *"/>
+                                            <p:inputText value="#{venueBean.venue.name}" required="true"
+                                                         requiredMessage="#{msg['venue.name']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                                            <h:outputText styleClass="input-label"
+                                                          value="#{msg['venue.description']} *"/>
+                                            <p:inputTextarea value="#{venueBean.venue.description}" required="true"
+                                                             rows="4"
+                                                             cols="40"
+                                                             requiredMessage="#{msg['venue.description']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                                            <h:outputText styleClass="input-label" for="type"
+                                                          value="#{msg['venue.type']} *"/>
+                                            <p:selectOneMenu id="type" style="width:150px" required="true"
+                                                             value="#{venueBean.venue.type}" converter="typeVoConverter"
+                                                             requiredMessage="#{msg['venue.type']} #{msg['createvenue.wizard.requiredmessage']}">
+                                                <f:selectItem itemLabel="#{msg['selectonemenu.select']}" itemValue=""/>
+                                                <f:selectItems value="#{typeBean.types}" var="type"
+                                                               itemLabel="#{type.name}" itemValue="#{type}"/>
+                                            </p:selectOneMenu>
                                         </h:panelGrid>
                                     </div>
-                                    <p:commandButton value="#{msg['createvenue.wizard.submit']}"
-                                                     action="#{createVenueBean.doCreate}" process="@this"/>
-                                </div>
-                            </p:panel>
-                        </p:tab>
-                    </p:wizard>
-                </h:form>
-            </div>
+                                </p:panel>
+                            </p:tab>
+
+                            <p:tab id="address" title="#{msg['createvenue.wizard.label.address']}">
+                                <p:panel header="#{msg['createvenue.wizard.label.address.details']}">
+                                    <div class="wizard-padding">
+                                        <p:messages/>
+                                        <h:panelGrid columns="2" columnClasses="label, value">
+                                            <h:outputText styleClass="input-label"
+                                                          value="#{msg['venue.address.country']} *"/>
+                                            <p:inputText value="#{venueBean.venue.address.country}" required="true"
+                                                         requiredMessage="#{msg['venue.address.country']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                                            <h:outputText styleClass="input-label"
+                                                          value="#{msg['venue.address.postalcode']} *"/>
+                                            <p:inputText value="#{venueBean.venue.address.postcode}" required="true"
+                                                         label="#{msg['venue.address.postalcode']}"
+                                                         requiredMessage="#{msg['venue.address.postalcode']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                                            <h:outputText styleClass="input-label"
+                                                          value="#{msg['venue.address.city']} *"/>
+                                            <p:inputText value="#{venueBean.venue.address.city}" required="true"
+                                                         requiredMessage="#{msg['venue.address.city']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                                            <h:outputText styleClass="input-label"
+                                                          value="#{msg['venue.address.street']} *"/>
+                                            <p:inputText value="#{venueBean.venue.address.street}" required="true"
+                                                         requiredMessage="#{msg['venue.address.street']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                                            <h:outputText styleClass="input-label"
+                                                          value="#{msg['venue.address.number']} *"/>
+                                            <p:inputText value="#{venueBean.venue.address.number}" required="true"
+                                                         requiredMessage="#{msg['venue.address.number']} #{msg['createvenue.wizard.requiredmessage']}"/>
+                                        </h:panelGrid>
+                                    </div>
+                                </p:panel>
+                            </p:tab>
+
+                            <p:tab id="confirm" title="#{msg['createvenue.wizard.label.confirmation']}">
+                                <p:panel header="#{msg['createvenue.wizard.label.confirmation']}">
+                                    <div class="wizard-padding">
+                                        <div class="centered-flex">
+                                            <h:panelGrid id="confirmation" columns="2" columnClasses="grid,grid">
+                                                <h:panelGrid columns="2" columnClasses="label, value">
+                                                    <h:outputText styleClass="output-label"
+                                                                  value="#{msg['venue.name']}"/>
+                                                    <h:outputText value="#{venueBean.venue.name}"
+                                                                  styleClass="output-label"/>
+                                                    <h:outputText styleClass="output-label"
+                                                                  value="#{msg['venue.type']}"/>
+                                                    <h:outputText value="#{venueBean.venue.type.name}"
+                                                                  styleClass="output-label"/>
+                                                </h:panelGrid>
+
+                                                <h:panelGrid columns="2" columnClasses="label, value">
+                                                    <h:outputText styleClass="output-label"
+                                                                  value="#{msg['venue.address.country']}"/>
+                                                    <h:outputText value="#{venueBean.venue.address.country}"
+                                                                  styleClass="output-label"/>
+                                                    <h:outputText styleClass="output-label"
+                                                                  value="#{msg['venue.address.postalcode']}"/>
+                                                    <h:outputText value="#{venueBean.venue.address.postcode}"
+                                                                  styleClass="output-label"/>
+                                                    <h:outputText styleClass="output-label"
+                                                                  value="#{msg['venue.address.city']}"/>
+                                                    <h:outputText value="#{venueBean.venue.address.city}"
+                                                                  styleClass="output-label"/>
+                                                    <h:outputText styleClass="output-label"
+                                                                  value="#{msg['venue.address.street']}"/>
+                                                    <h:outputText value="#{venueBean.venue.address.street}"
+                                                                  styleClass="output-label"/>
+                                                    <h:outputText styleClass="output-label"
+                                                                  value="#{msg['venue.address.number']}"/>
+                                                    <h:outputText value="#{venueBean.venue.address.number}"
+                                                                  styleClass="output-label"/>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                        </div>
+                                        <div class="grid centered-flex" style="margin: 20px 0;">
+                                            <h:panelGrid columns="2" columnClasses="label, value">
+                                                <h:outputText styleClass="output-label"
+                                                              value="#{msg['venue.description']}"/>
+                                                <h:outputText value="#{venueBean.venue.description}"
+                                                              styleClass="output-label"
+                                                              style="word-wrap:break-word;"/>
+                                            </h:panelGrid>
+                                        </div>
+                                        <p:commandButton value="#{msg['createvenue.wizard.submit']}"
+                                                         action="#{createVenueBean.doCreate}" process="@this"
+                                                         style="margin: 20px"/>
+                                    </div>
+                                </p:panel>
+                            </p:tab>
+                        </p:wizard>
+                    </h:form>
+                </div>
+            </ui:fragment>
         </ui:define>
     </ui:composition>
 </html>
