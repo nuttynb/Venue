@@ -4,7 +4,6 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:composition template="/templates/pageTemplate.xhtml">
         <ui:define name="title">#{venueBean.venue.name} #{msg['profile']}</ui:define>
@@ -32,7 +31,8 @@
                         <h:outputText styleClass="info-font" value="#{msg['venue.not.exists']}"/>
                     </div>
                 </ui:fragment>
-                <ui:fragment rendered="#{(venueBean.venue ne null) and (!venueBean.venue.enabled)}">
+                <ui:fragment
+                        rendered="#{(venueBean.venue ne null) and (not venueBean.venue.enabled) and (not publicProfileBean.owner) and (not publicProfileBean.admin) }">
                     <div class="centered-block centered-text">
                         <h:outputText styleClass="info-font" value="#{msg['venue.blocked']}"/>
                     </div>
