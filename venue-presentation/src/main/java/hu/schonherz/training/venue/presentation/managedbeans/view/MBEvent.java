@@ -16,6 +16,9 @@ public class MBEvent implements Serializable {
 
     EventVo event;
 
+    public MBEvent() {
+    }
+
     public EventVo getEvent() {
         return event;
     }

@@ -10,12 +10,14 @@ import java.util.List;
 
 @ManagedBean(name = "eventImagesBean")
 @ViewScoped
-public class MBEventImages implements Serializable{
+public class MBEventImages implements Serializable {
 
     private static final long serialVersionUID = -5454332432324443323L;
 
     List<EventImageVo> images = new ArrayList<>();
 
+    public MBEventImages() {
+    }
 
     public List<EventImageVo> getImages() {
         return images;

@@ -29,9 +29,6 @@ public class VenueVo implements Serializable {
 
     private Boolean enabled = Boolean.TRUE;
 
-    public VenueVo() {
-        address = new AddressVo();
-    }
 
     /**
      * Return the id of venue.
