@@ -27,8 +27,12 @@ public class VenueVo implements Serializable {
 
     private String adminMessage;
 
-    private Boolean enabled = Boolean.TRUE;
+    private Boolean enabled;
 
+    public VenueVo() {
+        enabled = Boolean.TRUE;
+        address = new AddressVo();
+    }
 
     /**
      * Return the id of venue.
