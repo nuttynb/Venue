@@ -1,7 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:c="http://java.sun.com/jsp/jstl/core"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:outputScript library="js" name="calendar.js"/>
@@ -17,10 +16,12 @@
                 <ui:include src="profile_details_elements/review.xhtml"/>
             </p:panel>
         </div>
-        <div class="col-xs-12 col-md-12">
-            <h:outputLink value="profile.xhtml?venueid=#{venueBean.venue.id}"
-                          style="margin-left: 20px">#{msg['venue.profile.watch.public']}</h:outputLink>
-        </div>
+        <ui:fragment rendered="#{!publicProfileBean.disabled}">
+            <div class="col-xs-12 col-md-12">
+                <h:outputLink value="profile.xhtml?venueid=#{venueBean.venue.id}"
+                              style="margin-left: 20px">#{msg['venue.profile.watch.public']}</h:outputLink>
+            </div>
+        </ui:fragment>
         <div class="col-xs-12 col-md-4">
             <ui:include src="profile_details_elements/profile-image.xhtml"/>
         </div>
