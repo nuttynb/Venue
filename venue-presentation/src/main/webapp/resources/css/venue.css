@@ -166,7 +166,43 @@ a .box:hover {
 .box .label {
     padding-left: 0;
 }
+.FREE_SLOT,
+.FREE_SLOT .fc-event-skin,
+.FREE_SLOT a{
+    background-color: greenyellow;
+    border-color: greenyellow;
+    color: black;
+}
 
-.promotion {
-    float: right;
+.BOOKED_EVENT .fc-event,
+.BOOKED_EVENT a,
+.BOOKED_EVENT .fc-event-inner {
+    background-color: red;
+    border-color: red;
+    color: black;
+
+}
+
+.DRINK_PROMOTION .fc-event,
+.DRINK_PROMOTION a,
+.DRINK_PROMOTION .fc-event-inner{
+    background-color: gold;
+    border-color: gold;
+    color: black;
+}
+
+.promotion .fc-event,
+.promotion a,
+.promotion .fc-event-inner{
+    background-color: gold;
+    border-color: gold;
+    color: black;
+}
+
+.promotion ,
+.promotion a,
+.promotion .fc-event-skin{
+    background-color: gold;
+    border-color: gold;
+    color: black;
 }

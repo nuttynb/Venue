@@ -5,13 +5,6 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
     <div class="container-fluid">
         <div class="col-xs-12 col-md-12">
-            <div class="box">
-                <div class="box-header">
-                    #{eventBean.event.name}
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-12">
             <p:panel widgetVar="event-galleria-panel">
                 <h:outputText value="#{msg['no.image']}" rendered="#{eventImagesBean.images.isEmpty()}"/>
                 <p:galleria value="#{eventImagesBean.images}" var="image" panelWidth="500" panelHeight="300"
@@ -26,64 +19,90 @@
         </div>
         <div class="col-xs-12 col-md-6">
             <div class="box">
-                <div class="box-header">
-                    #{eventBean.event.beginDate}
+                <div class="venue-name centered-flex">
+                    <h:outputText value="#{eventBean.event.name}"/>
                 </div>
             </div>
         </div>
         <div class="col-xs-12 col-md-6">
             <div class="box">
                 <div class="box-header">
-                    #{eventBean.event.endDate}
+                    <h:outputText value="Begin Date:"/>
+                </div>
+                <div class="box-content">
+                    <h:outputText value="#{eventBean.event.beginDate}"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="box">
+                <div class="box-header">
+                    <h:outputText value="End Date:"/>
+                </div>
+                <div class="box-content">
+                    <h:outputText value="#{eventBean.event.endDate}"/>
                  </div>
             </div>
         </div>
         <div class="col-xs-12 col-md-6">
+    <div class="box">
+        <div class="box-header">
+            <h:outputText value="Event Type:"/>
+        </div>
+        <div class="box-content">
+            <h:outputText value="#{eventBean.event.type}"/>
+        </div>
+    </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+    <div class="box">
+        <div class="box-header">
+            <h:outputText value="Event Description:"/>
+        </div>
+        <div class="box-content">
+            <h:outputText value="#{eventBean.event.description}"/>
+        </div>
+    </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <h:form>
+                <p:fileUpload fileUploadListener="#{eventFileUpload.fileUpload}"
+                              uploadLabel="#{msg['fileupload.wizard.label.upload']}"
+                              label="#{msg['fileupload.wizard.label.choose']}"
+                              cancelLabel="#{msg['fileupload.wizard.label.cancel']}"
+                              invalidSizeMessage="#{msg['fileupload.wizard.label.size']}" mode="advanced"
+                              dragDropSupport="true" sizeLimit="4000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                              multiple="true" oncomplete="afterEventUploading();">
+                    <p:remoteCommand name="afterEventUploading" actionListener="#{eventProfileBean.onUpdateafterUploading}"
+                                     update="@widgetVar(event-galleria-panel)"/>
+                </p:fileUpload>
+            </h:form>
+        </div>
+        <div class="col-xs-12 col-md-6" >
             <div class="box">
-                <div class="box-header">
-            #{eventBean.event.bandId}
-                </div>
+                <h:panelGrid rendered="#{eventBean.event.promotion}">
+                    <div class="centered-flex">
+                    <div class="box-header">
+                        <h:outputText value="Promotion Description:"/>
+                    </div>
+                    <div class="box-content">
+                        <h:outputText value="#{eventBean.event.promoDescription}"/>
+                    </div>
+                    <div class="box-header">
+                        <h:outputText value="Promotion Amount:"/>
+                    </div>
+                    <div class="box-content">
+                        <h:outputText value="#{eventBean.event.amount} $"/>
+                    </div>
+                    <div class="box-header">
+                        <h:outputText value="Promotion in percent:"/>
+                    </div>
+                    <div class="box-content">
+                        <h:outputText value="#{eventBean.event.percent} %"/>
+                    </div>
+                    </div>
+                </h:panelGrid>
             </div>
-        </div>
-        <div class="col-xs-12 col-md-6">
-    <div class="box">
-        <div class="box-header">
-            #{eventBean.event.type}
-        </div>
-    </div>
-        </div>
-        <div class="col-xs-12 col-md-6">
-    <div class="box">
-    <div class="box-header">
-            #{eventBean.event.id}
-    </div>
-    </div>
-        </div>
-        <div class="col-xs-12 col-md-6">
-    <div class="box">
-        <div class="box-header">
-            #{eventBean.event.description}
-        </div>
-    </div>
-        </div>
-        <div class="col-xs-12 col-md-12" >
-            <h:panelGrid rendered="#{eventBean.event.promotion}">
-                <div class="box promotion">
-                    <div class="box-header">
-                #{eventBean.event.promoDescription}
-                    </div>
-                </div>
-                <div class="box promotion">
-                    <div class="box-header">
-                        #{eventBean.event.amount}
-                    </div>
-                </div>
-                <div class="box promotion">
-                    <div class="box-header">
-                        #{eventBean.event.percent}
-                    </div>
-                </div>
-            </h:panelGrid>
         </div>
         <!--
         <div class="col-xs-12 col-md-6">
@@ -100,19 +119,5 @@
                 </div>
             </div>
         </div>-->
-        <div class="col-xs-12 col-md-12">
-            <h:form>
-                <p:fileUpload fileUploadListener="#{eventFileUpload.fileUpload}"
-                              uploadLabel="#{msg['fileupload.wizard.label.upload']}"
-                              label="#{msg['fileupload.wizard.label.choose']}"
-                              cancelLabel="#{msg['fileupload.wizard.label.cancel']}"
-                              invalidSizeMessage="#{msg['fileupload.wizard.label.size']}" mode="advanced"
-                              dragDropSupport="true" sizeLimit="4000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                              multiple="true" oncomplete="afterEventUploading();">
-                    <p:remoteCommand name="afterEventUploading" actionListener="#{eventProfileBean.onUpdateafterUploading}"
-                                     update="@widgetVar(event-galleria-panel)"/>
-                </p:fileUpload>
-            </h:form>
-        </div>
     </div>
 </ui:composition>

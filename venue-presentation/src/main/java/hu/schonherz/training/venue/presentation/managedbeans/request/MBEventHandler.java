@@ -1,8 +1,6 @@
 package hu.schonherz.training.venue.presentation.managedbeans.request;
 
-import hu.schonherz.training.venue.presentation.managedbeans.view.MBEventVoWrapper;
-import hu.schonherz.training.venue.presentation.managedbeans.view.MBSchedule;
-import hu.schonherz.training.venue.presentation.managedbeans.view.MBVenue;
+import hu.schonherz.training.venue.presentation.managedbeans.view.*;
 import hu.schonherz.training.venue.presentation.wrappers.EventVoWrapper;
 import hu.schonherz.training.venue.service.EventService;
 import org.primefaces.event.SelectEvent;
@@ -55,6 +53,7 @@ public class MBEventHandler implements Serializable {
             schedule.getEventModel().updateEvent(event.getEvent());
         }
         event.getEvent().getEventVo().setVenue(venue.getVenue());
+        //selectColour();
         eventService.createEvent(event.getEvent().getEventVo());
 
     }
@@ -83,6 +82,17 @@ public class MBEventHandler implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 */
+
+    public void selectColour(){
+        switch(event.getEvent().getEventVo().getType().name()){
+            case "FREE_SLOT" :
+                event.getEvent().setStyleClass("open");
+            case "BOOKED_EVENT" :
+                event.getEvent().setStyleClass("booked");
+            case "DRINK_PROMOTION" :
+                event.getEvent().setStyleClass("promotion");
+        }
+    }
 
     public MBVenue getVenue() {
         return venue;
