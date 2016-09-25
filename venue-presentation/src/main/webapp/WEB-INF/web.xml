@@ -30,6 +30,12 @@
         <param-value>native</param-value>
     </context-param>
 
+    <!-- Enable FA -->
+    <context-param>
+        <param-name>primefaces.FONT_AWESOME</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
     <!-- Welcome page -->
     <welcome-file-list>
         <welcome-file>profile.xhtml</welcome-file>
