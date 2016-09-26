@@ -27,7 +27,7 @@
         <div class="col-xs-12 col-md-6">
             <div class="box">
                 <div class="box-header">
-                    <h:outputText value="Begin Date:"/>
+                    <h:outputText value="#{msg['event.begin.date']}"/>
                 </div>
                 <div class="box-content">
                     <h:outputText value="#{eventBean.event.beginDate}"/>
@@ -37,7 +37,7 @@
         <div class="col-xs-12 col-md-6">
             <div class="box">
                 <div class="box-header">
-                    <h:outputText value="End Date:"/>
+                    <h:outputText value="#{msg['event.end.date']}"/>
                 </div>
                 <div class="box-content">
                     <h:outputText value="#{eventBean.event.endDate}"/>
@@ -47,17 +47,17 @@
         <div class="col-xs-12 col-md-6">
     <div class="box">
         <div class="box-header">
-            <h:outputText value="Event Type:"/>
+            <h:outputText value="#{msg['event.type.name']}"/>
         </div>
         <div class="box-content">
-            <h:outputText value="#{eventBean.event.type}"/>
+            <h:outputText value="#{eventBean.event.type.name()}"/>
         </div>
     </div>
         </div>
         <div class="col-xs-12 col-md-6">
     <div class="box">
         <div class="box-header">
-            <h:outputText value="Event Description:"/>
+            <h:outputText value="#{msg['event.description.name']}"/>
         </div>
         <div class="box-content">
             <h:outputText value="#{eventBean.event.description}"/>
@@ -79,30 +79,28 @@
             </h:form>
         </div>
         <div class="col-xs-12 col-md-6" >
-            <div class="box">
-                <h:panelGrid rendered="#{eventBean.event.promotion}">
-                    <div class="centered-flex">
-                    <div class="box-header">
-                        <h:outputText value="Promotion Description:"/>
-                    </div>
-                    <div class="box-content">
-                        <h:outputText value="#{eventBean.event.promoDescription}"/>
-                    </div>
-                    <div class="box-header">
-                        <h:outputText value="Promotion Amount:"/>
-                    </div>
-                    <div class="box-content">
-                        <h:outputText value="#{eventBean.event.amount} $"/>
-                    </div>
-                    <div class="box-header">
-                        <h:outputText value="Promotion in percent:"/>
-                    </div>
-                    <div class="box-content">
-                        <h:outputText value="#{eventBean.event.percent} %"/>
-                    </div>
-                    </div>
-                </h:panelGrid>
-            </div>
+                <p:accordionPanel rendered="#{eventBean.event.promotion}">
+                    <p:tab title="#{msg['promotion.details']}">
+                        <div class="box">
+                        <h:outputText value="#{msg['promotion.description']}" styleClass="box-header centered-text"/>
+                            <div>
+                        <h:outputText value="#{eventBean.event.promoDescription}" styleClass="box-content centered-text"/>
+                        </div>
+                        </div>
+                        <div class="box">
+                        <h:outputText value="#{msg['promotion.amount']}" styleClass="box-header centered-text"/>
+                            <div>
+                            <h:outputText value="#{eventBean.event.amount} $" styleClass="box-content centered-text"/>
+                        </div>
+                        </div>
+                        <div class="box">
+                        <h:outputText value="#{msg['promotion.percent']}" styleClass="box-header centered-text"/>
+                            <div>
+                            <h:outputText value="#{eventBean.event.percent} %" styleClass="box-content centered-text"/>
+                        </div>
+                        </div>
+                    </p:tab>
+                </p:accordionPanel>
         </div>
         <!--
         <div class="col-xs-12 col-md-6">

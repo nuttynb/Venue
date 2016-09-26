@@ -87,4 +87,8 @@ public class EventVoWrapper extends DefaultScheduleEvent {
         eventVo.setDescription(description);
     }
 
+    public void setStyleClass() {
+        super.setStyleClass(eventVo.getType().name());
+    }
 }
+

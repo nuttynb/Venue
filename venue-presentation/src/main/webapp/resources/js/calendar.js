@@ -24,3 +24,4 @@ PrimeFaces.locales['hu_HU']= {
     day: 'Nap',
     allDayText: 'Egész nap'
 };
+

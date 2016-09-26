@@ -48,12 +48,15 @@ public class MBEventHandler implements Serializable {
 
     public void addEvent(ActionEvent actionEvent) {
         if (event.getEvent().getId() == null) {
+            event.getEvent().setStyleClass();
             schedule.getEventModel().addEvent(event.getEvent());
         } else {
+            event.getEvent().setStyleClass();
             schedule.getEventModel().updateEvent(event.getEvent());
+
         }
         event.getEvent().getEventVo().setVenue(venue.getVenue());
-        //selectColour();
+
         eventService.createEvent(event.getEvent().getEventVo());
 
     }
@@ -82,17 +85,6 @@ public class MBEventHandler implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 */
-
-    public void selectColour(){
-        switch(event.getEvent().getEventVo().getType().name()){
-            case "FREE_SLOT" :
-                event.getEvent().setStyleClass("open");
-            case "BOOKED_EVENT" :
-                event.getEvent().setStyleClass("booked");
-            case "DRINK_PROMOTION" :
-                event.getEvent().setStyleClass("promotion");
-        }
-    }
 
     public MBVenue getVenue() {
         return venue;
